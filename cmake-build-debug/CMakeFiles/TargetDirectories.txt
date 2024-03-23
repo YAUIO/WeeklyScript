@@ -1,4 +1,0 @@
-F:/Users/User/Documents/СPPProjects/WeeklyScript/cmake-build-debug/CMakeFiles/WeeklyScript.dir
-F:/Users/User/Documents/СPPProjects/WeeklyScript/cmake-build-debug/CMakeFiles/WeeklyScriptGetC.dir
-F:/Users/User/Documents/СPPProjects/WeeklyScript/cmake-build-debug/CMakeFiles/edit_cache.dir
-F:/Users/User/Documents/СPPProjects/WeeklyScript/cmake-build-debug/CMakeFiles/rebuild_cache.dir
