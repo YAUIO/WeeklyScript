@@ -9,17 +9,16 @@ FetchContent_Declare(
         GIT_TAG 10.2.1
 )
 
-FetchContent_Declare(
-        boost
-        GIT_REPOSITORY https://github.com/boostorg/boost
-        GIT_TAG boost-1.84.0
-)
-
-FetchContent_MakeAvailable(boost)
 FetchContent_MakeAvailable(fmt)
 
+find_package(Boost 1.84.0 COMPONENTS system filesystem REQUIRED)
+include_directories(${Boost_INCLUDE_DIRS})
+
 add_executable(WeeklyScript main.cpp)
+
 TARGET_LINK_LIBRARIES(WeeklyScript fmt)
-TARGET_LINK_LIBRARIES(WeeklyScript boost)
+target_link_libraries(WeeklyScript ${Boost_LIBRARIES})
+
+
 add_executable(WeeklyScriptGetC mainGet.cpp)
 TARGET_LINK_LIBRARIES(WeeklyScriptGetC fmt)

@@ -1522,3 +1522,82 @@ events:
         
       exitCode: 0
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake-build-debug/_deps/boost-src/libs/cobalt/cmake/CheckRequirements.cmake:19 (try_compile)"
+      - "cmake-build-debug/_deps/boost-src/libs/cobalt/CMakeLists.txt:15 (include)"
+    directories:
+      source: "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-build/libs/cobalt/CMakeFiles/CMakeTmp"
+      binary: "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-build/libs/cobalt/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/tools/cmake/include"
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
+    buildResult:
+      variable: "BOOST_COBALT_HAS_COROUTINE_INCLUDE"
+      cached: true
+      stdout: |
+        Change Dir: 'F:/Users/User/Documents/СPPProjects/WeeklyScript/cmake-build-debug/_deps/boost-build/libs/cobalt/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): "D:/Soft/Programs/CLion 2023.3.4/bin/ninja/win/x64/ninja.exe" -v cmTC_38ea2
+        [1/2] "D:\\Soft\\Programs\\CLion 2023.3.4\\bin\\mingw\\bin\\g++.exe"   -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/cmTC_38ea2.dir/coroutine.cpp.obj -c F:/Users/User/Documents/╤PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/cobalt/cmake/coroutine.cpp
+        [2/2] cmd.exe /C "cd . && "D:\\Soft\\Programs\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f libcmTC_38ea2.a && "D:\\Soft\\Programs\\CLion 2023.3.4\\bin\\mingw\\bin\\ar.exe" qc libcmTC_38ea2.a  CMakeFiles/cmTC_38ea2.dir/coroutine.cpp.obj && "D:\\Soft\\Programs\\CLion 2023.3.4\\bin\\mingw\\bin\\ranlib.exe" libcmTC_38ea2.a && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake-build-debug/_deps/boost-src/libs/cobalt/cmake/CheckRequirements.cmake:33 (try_compile)"
+      - "cmake-build-debug/_deps/boost-src/libs/cobalt/CMakeLists.txt:15 (include)"
+    directories:
+      source: "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-build/libs/cobalt/CMakeFiles/CMakeTmp"
+      binary: "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-build/libs/cobalt/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/tools/cmake/include"
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
+    buildResult:
+      variable: "BOOST_COBALT_HAS_CONCEPTS"
+      cached: true
+      stdout: |
+        Change Dir: 'F:/Users/User/Documents/СPPProjects/WeeklyScript/cmake-build-debug/_deps/boost-build/libs/cobalt/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): "D:/Soft/Programs/CLion 2023.3.4/bin/ninja/win/x64/ninja.exe" -v cmTC_aefbf
+        [1/2] "D:\\Soft\\Programs\\CLion 2023.3.4\\bin\\mingw\\bin\\g++.exe"   -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/cmTC_aefbf.dir/concepts.cpp.obj -c F:/Users/User/Documents/╤PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/cobalt/cmake/concepts.cpp
+        [2/2] cmd.exe /C "cd . && "D:\\Soft\\Programs\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f libcmTC_aefbf.a && "D:\\Soft\\Programs\\CLion 2023.3.4\\bin\\mingw\\bin\\ar.exe" qc libcmTC_aefbf.a  CMakeFiles/cmTC_aefbf.dir/concepts.cpp.obj && "D:\\Soft\\Programs\\CLion 2023.3.4\\bin\\mingw\\bin\\ranlib.exe" libcmTC_aefbf.a && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake-build-debug/_deps/boost-src/libs/cobalt/cmake/CheckRequirements.cmake:49 (try_compile)"
+      - "cmake-build-debug/_deps/boost-src/libs/cobalt/CMakeLists.txt:15 (include)"
+    directories:
+      source: "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-build/libs/cobalt/CMakeFiles/CMakeTmp"
+      binary: "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-build/libs/cobalt/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/tools/cmake/include"
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
+    buildResult:
+      variable: "BOOST_COBALT_HAS_STD_PMR"
+      cached: true
+      stdout: |
+        Change Dir: 'F:/Users/User/Documents/СPPProjects/WeeklyScript/cmake-build-debug/_deps/boost-build/libs/cobalt/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): "D:/Soft/Programs/CLion 2023.3.4/bin/ninja/win/x64/ninja.exe" -v cmTC_cf546
+        [1/2] "D:\\Soft\\Programs\\CLion 2023.3.4\\bin\\mingw\\bin\\g++.exe"   -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_cf546.dir/memory_resource.cpp.obj -c F:/Users/User/Documents/╤PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/cobalt/cmake/memory_resource.cpp
+        [2/2] cmd.exe /C "cd . && "D:\\Soft\\Programs\\CLion 2023.3.4\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f libcmTC_cf546.a && "D:\\Soft\\Programs\\CLion 2023.3.4\\bin\\mingw\\bin\\ar.exe" qc libcmTC_cf546.a  CMakeFiles/cmTC_cf546.dir/memory_resource.cpp.obj && "D:\\Soft\\Programs\\CLion 2023.3.4\\bin\\mingw\\bin\\ranlib.exe" libcmTC_cf546.a && cd ."
+        
+      exitCode: 0
+...

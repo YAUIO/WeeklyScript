@@ -1,8 +1,9 @@
 # ninja log v5
 3	4095	7329031693314493	CMakeFiles/WeeklyScript.dir/main.cpp.obj	a57395bf5fb4f523
-13	1446	7329031666891907	_deps/fmt-build/CMakeFiles/fmt.dir/src/os.cc.obj	a945cc89108cea08
-16	1876	7329031671162364	_deps/fmt-build/CMakeFiles/fmt.dir/src/format.cc.obj	5531af7180033c01
+14	1614	7329053447541461	_deps/fmt-build/CMakeFiles/fmt.dir/src/os.cc.obj	a945cc89108cea08
+18	2054	7329053451911559	_deps/fmt-build/CMakeFiles/fmt.dir/src/format.cc.obj	5531af7180033c01
 1877	2235	7329031674802912	_deps/fmt-build/libfmtd.a	38da9d8235d50c15
 3	1760	7328597344809232	CMakeFiles/WeeklyScriptGetC.dir/mainGet.cpp.obj	3a5536fea6b5d66c
 4096	6044	7329031712844830	WeeklyScript.exe	f19d82d4c6370494
 2357	2453	7328597351729514	WeeklyScriptGetC.exe	dc0a63a12a672217
+2	27	0	F:/Users/User/Documents/ÑPPProjects/WeeklyScript/cmake-build-debug/CMakeFiles/cmake.verify_globs	f1d28d47057cf4d0
