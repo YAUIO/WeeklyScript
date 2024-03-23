@@ -1,0 +1,2357 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "_deps/boost-build/libs/log/libboost_log-gcc13-mt-d-x64-1_84.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_link_libraries",
+			"target_compile_definitions",
+			"target_include_directories",
+			"target_compile_features"
+		],
+		"files" : 
+		[
+			"cmake-build-debug/_deps/boost-src/libs/log/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 434,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 460,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 509,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 452,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 445,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -std=gnu++20 -fdiagnostics-color=always"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_ATOMIC_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_ATOMIC_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CHRONO_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CHRONO_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTAINER_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTAINER_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTEXT_EXPORT="
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTEXT_NO_LIB="
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTEXT_STATIC_LINK="
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_COROUTINE_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_COROUTINE_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_DATE_TIME_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_DATE_TIME_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_FILESYSTEM_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_FILESYSTEM_STATIC_LINK=1"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_BUILDING_THE_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_NO_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_STATIC_LINK"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_USE_AVX2"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_USE_BOOST_REGEX"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_USE_SSSE3"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_RANDOM_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_RANDOM_STATIC_LINK"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_SPIRIT_USE_PHOENIX_V3=1"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_THREAD_DONT_USE_CHRONO=1"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_THREAD_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_THREAD_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_THREAD_USE_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_USE_WINDOWS_H"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "NOMINMAX"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "SECURITY_WIN32"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "WIN32_LEAN_AND_MEAN"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "_CRT_SECURE_NO_DEPRECATE"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "_CRT_SECURE_NO_WARNINGS"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "_SCL_SECURE_NO_DEPRECATE"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "_SCL_SECURE_NO_WARNINGS"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "__STDC_CONSTANT_MACROS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 4,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/log/include"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/log/src"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-build/libs/log/src"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/array/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/assert/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/config/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/core/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/static_assert/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/throw_exception/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/container/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/intrusive/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/container_hash/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/describe/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/mp11/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/move/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/date_time/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/algorithm/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/bind/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/concept_check/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/preprocessor/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/type_traits/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/exception/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/smart_ptr/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/tuple/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/function/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/iterator/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/detail/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/function_types/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/mpl/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/predef/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/utility/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/io/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/fusion/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/typeof/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/functional/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/optional/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/range/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/conversion/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/regex/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/unordered/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/lexical_cast/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/integer/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/numeric/conversion/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/tokenizer/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/winapi/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/filesystem/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/system/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/variant2/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/parameter/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/phoenix/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/proto/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/type_index/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/align/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/asio/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/context/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/pool/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/coroutine/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/interprocess/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/random/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/dynamic_bitset/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/spirit/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/endian/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/thread/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/atomic/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/chrono/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/ratio/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/variant/include"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					5,
+					5,
+					2,
+					2,
+					2,
+					2
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				1,
+				3,
+				4,
+				6,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				19,
+				20,
+				21,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28,
+				29,
+				30,
+				31,
+				32,
+				34,
+				35,
+				36,
+				37,
+				38,
+				39,
+				40,
+				41,
+				42,
+				43,
+				45,
+				48,
+				50,
+				51,
+				55
+			]
+		},
+		{
+			"defines" : 
+			[
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_ATOMIC_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_ATOMIC_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CHRONO_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CHRONO_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTAINER_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTAINER_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTEXT_EXPORT="
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTEXT_NO_LIB="
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTEXT_STATIC_LINK="
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_COROUTINE_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_COROUTINE_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_DATE_TIME_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_DATE_TIME_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_FILESYSTEM_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_FILESYSTEM_STATIC_LINK=1"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_BUILDING_THE_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_NO_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_STATIC_LINK"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_USE_AVX2"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_USE_BOOST_REGEX"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_USE_SSSE3"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_RANDOM_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_RANDOM_STATIC_LINK"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_SPIRIT_USE_PHOENIX_V3=1"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_THREAD_DONT_USE_CHRONO=1"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_THREAD_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_THREAD_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_THREAD_USE_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_USE_WINDOWS_H"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "NOMINMAX"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "SECURITY_WIN32"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "WIN32_LEAN_AND_MEAN"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "_CRT_SECURE_NO_DEPRECATE"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "_CRT_SECURE_NO_WARNINGS"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "_SCL_SECURE_NO_DEPRECATE"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "_SCL_SECURE_NO_WARNINGS"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "__STDC_CONSTANT_MACROS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 4,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/log/include"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/log/src"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-build/libs/log/src"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/array/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/assert/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/config/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/core/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/static_assert/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/throw_exception/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/container/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/intrusive/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/container_hash/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/describe/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/mp11/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/move/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/date_time/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/algorithm/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/bind/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/concept_check/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/preprocessor/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/type_traits/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/exception/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/smart_ptr/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/tuple/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/function/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/iterator/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/detail/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/function_types/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/mpl/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/predef/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/utility/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/io/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/fusion/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/typeof/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/functional/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/optional/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/range/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/conversion/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/regex/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/unordered/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/lexical_cast/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/integer/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/numeric/conversion/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/tokenizer/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/winapi/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/filesystem/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/system/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/variant2/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/parameter/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/phoenix/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/proto/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/type_index/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/align/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/asio/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/context/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/pool/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/coroutine/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/interprocess/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/random/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/dynamic_bitset/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/spirit/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/endian/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/thread/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/atomic/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/chrono/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/ratio/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/variant/include"
+				}
+			],
+			"language" : "RC",
+			"sourceIndexes" : 
+			[
+				53
+			]
+		},
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -std=gnu++20 -fdiagnostics-color=always"
+				},
+				{
+					"fragment" : "-msse -msse2 -msse3 -mssse3"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_ATOMIC_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_ATOMIC_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CHRONO_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CHRONO_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTAINER_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTAINER_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTEXT_EXPORT="
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTEXT_NO_LIB="
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTEXT_STATIC_LINK="
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_COROUTINE_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_COROUTINE_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_DATE_TIME_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_DATE_TIME_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_FILESYSTEM_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_FILESYSTEM_STATIC_LINK=1"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_BUILDING_THE_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_NO_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_STATIC_LINK"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_USE_AVX2"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_USE_BOOST_REGEX"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_USE_SSSE3"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_RANDOM_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_RANDOM_STATIC_LINK"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_SPIRIT_USE_PHOENIX_V3=1"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_THREAD_DONT_USE_CHRONO=1"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_THREAD_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_THREAD_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_THREAD_USE_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_USE_WINDOWS_H"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "NOMINMAX"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "SECURITY_WIN32"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "WIN32_LEAN_AND_MEAN"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "_CRT_SECURE_NO_DEPRECATE"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "_CRT_SECURE_NO_WARNINGS"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "_SCL_SECURE_NO_DEPRECATE"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "_SCL_SECURE_NO_WARNINGS"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "__STDC_CONSTANT_MACROS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 4,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/log/include"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/log/src"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-build/libs/log/src"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/array/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/assert/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/config/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/core/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/static_assert/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/throw_exception/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/container/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/intrusive/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/container_hash/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/describe/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/mp11/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/move/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/date_time/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/algorithm/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/bind/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/concept_check/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/preprocessor/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/type_traits/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/exception/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/smart_ptr/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/tuple/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/function/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/iterator/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/detail/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/function_types/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/mpl/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/predef/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/utility/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/io/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/fusion/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/typeof/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/functional/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/optional/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/range/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/conversion/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/regex/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/unordered/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/lexical_cast/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/integer/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/numeric/conversion/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/tokenizer/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/winapi/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/filesystem/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/system/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/variant2/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/parameter/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/phoenix/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/proto/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/type_index/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/align/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/asio/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/context/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/pool/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/coroutine/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/interprocess/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/random/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/dynamic_bitset/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/spirit/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/endian/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/thread/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/atomic/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/chrono/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/ratio/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/variant/include"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					5,
+					5,
+					2,
+					2,
+					2,
+					2
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				56
+			]
+		},
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -std=gnu++20 -fdiagnostics-color=always"
+				},
+				{
+					"fragment" : "-mavx -mavx2 -fabi-version=0"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_ATOMIC_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_ATOMIC_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CHRONO_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CHRONO_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTAINER_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTAINER_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTEXT_EXPORT="
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTEXT_NO_LIB="
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTEXT_STATIC_LINK="
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_COROUTINE_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_COROUTINE_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_DATE_TIME_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_DATE_TIME_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_FILESYSTEM_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_FILESYSTEM_STATIC_LINK=1"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_BUILDING_THE_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_NO_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_STATIC_LINK"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_USE_AVX2"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_USE_BOOST_REGEX"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_LOG_USE_SSSE3"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_RANDOM_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_RANDOM_STATIC_LINK"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_SPIRIT_USE_PHOENIX_V3=1"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_THREAD_DONT_USE_CHRONO=1"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_THREAD_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_THREAD_STATIC_LINK"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_THREAD_USE_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_USE_WINDOWS_H"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "NOMINMAX"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "SECURITY_WIN32"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "WIN32_LEAN_AND_MEAN"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "_CRT_SECURE_NO_DEPRECATE"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "_CRT_SECURE_NO_WARNINGS"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "_SCL_SECURE_NO_DEPRECATE"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "_SCL_SECURE_NO_WARNINGS"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "__STDC_CONSTANT_MACROS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 4,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/log/include"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/log/src"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-build/libs/log/src"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/array/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/assert/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/config/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/core/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/static_assert/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/throw_exception/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/container/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/intrusive/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/container_hash/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/describe/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/mp11/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/move/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/date_time/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/algorithm/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/bind/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/concept_check/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/preprocessor/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/type_traits/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/exception/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/smart_ptr/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/tuple/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/function/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/iterator/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/detail/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/function_types/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/mpl/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/predef/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/utility/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/io/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/fusion/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/typeof/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/functional/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/optional/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/range/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/conversion/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/regex/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/unordered/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/lexical_cast/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/integer/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/numeric/conversion/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/tokenizer/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/winapi/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/filesystem/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/system/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/variant2/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/parameter/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/phoenix/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/proto/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/type_index/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/align/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/asio/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/context/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/pool/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/coroutine/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/interprocess/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/random/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/dynamic_bitset/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/spirit/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/endian/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/thread/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/atomic/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/chrono/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/ratio/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/variant/include"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					5,
+					5,
+					2,
+					2,
+					2,
+					2
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				57
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "boost_atomic::@af4e7b587c628727a501"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "boost_chrono::@be6e289178a6d7f8349b"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "boost_container::@c32b1d466a2a3774f8b2"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "boost_context::@713694650cfe3e0a28ae"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "boost_coroutine::@0a134651b6718b90729d"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "boost_date_time::@66ea84c75316a41dd820"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "boost_exception::@99a4a3f312800b24f965"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "boost_filesystem::@bfb09f59da8919bb4a34"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "boost_random::@ddffb027e3570cd93ea8"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "boost_thread::@0571f5ffef38e5273762"
+		}
+	],
+	"id" : "boost_log::@d73e606139ecf3097288",
+	"name" : "boost_log",
+	"nameOnDisk" : "libboost_log-gcc13-mt-d-x64-1_84.a",
+	"paths" : 
+	{
+		"build" : "_deps/boost-build/libs/log",
+		"source" : "cmake-build-debug/_deps/boost-src/libs/log"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				0,
+				2,
+				5,
+				7,
+				8,
+				17,
+				18,
+				22,
+				33,
+				44,
+				46,
+				47,
+				49,
+				52,
+				54
+			]
+		},
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				1,
+				3,
+				4,
+				6,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				19,
+				20,
+				21,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28,
+				29,
+				30,
+				31,
+				32,
+				34,
+				35,
+				36,
+				37,
+				38,
+				39,
+				40,
+				41,
+				42,
+				43,
+				45,
+				48,
+				50,
+				51,
+				53,
+				55,
+				56,
+				57
+			]
+		},
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				58
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/alignment_gap_between.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/attribute_name.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/attribute_set_impl.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/attribute_set.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/attribute_value_set.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/bit_tools.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/code_conversion.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/stateless_allocator.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/unique_ptr.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/core.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/record_ostream.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/severity_level.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/global_logger_storage.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/named_scope.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/process_name.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/process_id.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/thread_id.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/id_formatting.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/murmur3.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/timer.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/exceptions.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/default_attribute_names.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/default_sink.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/default_sink.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/text_ostream_backend.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/text_file_backend.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/text_multifile_backend.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/thread_specific.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/once_block.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/timestamp.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/threadsafe_queue.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/event.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/trivial.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/spirit_encoding.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/spirit_encoding.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/format_parser.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/date_time_format_parser.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/named_scope_format_parser.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/permissions.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/dump.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/syslog_backend.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/windows/light_rw_mutex.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/windows/is_debugger_present.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/windows/debug_output_backend.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/windows/auto_handle.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/windows/object_name.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/windows/utf_code_conversion.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/windows/mapped_shared_memory.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/windows/mapped_shared_memory.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/windows/ipc_sync_wrappers.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/windows/ipc_sync_wrappers.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/windows/ipc_reliable_message_queue.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/_deps/boost-build/libs/log/src/windows/simple_event_log.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/_deps/boost-build/libs/log/src/windows/simple_event_log.rc",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/windows/event_log_registry.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/windows/event_log_backend.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 2,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/dump_ssse3.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 3,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/dump_avx2.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/log/src/windows/simple_event_log.mc",
+			"sourceGroupIndex" : 2
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

@@ -1,0 +1,135 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "_deps/boost-build/libs/exception/libboost_exception-gcc13-mt-d-x64-1_84.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_link_libraries"
+		],
+		"files" : 
+		[
+			"cmake-build-debug/_deps/boost-src/libs/exception/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 9,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 17,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -std=gnu++20 -fdiagnostics-color=always"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 0,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/exception/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/assert/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/config/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/core/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/static_assert/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/throw_exception/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/smart_ptr/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/move/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/type_traits/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/tuple/include"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"id" : "boost_exception::@99a4a3f312800b24f965",
+	"name" : "boost_exception",
+	"nameOnDisk" : "libboost_exception-gcc13-mt-d-x64-1_84.a",
+	"paths" : 
+	{
+		"build" : "_deps/boost-build/libs/exception",
+		"source" : "cmake-build-debug/_deps/boost-src/libs/exception"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/exception/src/clone_current_exception_non_intrusive.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

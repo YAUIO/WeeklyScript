@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "_deps/boost-build/libs/throw_exception",
+		"source" : "cmake-build-debug/_deps/boost-src/libs/throw_exception"
+	}
+}

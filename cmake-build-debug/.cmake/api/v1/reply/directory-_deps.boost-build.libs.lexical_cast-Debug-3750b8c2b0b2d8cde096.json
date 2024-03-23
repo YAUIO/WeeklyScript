@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "_deps/boost-build/libs/lexical_cast",
+		"source" : "cmake-build-debug/_deps/boost-src/libs/lexical_cast"
+	}
+}

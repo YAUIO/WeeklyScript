@@ -1,0 +1,348 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "_deps/boost-build/libs/fiber/libboost_fiber-gcc13-mt-d-x64-1_84.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_link_libraries",
+			"target_compile_definitions",
+			"target_compile_features"
+		],
+		"files" : 
+		[
+			"cmake-build-debug/_deps/boost-src/libs/fiber/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 26,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 49,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 62,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 70,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 60,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -std=gnu++20 -fdiagnostics-color=always"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTEXT_EXPORT="
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTEXT_NO_LIB="
+				},
+				{
+					"backtrace" : 2,
+					"define" : "BOOST_CONTEXT_STATIC_LINK="
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_FIBERS_SOURCE"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_FIBER_NO_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_FIBER_SOURCE"
+				},
+				{
+					"backtrace" : 4,
+					"define" : "BOOST_FIBER_STATIC_LINK"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 0,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/fiber/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/assert/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/config/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/context/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/core/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/static_assert/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/throw_exception/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/mp11/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/pool/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/integer/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/type_traits/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/winapi/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/predef/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/smart_ptr/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/move/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/intrusive/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/container_hash/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/describe/include"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					5,
+					2,
+					2,
+					2
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "boost_context::@713694650cfe3e0a28ae"
+		}
+	],
+	"id" : "boost_fiber::@44f0a221ac2f1610ed84",
+	"name" : "boost_fiber",
+	"nameOnDisk" : "libboost_fiber-gcc13-mt-d-x64-1_84.a",
+	"paths" : 
+	{
+		"build" : "_deps/boost-build/libs/fiber",
+		"source" : "cmake-build-debug/_deps/boost-src/libs/fiber"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/fiber/src/algo/algorithm.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/fiber/src/algo/round_robin.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/fiber/src/algo/shared_work.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/fiber/src/algo/work_stealing.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/fiber/src/barrier.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/fiber/src/condition_variable.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/fiber/src/context.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/fiber/src/fiber.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/fiber/src/future.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/fiber/src/mutex.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/fiber/src/properties.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/fiber/src/recursive_mutex.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/fiber/src/recursive_timed_mutex.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/fiber/src/scheduler.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/fiber/src/timed_mutex.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/fiber/src/waker.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

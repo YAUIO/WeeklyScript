@@ -1,0 +1,994 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "_deps/boost-build/libs/json/libboost_json-gcc13-mt-d-x64-1_84.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_link_libraries",
+			"boost_json_setup_properties",
+			"target_compile_definitions",
+			"target_compile_features"
+		],
+		"files" : 
+		[
+			"cmake-build-debug/_deps/boost-src/libs/json/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 101,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 103,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 72,
+				"parent" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 60,
+				"parent" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 108,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 59,
+				"parent" : 2
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -std=gnu++20 -fdiagnostics-color=always"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_CONTAINER_NO_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_CONTAINER_STATIC_LINK"
+				},
+				{
+					"backtrace" : 4,
+					"define" : "BOOST_JSON_NO_LIB=1"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "BOOST_JSON_STATIC_LINK=1"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 0,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/json/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/align/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/assert/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/config/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/core/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/static_assert/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/throw_exception/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/container/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/intrusive/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/container_hash/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/describe/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/mp11/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/move/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/system/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/variant2/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/winapi/include"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "F:/Users/User/Documents/\u0421PPProjects/WeeklyScript/cmake-build-debug/_deps/boost-src/libs/predef/include"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					6,
+					3,
+					3,
+					3,
+					3
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				118
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 3,
+			"id" : "boost_container::@c32b1d466a2a3774f8b2"
+		}
+	],
+	"id" : "boost_json::@daaa90488671f3629275",
+	"name" : "boost_json",
+	"nameOnDisk" : "libboost_json-gcc13-mt-d-x64-1_84.a",
+	"paths" : 
+	{
+		"build" : "_deps/boost-build/libs/json",
+		"source" : "cmake-build-debug/_deps/boost-src/libs/json"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0,
+				118
+			]
+		},
+		{
+			"name" : "json",
+			"sourceIndexes" : 
+			[
+				1,
+				2,
+				3,
+				4,
+				62,
+				63,
+				90,
+				91,
+				92,
+				93,
+				94,
+				95,
+				96,
+				97,
+				98,
+				99,
+				100,
+				101,
+				102,
+				103,
+				104,
+				105,
+				106,
+				107,
+				108,
+				109,
+				110,
+				111,
+				112,
+				113,
+				114,
+				115,
+				116,
+				117
+			]
+		},
+		{
+			"name" : "json\\detail",
+			"sourceIndexes" : 
+			[
+				5,
+				6,
+				29,
+				30,
+				31,
+				32,
+				33,
+				34,
+				43,
+				44,
+				52,
+				53,
+				54,
+				55,
+				56,
+				57,
+				58,
+				59,
+				60,
+				61
+			]
+		},
+		{
+			"name" : "json\\detail\\charconv",
+			"sourceIndexes" : 
+			[
+				7,
+				26,
+				28
+			]
+		},
+		{
+			"name" : "json\\detail\\charconv\\detail",
+			"sourceIndexes" : 
+			[
+				8,
+				9,
+				10,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25
+			]
+		},
+		{
+			"name" : "json\\detail\\charconv\\detail\\fast_float",
+			"sourceIndexes" : 
+			[
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19
+			]
+		},
+		{
+			"name" : "json\\detail\\charconv\\impl",
+			"sourceIndexes" : 
+			[
+				27
+			]
+		},
+		{
+			"name" : "json\\detail\\impl",
+			"sourceIndexes" : 
+			[
+				35,
+				36,
+				37,
+				38,
+				39,
+				40,
+				41,
+				42
+			]
+		},
+		{
+			"name" : "json\\detail\\ryu\\detail",
+			"sourceIndexes" : 
+			[
+				45,
+				46,
+				47,
+				48,
+				49
+			]
+		},
+		{
+			"name" : "json\\detail\\ryu\\impl",
+			"sourceIndexes" : 
+			[
+				50
+			]
+		},
+		{
+			"name" : "json\\detail\\ryu",
+			"sourceIndexes" : 
+			[
+				51
+			]
+		},
+		{
+			"name" : "json\\impl",
+			"sourceIndexes" : 
+			[
+				64,
+				65,
+				66,
+				67,
+				68,
+				69,
+				70,
+				71,
+				72,
+				73,
+				74,
+				75,
+				76,
+				77,
+				78,
+				79,
+				80,
+				81,
+				82,
+				83,
+				84,
+				85,
+				86,
+				87,
+				88,
+				89
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/array.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/basic_parser.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/basic_parser_impl.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/conversion.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/array.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/buffer.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/chars_format.hpp",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/detail/compute_float64.hpp",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/detail/config.hpp",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/detail/emulated128.hpp",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/detail/fast_float/ascii_number.hpp",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/detail/fast_float/bigint.hpp",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/detail/fast_float/constexpr_feature_detect.hpp",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/detail/fast_float/decimal_to_binary.hpp",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/detail/fast_float/digit_comparison.hpp",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/detail/fast_float/fast_float.hpp",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/detail/fast_float/fast_table.hpp",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/detail/fast_float/float_common.hpp",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/detail/fast_float/parse_number.hpp",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/detail/from_chars_float_impl.hpp",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/detail/from_chars_integer_impl.hpp",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/detail/from_chars_result.hpp",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/detail/integer_search_trees.hpp",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/detail/parser.hpp",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/detail/significand_tables.hpp",
+			"sourceGroupIndex" : 4
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/from_chars.hpp",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/impl/from_chars.ipp",
+			"sourceGroupIndex" : 6
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/charconv/limits.hpp",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/config.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/default_resource.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/digest.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/except.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/format.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/handler.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/impl/array.hpp",
+			"sourceGroupIndex" : 7
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/impl/default_resource.ipp",
+			"sourceGroupIndex" : 7
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/impl/except.ipp",
+			"sourceGroupIndex" : 7
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/impl/format.ipp",
+			"sourceGroupIndex" : 7
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/impl/handler.ipp",
+			"sourceGroupIndex" : 7
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/impl/shared_resource.ipp",
+			"sourceGroupIndex" : 7
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/impl/stack.ipp",
+			"sourceGroupIndex" : 7
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/impl/string_impl.ipp",
+			"sourceGroupIndex" : 7
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/object.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/parse_into.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/ryu/detail/common.hpp",
+			"sourceGroupIndex" : 8
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/ryu/detail/d2s.hpp",
+			"sourceGroupIndex" : 8
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/ryu/detail/d2s_full_table.hpp",
+			"sourceGroupIndex" : 8
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/ryu/detail/d2s_intrinsics.hpp",
+			"sourceGroupIndex" : 8
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/ryu/detail/digit_table.hpp",
+			"sourceGroupIndex" : 8
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/ryu/impl/d2s.ipp",
+			"sourceGroupIndex" : 9
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/ryu/ryu.hpp",
+			"sourceGroupIndex" : 10
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/sbo_buffer.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/shared_resource.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/sse2.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/stack.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/stream.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/string_impl.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/utf8.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/value.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/value_from.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/detail/value_to.hpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/error.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/fwd.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/array.hpp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/array.ipp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/conversion.hpp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/error.hpp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/error.ipp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/kind.ipp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/monotonic_resource.ipp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/null_resource.ipp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/object.hpp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/object.ipp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/parse.ipp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/parse_into.hpp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/parser.ipp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/pointer.ipp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/serialize.ipp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/serializer.ipp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/static_resource.ipp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/stream_parser.ipp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/string.hpp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/string.ipp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/value.hpp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/value.ipp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/value_ref.hpp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/value_ref.ipp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/value_stack.ipp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/impl/visit.hpp",
+			"sourceGroupIndex" : 11
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/json.natvis",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/kind.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/memory_resource.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/monotonic_resource.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/null_resource.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/object.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/parse.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/parse_into.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/parse_options.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/parser.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/pilfer.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/serialize.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/serialize_options.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/serializer.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/set_pointer_options.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/src.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/static_resource.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/storage_ptr.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/stream_parser.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/string.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/string_view.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/system_error.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/value.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/value_from.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/value_ref.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/value_stack.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/value_to.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/include/boost/json/visit.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "cmake-build-debug/_deps/boost-src/libs/json/src/src.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

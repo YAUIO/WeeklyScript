@@ -1,0 +1,81 @@
+"D:\Soft\Programs\CLion 2023.3.4\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=D:/Soft/Programs/CLion 2023.3.4/bin/ninja/win/x64/ninja.exe" -G Ninja -S F:\Users\User\Documents\СPPProjects\WeeklyScript -B F:\Users\User\Documents\СPPProjects\WeeklyScript\cmake-build-debug
+-- Boost: Debug build, static libraries, MPI OFF, Python OFF, testing OFF
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Performing Test BOOST_ATOMIC_TARGET_X86
+-- Performing Test BOOST_ATOMIC_TARGET_X86 - Success
+-- Performing Test BOOST_ATOMIC_COMPILER_HAS_SSE2
+-- Performing Test BOOST_ATOMIC_COMPILER_HAS_SSE2 - Success
+-- Performing Test BOOST_ATOMIC_COMPILER_HAS_SSE41
+-- Performing Test BOOST_ATOMIC_COMPILER_HAS_SSE41 - Success
+-- Performing Test BOOST_ATOMIC_HAS_SYNCHRONIZATION_LIB
+-- Performing Test BOOST_ATOMIC_HAS_SYNCHRONIZATION_LIB - Success
+-- Boost.Context: architecture x86_64, binary format pe, ABI ms, assembler gas, suffix .asm, implementation fcontext
+-- The ASM compiler identification is GNU
+-- Found assembler: D:/Soft/Programs/CLion 2023.3.4/bin/mingw/bin/gcc.exe
+-- Boost.Fiber: NUMA target OS is windows
+-- Performing Test BOOST_FILESYSTEM_HAS_INIT_PRIORITY
+-- Performing Test BOOST_FILESYSTEM_HAS_INIT_PRIORITY - Success
+-- Performing Test BOOST_FILESYSTEM_HAS_CXX20_ATOMIC_REF
+-- Performing Test BOOST_FILESYSTEM_HAS_CXX20_ATOMIC_REF - Success
+-- Performing Test BOOST_FILESYSTEM_HAS_STAT_ST_BLKSIZE
+-- Performing Test BOOST_FILESYSTEM_HAS_STAT_ST_BLKSIZE - Failed
+-- Performing Test BOOST_FILESYSTEM_HAS_STAT_ST_MTIM
+-- Performing Test BOOST_FILESYSTEM_HAS_STAT_ST_MTIM - Failed
+-- Performing Test BOOST_FILESYSTEM_HAS_STAT_ST_MTIMENSEC
+-- Performing Test BOOST_FILESYSTEM_HAS_STAT_ST_MTIMENSEC - Failed
+-- Performing Test BOOST_FILESYSTEM_HAS_STAT_ST_MTIMESPEC
+-- Performing Test BOOST_FILESYSTEM_HAS_STAT_ST_MTIMESPEC - Failed
+-- Performing Test BOOST_FILESYSTEM_HAS_STAT_ST_BIRTHTIMENSEC
+-- Performing Test BOOST_FILESYSTEM_HAS_STAT_ST_BIRTHTIMENSEC - Failed
+-- Performing Test BOOST_FILESYSTEM_HAS_STAT_ST_BIRTHTIMESPEC
+-- Performing Test BOOST_FILESYSTEM_HAS_STAT_ST_BIRTHTIMESPEC - Failed
+-- Performing Test BOOST_FILESYSTEM_HAS_STATX
+-- Performing Test BOOST_FILESYSTEM_HAS_STATX - Failed
+-- Performing Test BOOST_FILESYSTEM_HAS_STATX_SYSCALL
+-- Performing Test BOOST_FILESYSTEM_HAS_STATX_SYSCALL - Failed
+-- Performing Test BOOST_FILESYSTEM_HAS_FDOPENDIR_NOFOLLOW
+-- Performing Test BOOST_FILESYSTEM_HAS_FDOPENDIR_NOFOLLOW - Failed
+-- Performing Test BOOST_FILESYSTEM_HAS_DIRENT_D_TYPE
+-- Performing Test BOOST_FILESYSTEM_HAS_DIRENT_D_TYPE - Failed
+-- Performing Test BOOST_FILESYSTEM_HAS_POSIX_AT_APIS
+-- Performing Test BOOST_FILESYSTEM_HAS_POSIX_AT_APIS - Failed
+-- Performing Test BOOST_FILESYSTEM_HAS_BCRYPT
+-- Performing Test BOOST_FILESYSTEM_HAS_BCRYPT - Success
+-- Boost.Iostreams: ZLIB OFF, BZip2 OFF, LZMA OFF, Zstd OFF
+-- Boost.Locale: iconv OFF, ICU OFF, POSIX OFF, std ON, winapi ON
+-- Performing Test BOOST_LOG_TARGET_X86
+-- Performing Test BOOST_LOG_TARGET_X86 - Success
+-- Performing Test BOOST_LOG_HAS_LOCK_FREE_ATOMIC_INT32
+-- Performing Test BOOST_LOG_HAS_LOCK_FREE_ATOMIC_INT32 - Success
+-- Performing Test BOOST_LOG_COMPILER_HAS_SSSE3
+-- Performing Test BOOST_LOG_COMPILER_HAS_SSSE3 - Success
+-- Performing Test BOOST_LOG_COMPILER_HAS_AVX2
+-- Performing Test BOOST_LOG_COMPILER_HAS_AVX2 - Success
+-- Performing Test BOOST_LOG_HAS_NATIVE_SYSLOG
+-- Performing Test BOOST_LOG_HAS_NATIVE_SYSLOG - Failed
+-- Boost.Log: Message compiler found: D:/Soft/Programs/CLion 2023.3.4/bin/mingw/bin/windmc.exe
+-- Boost.Math: standalone mode OFF
+-- Boost.Multiprecision: standalone mode OFF
+-- Could NOT find OpenSSL, try to set the path to OpenSSL root folder in the system variable OPENSSL_ROOT_DIR (missing: OPENSSL_CRYPTO_LIBRARY OPENSSL_INCLUDE_DIR) 
+-- Boost.MySQL has been disabled, because the required package OpenSSL hasn't been found
+-- Performing Test BOOST_NOWIDE_HAS_LFS
+-- Performing Test BOOST_NOWIDE_HAS_LFS - Success
+-- Performing Test BOOST_NOWIDE_HAS_INIT_PRIORITY
+-- Performing Test BOOST_NOWIDE_HAS_INIT_PRIORITY - Success
+-- Could NOT find OpenSSL, try to set the path to OpenSSL root folder in the system variable OPENSSL_ROOT_DIR (missing: OPENSSL_CRYPTO_LIBRARY OPENSSL_INCLUDE_DIR) 
+-- Boost.Redis has been disabled, because the required package OpenSSL hasn't been found
+-- Performing Test BOOST_STACKTRACE_HAS_BACKTRACE
+-- Performing Test BOOST_STACKTRACE_HAS_BACKTRACE - Failed
+-- Performing Test BOOST_STACKTRACE_HAS_WINDBG
+-- Performing Test BOOST_STACKTRACE_HAS_WINDBG - Success
+-- Performing Test BOOST_STACKTRACE_HAS_WINDBG_CACHED
+-- Performing Test BOOST_STACKTRACE_HAS_WINDBG_CACHED - Success
+-- Boost.Stacktrace: noop ON, backtrace OFF, addr2line OFF, basic ON, windbg ON, windbg_cached ON
+-- Boost.Thread: threading API is win32
+-- Version: 10.2.1
+-- Build type: Debug
+-- Configuring done (347.2s)
+-- Generating done (0.5s)
+-- Build files have been written to: F:/Users/User/Documents/СPPProjects/WeeklyScript/cmake-build-debug

@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "_deps/boost-build/libs/poly_collection",
+		"source" : "cmake-build-debug/_deps/boost-src/libs/poly_collection"
+	}
+}
