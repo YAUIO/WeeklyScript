@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.27)
 project(WeeklyScript)
 set(CMAKE_CXX_STANDARD 20)
+set(Boost_NO_WARN_NEW_VERSIONS 1)
 include(FetchContent)
 
 FetchContent_Declare(
@@ -8,11 +9,7 @@ FetchContent_Declare(
         GIT_REPOSITORY https://github.com/fmtlib/fmt
         GIT_TAG 10.2.1
 )
-
-set(Boost_INCLUDE_DIR "D:/Soft/Programs/CPPPPKG/boost")
-set(Boost_LIBRARY_DIR "D:/Soft/Programs/CPPPPKG/boost/lib")
-find_package(Boost COMPONENTS system filesystem REQUIRED)
-include_directories(${Boost_INCLUDE_DIR})
+FetchContent_MakeAvailable(fmt)
 
 add_executable(WeeklyScript main.cpp)
 TARGET_LINK_LIBRARIES(WeeklyScript fmt)

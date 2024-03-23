@@ -7,7 +7,7 @@
 #include <vector>
 #include <thread>
 #include <regex>
-#include <boost/lexical_cast.hpp>
+#include <cmath>
 
 class Score {
 public:
@@ -24,16 +24,16 @@ public:
     double total_pp;
 };
 
-class InputTable{
+class InputTable {
 public:
     std::string keyCode;
     std::string key;
 };
 
-std::string getKeyCode(std::string keyI,std::vector<InputTable> table){
+std::string getKeyCode(std::string keyI, std::vector<InputTable> table) {
     int i = 0;
-    while (i<table.size()){
-        if(table[i].key == keyI){
+    while (i < table.size()) {
+        if (table[i].key == keyI) {
             return table[i].keyCode;
         }
         i++;
@@ -41,7 +41,7 @@ std::string getKeyCode(std::string keyI,std::vector<InputTable> table){
     return "0x30";
 }
 
-std::vector<InputTable> ParseInputTable(){
+std::vector<InputTable> ParseInputTable() {
     namespace fs = std::filesystem;
     auto pathToTable = fs::path("inputTable.txt");
     auto file = std::fstream(pathToTable);
@@ -49,18 +49,18 @@ std::vector<InputTable> ParseInputTable(){
     auto bufN = std::string();
     int i = 0;
     auto vector = std::vector<InputTable>();
-    while (buf!="STOP"){
+    while (buf != "STOP") {
         std::getline(file, buf, ' ');
         //fmt::print("{}",buf);
-        if(buf=="STOP"){
+        if (buf == "STOP") {
             break;
         }
-        std::getline(file,bufN,' ');
+        std::getline(file, bufN, ' ');
         //fmt::println("-{}",bufN);
         vector.push_back(InputTable());
-        vector[i].keyCode=buf;
-        vector[i].key=bufN;
-        std::getline(file,buf,'\n');
+        vector[i].keyCode = buf;
+        vector[i].key = bufN;
+        std::getline(file, buf, '\n');
         i++;
     }
     return vector;
@@ -80,7 +80,7 @@ void LeftClick() {
     ::SendInput(1, &Input, sizeof(INPUT));
 }
 
-void pressKey(std::string s){
+void pressTwoKeys(std::string s, std::string s1) {
     INPUT ip;
     ip.type = INPUT_KEYBOARD;
     ip.ki.wScan = 0;
@@ -88,7 +88,33 @@ void pressKey(std::string s){
     ip.ki.dwExtraInfo = 0;
 
     // Press the "A" key
-    ip.ki.wVk = boost::lexical_cast<short>(s); // virtual-key code for the "a" key
+    ip.ki.wVk = static_cast< unsigned short >( std::strtoul(s.c_str(), NULL, 0)); // virtual-key code for the "a" key
+    ip.ki.dwFlags = 0; // 0 for key press
+    SendInput(1, &ip, sizeof(INPUT));
+
+    ip.ki.wVk = static_cast< unsigned short >( std::strtoul(s1.c_str(), NULL, 0)); // virtual-key code for the "a" key
+    ip.ki.dwFlags = 0; // 0 for key press
+    SendInput(1, &ip, sizeof(INPUT));
+
+    // Release the "A" key
+    ip.ki.wVk = static_cast< unsigned short >( std::strtoul(s.c_str(), NULL, 0));
+    ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
+    SendInput(1, &ip, sizeof(INPUT));
+
+    ip.ki.wVk = static_cast< unsigned short >( std::strtoul(s1.c_str(), NULL, 0));
+    ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
+    SendInput(1, &ip, sizeof(INPUT));
+}
+
+void pressKey(std::string s) {
+    INPUT ip;
+    ip.type = INPUT_KEYBOARD;
+    ip.ki.wScan = 0;
+    ip.ki.time = 0;
+    ip.ki.dwExtraInfo = 0;
+
+    // Press the "A" key
+    ip.ki.wVk = static_cast< unsigned short >( std::strtoul(s.c_str(), NULL, 0)); // virtual-key code for the "a" key
     ip.ki.dwFlags = 0; // 0 for key press
     SendInput(1, &ip, sizeof(INPUT));
 
@@ -217,7 +243,7 @@ void renameFiles(std::vector<Score> vector, std::filesystem::path path) {
     int ii = 0;
     while (i < vector.size()) {
         while (ii < vector[i].scoreLink.size()) {
-            if (vector[i].scoreLink[ii] >= '0' && vector[i].scoreLink[ii] <= '9'){
+            if (vector[i].scoreLink[ii] >= '0' && vector[i].scoreLink[ii] <= '9') {
                 break;
             }
             ii++;
@@ -229,7 +255,7 @@ void renameFiles(std::vector<Score> vector, std::filesystem::path path) {
     ii = 0;
     auto found = std::vector<int>();
     auto matches = std::vector<std::string>();
-    while (i<ids.size()) {
+    while (i < ids.size()) {
         for (const auto &str: pathM) {
             if (std::regex_match(str, std::regex(".*" + ids[i] + ".*"))) {
                 matches.push_back(str);
@@ -241,19 +267,20 @@ void renameFiles(std::vector<Score> vector, std::filesystem::path path) {
     //fmt::println("{}",matches.size());
     i = 0;
     auto matchesConv = std::vector<std::string>();
-    while (i<matches.size()){
+    while (i < matches.size()) {
         matchesConv.push_back(matches[i]);
         i++;
     }
     i = 0;
-    while(i<vector.size()) {
-        fs::rename(matchesConv[i],path.generic_string().append("/").append(std::to_string(vector[found[i]].pp)).append(".osr"));
+    while (i < vector.size()) {
+        fs::rename(matchesConv[i],
+                   path.generic_string().append("/").append(std::to_string(vector[found[i]].pp)).append(".osr"));
         i++;
     }
 
 }
 
-std::vector<Score> sortScores(std::vector<Score> v){
+std::vector<Score> sortScores(std::vector<Score> v) {
     auto weeklyScores = std::vector<Score>();
     int i = 0;
     while (i < v.size()) {
@@ -302,6 +329,7 @@ auto main() -> int {
     renameFiles(weeklyScores, pathD);
     */
     auto InputTableV = ParseInputTable();
-    pressKey(getKeyCode("W",InputTableV));
+    pressKey(getKeyCode("W", InputTableV));
+    pressTwoKeys(getKeyCode("W", InputTableV),getKeyCode("A", InputTableV));
     return 0;
 }
