@@ -7,7 +7,7 @@
 #include <vector>
 #include <thread>
 #include <regex>
-#include <boost>
+#include <boost/lexical_cast.hpp>
 
 class Score {
 public:

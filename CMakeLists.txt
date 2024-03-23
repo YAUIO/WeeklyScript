@@ -9,16 +9,13 @@ FetchContent_Declare(
         GIT_TAG 10.2.1
 )
 
-FetchContent_MakeAvailable(fmt)
-
-find_package(Boost 1.84.0 COMPONENTS system filesystem REQUIRED)
-include_directories(${Boost_INCLUDE_DIRS})
+set(Boost_INCLUDE_DIR "D:/Soft/Programs/CPPPPKG/boost")
+set(Boost_LIBRARY_DIR "D:/Soft/Programs/CPPPPKG/boost/lib")
+find_package(Boost COMPONENTS system filesystem REQUIRED)
+include_directories(${Boost_INCLUDE_DIR})
 
 add_executable(WeeklyScript main.cpp)
-
 TARGET_LINK_LIBRARIES(WeeklyScript fmt)
-target_link_libraries(WeeklyScript ${Boost_LIBRARIES})
-
 
 add_executable(WeeklyScriptGetC mainGet.cpp)
 TARGET_LINK_LIBRARIES(WeeklyScriptGetC fmt)
