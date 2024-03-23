@@ -1,2 +1,3 @@
 # WeeklyScript
  
+Automated Weekly Script
