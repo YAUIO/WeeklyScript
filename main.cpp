@@ -9,6 +9,9 @@
 #include <regex>
 #include <cmath>
 
+//Before running the code, don't forget to move inputTable.txt to cmake-build-debug, add STOP in the end of csv and properly set paths in main() and openProgram()
+//Also, adjust locale for IpWindowName in OpenFocusChrome()
+
 class Score {
 public:
     std::string username;
@@ -67,12 +70,13 @@ std::vector<InputTable> ParseInputTable() {
 };
 
 void LeftClick() {
+    using namespace std::chrono_literals;
     INPUT Input = {0};
     // left down
     Input.type = INPUT_MOUSE;
     Input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
     ::SendInput(1, &Input, sizeof(INPUT));
-
+    std::this_thread::sleep_for(50ms);
     // left up
     ::ZeroMemory(&Input, sizeof(INPUT));
     Input.type = INPUT_MOUSE;
@@ -80,7 +84,9 @@ void LeftClick() {
     ::SendInput(1, &Input, sizeof(INPUT));
 }
 
-void pressTwoKeys(std::string s, std::string s1) {
+void pressTwoKeys(std::string s, std::string s1, std::vector<InputTable> InputTableV) {
+    s = getKeyCode(s, InputTableV);
+    s1 = getKeyCode(s1, InputTableV);
     INPUT ip;
     ip.type = INPUT_KEYBOARD;
     ip.ki.wScan = 0;
@@ -106,7 +112,8 @@ void pressTwoKeys(std::string s, std::string s1) {
     SendInput(1, &ip, sizeof(INPUT));
 }
 
-void pressKey(std::string s) {
+void pressKey(std::string s, std::vector<InputTable> InputTableV) {
+    s = getKeyCode(s, InputTableV);
     INPUT ip;
     ip.type = INPUT_KEYBOARD;
     ip.ki.wScan = 0;
@@ -121,6 +128,18 @@ void pressKey(std::string s) {
     // Release the "A" key
     ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
     SendInput(1, &ip, sizeof(INPUT));
+}
+
+void typeInStringPP(std::string s, std::vector<InputTable> InputTableV) {
+    using namespace std::chrono_literals;
+    int i = 0;
+    auto c = std::string();
+    while (i < s.size()) {
+        c = s[i];
+        pressKey(c, InputTableV);
+        std::this_thread::sleep_for(5ms);
+        i++;
+    }
 }
 
 bool isMods(std::string arg) {
@@ -229,6 +248,67 @@ void openLink(std::string s) {
     ShellExecute(NULL, NULL, linkChar, NULL, NULL, SW_SHOWNORMAL);
 }
 
+void openProgram(std::string s) {
+    if (s == "danser") {
+        s = "D:\\Users\\User\\Desktop\\Files\\danser-0.9.0-win\\danser.exe";
+    } else if (s == "premiere") {
+        s = "D:\\Soft\\Programs\\Adobe\\Adobe Premiere Pro 2020\\Adobe\\Adobe Premiere Pro 2020\\Adobe Premiere Pro.exe";
+    } else if (s == "chrome") {
+        s = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+    } else {
+        s = "G:\\osu!\\osu!.exe";
+    }
+    char *pathChar = new char[s.length() + 1];
+    std::copy(s.begin(), s.end(), pathChar);
+    ShellExecute(NULL, "open", pathChar, NULL, NULL, SW_SHOWDEFAULT);
+}
+
+void SetCursorPosDanser(int x, int y) {
+    HWND window = FindWindow(NULL, "danser-go 0.9.1 launcher");
+    if (window) {
+        RECT rect = {0};
+        GetWindowRect(window, &rect);
+
+        SetForegroundWindow(window);
+        SetActiveWindow(window);
+        SetFocus(window);
+        SetCursorPos(rect.right - x, rect.bottom - y);
+    }
+}
+
+void SetCursorPosExplorer(int x, int y) {
+    HWND window = FindWindow(NULL, "Select replay file");
+    if (window) {
+        RECT rect = {0};
+        GetWindowRect(window, &rect);
+
+        SetForegroundWindow(window);
+        SetActiveWindow(window);
+        SetFocus(window);
+        SetCursorPos(rect.right - x, rect.bottom - y);
+    }
+}
+
+void SetClickExplorer(int x, int y) {
+    using namespace std::chrono_literals;
+    SetCursorPosExplorer(x, y);
+    std::this_thread::sleep_for(10ms);
+    LeftClick();
+    std::this_thread::sleep_for(50ms);
+}
+
+void SetClickDanser(int x, int y) {
+    using namespace std::chrono_literals;
+    SetCursorPosDanser(x, y);
+    std::this_thread::sleep_for(10ms);
+    LeftClick();
+    std::this_thread::sleep_for(80ms);
+}
+
+void ExplorerFocusTextField() {
+    SetClickExplorer(248, 58);
+}
+
 void renameFiles(std::vector<Score> vector, std::filesystem::path path) {
     int i = 0;
     namespace fs = std::filesystem;
@@ -299,37 +379,83 @@ std::vector<Score> sortScores(std::vector<Score> v) {
     return weeklyScores;
 }
 
-auto main() -> int {
-    namespace fs = std::filesystem;
-    auto path = fs::path("D:\\Users\\User\\Desktop\\Files\\OsuScores\\output.csv");
-    auto pathD = fs::path("F:\\Users\\User\\Downloads\\Scores");
+void downloadData(std::vector<Score> weeklyScores, std::vector<InputTable> InputTableV, int cycle, int mode) {
     int i = 0;
-    /*auto scores = parseScores(path);
-    i = 0;
-    auto weeklyScores = sortScores(scores);
-    printScoresVector(weeklyScores);
     using namespace std::chrono_literals;
-    int cycle = weeklyScores.size();
-    while(i<cycle){
-        openLink(weeklyScores[i].scoreLink);
-        SetCursorPos(1284, 528);
-        std::this_thread::sleep_for(2s);
-        LeftClick();
-        std::this_thread::sleep_for(2s);
-        SetCursorPos(513, 278);
-        std::this_thread::sleep_for(10ms);
-        LeftClick();
-        std::this_thread::sleep_for(2s);
-        SetCursorPos(606, 595);
-        std::this_thread::sleep_for(10ms);
-        LeftClick();
-        std::this_thread::sleep_for(2s);
+
+    openProgram("chrome");
+    HWND window = FindWindow(NULL, "Новая Вкладка - Google Chrome");
+    if (window) {
+        SetForegroundWindow(window);
+        SetActiveWindow(window);
+        SetFocus(window);
+    }
+
+    while (i < cycle) {
+        if (mode == 0 || mode == 2) {
+            openLink(weeklyScores[i].scoreLink);
+            SetCursorPos(1284, 528); //Replay download
+            std::this_thread::sleep_for(2s);
+            LeftClick();
+            std::this_thread::sleep_for(150ms);
+        }
+        if (mode == 1 || mode == 2) { //Map download
+            SetCursorPos(513, 278);
+            std::this_thread::sleep_for(10ms);
+            LeftClick();
+            std::this_thread::sleep_for(2s);
+            SetCursorPos(606, 595);
+            std::this_thread::sleep_for(10ms);
+            LeftClick();
+            std::this_thread::sleep_for(2s);
+        }
+        pressTwoKeys("CTRL", "W", InputTableV);
         i++;
     }
-    renameFiles(weeklyScores, pathD);
-    */
+}
+
+auto main() -> int {
+    //Namespaces
+    namespace fs = std::filesystem;
+    using namespace std::chrono_literals;
+
+    //Path to input Scores file and Downloads folder
+    auto path = fs::path("D:\\Users\\User\\Desktop\\Files\\OsuScores\\output.csv");
+    auto pathD = fs::path("F:\\Users\\User\\Downloads\\Scores");
+    auto pathConf = fs::path("D:\\Users\\User\\Desktop\\Files\\danser-0.9.0-win\\settings");
+
+    //Parsing data
+    auto scores = parseScores(path);
     auto InputTableV = ParseInputTable();
-    pressKey(getKeyCode("W", InputTableV));
-    pressTwoKeys(getKeyCode("W", InputTableV),getKeyCode("A", InputTableV));
+    auto weeklyScores = sortScores(scores);
+
+    int i = 0;
+    //How many scores out of 400pp+ ones you want to iterate over
+    int cycle = weeklyScores.size();
+
+    //printScoresVector(weeklyScores);
+    //downloadData(weeklyScores, InputTableV, cycle, 0); //mode 0 - only replays ,1 - only maps, 2 - replays + maps
+    //renameFiles(weeklyScores, pathD); //renames all replays to their pp value
+    //openProgram("danser");
+    //std::this_thread::sleep_for(300s);
+
+    //Set proper danser state
+    SetClickDanser(694, 497); //mode
+    SetClickDanser(682, 409); //watch a replay
+    SetClickDanser(760, 38); //watch
+    SetClickDanser(753, 95); //record
+    SetClickDanser(745, 423); //select replay
+    std::this_thread::sleep_for(40ms);
+    ExplorerFocusTextField();
+    typeInStringPP(std::to_string(weeklyScores[i].pp).append(".OSR"),InputTableV);
+    SetClickExplorer(136,36);
+    SetClickDanser(542, 40); //configure
+    std::this_thread::sleep_for(40ms);
+    SetClickDanser(388, 262); //focus text field
+    typeInStringPP(std::to_string(weeklyScores[i].pp),InputTableV);
+    SetClickDanser(410, 194); //escape configure
+    //config choice write pls!!
+
+    SetClickDanser(182, 58);
     return 0;
 }
