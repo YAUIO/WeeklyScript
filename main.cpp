@@ -725,7 +725,7 @@ namespace YAUIO {
 
     void setProperDancerState(int mode){
         using namespace std::chrono_literals;
-        if(mode!=0) { //mode 1 is just for rendering, 0 - for opening
+        if(mode==1) { //mode 0 is just for rendering, 1 - for opening
             openProgram("danser");
             std::this_thread::sleep_for(300s);
         }
@@ -737,97 +737,104 @@ namespace YAUIO {
         SetClickDanser(753, 95); //record
     }
 
-    void renderReplay(Score score, int qScores, int i, std::vector<InputTable> InputTableV, std::filesystem::path pathD, std::filesystem::path pathConf, std::filesystem::path pathV){
+    void renderReplays(std::vector<Score> weeklyScores, int qScores, std::vector<InputTable> InputTableV, std::filesystem::path pathD, std::filesystem::path pathConf, std::filesystem::path pathV, int removeMode){
         using namespace std::chrono_literals;
         bool isBegChecked;
         bool rendered;
         double lastPart;
         double multiplier;
+        int i = 0;
         //fmt::println("{}",pathD.generic_string().append("/").append(std::to_string(score.pp).append(".osr")));
 
-        //Starting to configure recording
-        SetClickDanser(745, 423); //select replay
-        std::this_thread::sleep_for(40ms);
-        ExplorerFocusTextField();
-        typeInStringPP(std::to_string(score.pp).append(".OSR"), InputTableV);
-        SetClickExplorer(136, 36);
+        while (i<qScores) {
+            //Starting to configure recording
+            SetClickDanser(745, 423); //select replay
+            std::this_thread::sleep_for(40ms);
+            ExplorerFocusTextField();
+            typeInStringPP(std::to_string(weeklyScores[i].pp).append(".OSR"), InputTableV);
+            SetClickExplorer(136, 36);
 
-        SetClickDanser(542, 40); //configure
-        std::this_thread::sleep_for(40ms);
-        SetClickDanser(388, 262); //focus text field
-        std::this_thread::sleep_for(40ms);
-        pressTwoKeys("CTRL", "A", InputTableV);
-        pressKey("DEL", InputTableV);
-        typeInStringPP(std::to_string(score.pp), InputTableV);
-        SetClickDanser(410, 194); //escape configure
+            SetClickDanser(542, 40); //configure
+            std::this_thread::sleep_for(40ms);
+            SetClickDanser(388, 262); //focus text field
+            std::this_thread::sleep_for(40ms);
+            pressTwoKeys("CTRL", "A", InputTableV);
+            pressKey("DEL", InputTableV);
+            typeInStringPP(std::to_string(weeklyScores[i].pp), InputTableV);
+            SetClickDanser(410, 194); //escape configure
 
-        auto length = ReplayParser::parseReplay(pathD, score.pp);
-        length = length / 440; //get approximate length in seconds
-        std::this_thread::sleep_for(40ms);
-        if (length <= 40) {
-            if (!isBegChecked) {
+            auto length = ReplayParser::parseReplay(pathD, weeklyScores[i].pp);
+            length = length / 440; //get approximate length in seconds
+            std::this_thread::sleep_for(40ms);
+            if (length <= 40) {
+                if (!isBegChecked) {
+                    SetClickDanser(690, 166); //time/offset menu
+                    SetClickDanser(582, 388); //check skip map beginning
+                    SetClickDanser(422, 440); //exit menu
+                }
+            } else {
+                if (i != 0) { multiplier = double(i) / double(qScores); } else { multiplier = 1 / double(qScores); }
+                lastPart = (40.0 + ((double(length) / 4) * multiplier)) / length;
                 SetClickDanser(690, 166); //time/offset menu
-                SetClickDanser(582, 388); //check skip map beginning
+                if (lastPart > 1) { lastPart = 1; }
+                SetClickDanser(214 + (378 * lastPart), 328); //part select
                 SetClickDanser(422, 440); //exit menu
             }
-        } else {
-            if (i != 0) { multiplier = double(i) / double(qScores); } else { multiplier = 1 / double(qScores); }
-            lastPart = (40.0 + ((double(length) / 4) * multiplier)) / length;
-            SetClickDanser(690, 166); //time/offset menu
-            if (lastPart > 1) { lastPart = 1; }
-            SetClickDanser(214 + (378 * lastPart), 328); //part select
-            SetClickDanser(422, 440); //exit menu
-        }
-        //fmt::println("length {}\nmultiplier {}\nqScores {}\ni {}\nlastPart {}",length,multiplier,qScores,i,lastPart);
+            //fmt::println("length {}\nmultiplier {}\nqScores {}\ni {}\nlastPart {}",length,multiplier,qScores,i,lastPart);
 
-        auto configs = getOBCConfNames(pathConf); //configs
-        configs = sortOBC(configs);
-        auto configPath = std::string();
-        namespace fs = std::filesystem;
-        int configNumber = 0;
-        for (const auto &entry: configs) {
-            if (std::regex_match(configs[configNumber], std::regex(".*obc!" + score.username + ".*"))) {
-                configPath = entry;
-                break;
-            }
-            configNumber++;
-        }
-        fmt::println("{} {}",configPath,configNumber);
-
-        SetClickDanser(238, 466); //enter config menu
-        SetCursorPosDanser(246, 366); //hover over first cfg
-        configNumber++;
-
-        if(configNumber<=11) {
-            std::this_thread::sleep_for(40ms);
-            MouseScroll(20);
-            std::this_thread::sleep_for(80ms);
-            MouseScroll(-0.18*configNumber);
-            std::this_thread::sleep_for(80ms);
-            LeftClick();
-            std::this_thread::sleep_for(80ms);
-        }else{
-            std::this_thread::sleep_for(40ms);
-            MouseScroll(20);
-            std::this_thread::sleep_for(80ms);
-            MouseScroll(-0.18*configNumber);
-            std::this_thread::sleep_for(80ms);
-            SetClickDanser(246, 196+(24.286*(configNumber-11)));
-            std::this_thread::sleep_for(80ms);
-        }
-        SetClickDanser(422, 440); //exit menu
-        SetClickDanser(182, 58); //render
-        while (!rendered) {
-            std::this_thread::sleep_for(2s);
-            for (const auto &entry: fs::directory_iterator(pathV)) {
-                std::this_thread::sleep_for(4s);
-                if (std::regex_match(entry.path().generic_string(), std::regex(".*" + std::to_string(score.pp) + "\\.mp4"))) {
-                    rendered = true;
+            auto configs = getOBCConfNames(pathConf); //configs
+            configs = sortOBC(configs);
+            auto configPath = std::string();
+            namespace fs = std::filesystem;
+            int configNumber = 0;
+            for (const auto &entry: configs) {
+                if (std::regex_match(configs[configNumber], std::regex(".*obc!" + weeklyScores[i].username + ".*"))) {
+                    configPath = entry;
                     break;
                 }
+                configNumber++;
             }
+            //fmt::println("{} {}", configPath, configNumber);
+
+            SetClickDanser(238, 466); //enter config menu
+            SetCursorPosDanser(246, 366); //hover over first cfg
+            configNumber++;
+
+            if (configNumber <= 11) {
+                std::this_thread::sleep_for(40ms);
+                MouseScroll(20);
+                std::this_thread::sleep_for(80ms);
+                MouseScroll(-0.18 * configNumber);
+                std::this_thread::sleep_for(80ms);
+                LeftClick();
+                std::this_thread::sleep_for(80ms);
+            } else {
+                std::this_thread::sleep_for(40ms);
+                MouseScroll(20);
+                std::this_thread::sleep_for(80ms);
+                MouseScroll(-0.18 * configNumber);
+                std::this_thread::sleep_for(80ms);
+                SetClickDanser(246, 196 + (24.286 * (configNumber - 11)));
+                std::this_thread::sleep_for(80ms);
+            }
+            SetClickDanser(422, 440); //exit menu
+            SetClickDanser(182, 58); //render
+            while (!rendered) {
+                std::this_thread::sleep_for(4s);
+                for (const auto &entry: fs::directory_iterator(pathV)) {
+                    if (std::regex_match(entry.path().generic_string(),
+                                         std::regex(".*" + std::to_string(weeklyScores[i].pp) + "\\.mp4"))) {
+                        rendered = true;
+                        break;
+                    }
+                }
+            }
+            if(removeMode==1) {
+                std::filesystem::remove(
+                        pathD.generic_string().append("/").append(std::to_string(weeklyScores[i].pp).append(".osr")));
+            }
+            i++;
         }
-        std::filesystem::remove(pathD.generic_string().append("/").append(std::to_string(score.pp).append(".osr")));
     }
 }
 
@@ -837,26 +844,26 @@ auto main() -> int {
     using namespace std::chrono_literals;
     using namespace YAUIO;
 
-    //Path to input Scores file and Downloads folder
-    auto path = fs::path("D:\\Users\\User\\Desktop\\Files\\OsuScores\\output.csv");
-    auto pathD = fs::path("F:\\Users\\User\\Downloads\\Scores");
-    auto pathConf = fs::path("D:\\Users\\User\\Desktop\\Files\\danser-0.9.0-win\\settings");
-    auto pathV = fs::path("D:\\Users\\User\\Desktop\\Files\\danser-0.9.0-win\\videos");
+    //Paths
+    auto path = fs::path("D:\\Users\\User\\Desktop\\Files\\OsuScores\\output.csv"); //csv
+    auto pathD = fs::path("F:\\Users\\User\\Downloads\\Scores"); //replays
+    auto pathConf = fs::path("D:\\Users\\User\\Desktop\\Files\\danser-0.9.0-win\\settings"); //configs
+    auto pathV = fs::path("D:\\Users\\User\\Desktop\\Files\\danser-0.9.0-win\\videos"); //rendered videos
 
     //Parsing data
     auto scores = parseScores(path);
     auto InputTableV = ParseInputTable();
     auto weeklyScores = sortScores(scores);
 
-    int i = 0;
-    //How many scores out of 400pp+ ones you want to iterate over
-    int cycle = weeklyScores.size();
+    int cycle = weeklyScores.size(); //How many scores out of 400pp+ ones you want to iterate over
+    int doRemove = 0; //0 - not remove replay file after rendering, 1 - remove
+    int openDanser = 0; //0 - just config danser, 1 - open and configure
+    int downloadMode = 0; //mode 0 - only replays ,1 - only maps, 2 - replays + maps
 
     printScoresVector(weeklyScores);
-    downloadData(weeklyScores, InputTableV, cycle, 2); //mode 0 - only replays ,1 - only maps, 2 - replays + maps
+    downloadData(weeklyScores, InputTableV, cycle, downloadMode);
     renameFiles(weeklyScores, pathD); //renames all replays to their pp value
-
-    setProperDancerState(0);//0 - for opening and cfg, 1 - only cfg
-    renderReplay(weeklyScores[33],weeklyScores.size(),33,InputTableV,pathD,pathConf,pathV);
+    setProperDancerState(openDanser);
+    renderReplays(weeklyScores,cycle,InputTableV,pathD,pathConf,pathV,doRemove);
     return 0;
 }
