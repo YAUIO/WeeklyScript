@@ -519,24 +519,24 @@ namespace YAUIO {
         }
     }
 
-    void openLink(std::string s) {
-        char *linkChar = new char[s.length() + 1];
-        std::copy(s.begin(), s.end(), linkChar);
+    void openLink(std::string link) {
+        char *linkChar = new char[link.length() + 1];
+        std::copy(link.begin(), link.end(), linkChar);
         ShellExecute(NULL, NULL, linkChar, NULL, NULL, SW_SHOWNORMAL);
     }
 
-    void openProgram(std::string s) {
-        if (s == "danser") {
-            s = "D:\\Users\\User\\Desktop\\Files\\danser-0.9.0-win\\danser.exe";
-        } else if (s == "premiere") {
-            s = "D:\\Soft\\Programs\\Adobe\\Adobe Premiere Pro 2020\\Adobe\\Adobe Premiere Pro 2020\\Adobe Premiere Pro.exe";
-        } else if (s == "chrome") {
-            s = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+    void openProgram(std::string app) {
+        if (app == "danser") {
+            app = "D:\\Users\\User\\Desktop\\Files\\danser-0.9.0-win\\danser.exe";
+        } else if (app == "premiere") {
+            app = "D:\\Soft\\Programs\\Adobe\\Adobe Premiere Pro 2020\\Adobe\\Adobe Premiere Pro 2020\\Adobe Premiere Pro.exe";
+        } else if (app == "chrome") {
+            app = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
         } else {
-            s = "G:\\osu!\\osu!.exe";
+            app = "G:\\osu!\\osu!.exe";
         }
-        char *pathChar = new char[s.length() + 1];
-        std::copy(s.begin(), s.end(), pathChar);
+        char *pathChar = new char[app.length() + 1];
+        std::copy(app.begin(), app.end(), pathChar);
         ShellExecute(NULL, "open", pathChar, NULL, NULL, SW_SHOWDEFAULT);
     }
 
@@ -586,7 +586,7 @@ namespace YAUIO {
         SetClickExplorer(248, 58);
     }
 
-    void renameFiles(std::vector<Score> vector, std::filesystem::path path) {
+    void renameFiles(std::vector<Score> vector,int qScores, std::filesystem::path path) {
         int i = 0;
         namespace fs = std::filesystem;
         std::string pathM[vector.size() * 2];
@@ -598,7 +598,7 @@ namespace YAUIO {
         auto ids = std::vector<std::string>();
         i = 0;
         int ii = 0;
-        while (i < vector.size()) {
+        while (i < qScores) {
             while (ii < vector[i].scoreLink.size()) {
                 if (vector[i].scoreLink[ii] >= '0' && vector[i].scoreLink[ii] <= '9') {
                     break;
@@ -629,7 +629,7 @@ namespace YAUIO {
             i++;
         }
         i = 0;
-        while (i < vector.size()) {
+        while (i < qScores) {
             fs::rename(matchesConv[i],
                        path.generic_string().append("/").append(std::to_string(vector[found[i]].pp)).append(".osr"));
             i++;
@@ -662,12 +662,12 @@ namespace YAUIO {
             if (int(static_cast<unsigned char>(a[58])) < int(static_cast<unsigned char>(b[58]))
 
                 || (int(static_cast<unsigned char>(a[58])) == int(static_cast<unsigned char>(b[58]))
-                                                                  && (int(static_cast<unsigned char>(a[59])) < int(static_cast<unsigned char>(b[59])))
+                    && (int(static_cast<unsigned char>(a[59])) < int(static_cast<unsigned char>(b[59])))
 
-                || ((int(static_cast<unsigned char>(a[59])) == int(static_cast<unsigned char>(b[59]))
-                                                                   && int(static_cast<unsigned char>(a[60])) < int(static_cast<unsigned char>(b[60])))
-                                                                   )
-                                   )
+                    || ((int(static_cast<unsigned char>(a[59])) == int(static_cast<unsigned char>(b[59]))
+                         && int(static_cast<unsigned char>(a[60])) < int(static_cast<unsigned char>(b[60])))
+                    )
+                )
                     ) {
                 return true;
             } else {
@@ -689,20 +689,24 @@ namespace YAUIO {
             SetFocus(window);
         }
 
+        std::this_thread::sleep_for(2s);
+        SetCursorPos(900,500);
+        pressKey("F11",InputTableV);
+
         while (i < cycle) {
             if (mode == 0 || mode == 2) {
                 openLink(weeklyScores[i].scoreLink);
-                SetCursorPos(1284, 528); //Replay download
+                SetCursorPos(1284, 440); //Replay download
                 std::this_thread::sleep_for(2s);
                 LeftClick();
                 std::this_thread::sleep_for(150ms);
             }
             if (mode == 1 || mode == 2) { //Map download
-                SetCursorPos(513, 278);
+                SetCursorPos(513, 168);
                 std::this_thread::sleep_for(10ms);
                 LeftClick();
                 std::this_thread::sleep_for(2s);
-                SetCursorPos(606, 595);
+                SetCursorPos(606, 522);
                 std::this_thread::sleep_for(10ms);
                 LeftClick();
                 std::this_thread::sleep_for(2s);
@@ -710,6 +714,10 @@ namespace YAUIO {
             pressTwoKeys("CTRL", "W", InputTableV);
             i++;
         }
+        pressKey("F11",InputTableV);
+        std::this_thread::sleep_for(20ms);
+        pressTwoKeys("ALT","F4",InputTableV);
+        std::this_thread::sleep_for(20ms);
     }
 
     std::vector<std::string> getOBCConfNames(std::filesystem::path path) {
@@ -723,11 +731,11 @@ namespace YAUIO {
         return pathM;
     }
 
-    void setProperDancerState(int mode){
+    void setProperDancerState(int mode) {
         using namespace std::chrono_literals;
-        if(mode==1) { //mode 0 is just for rendering, 1 - for opening
+        if (mode == 1) { //mode 0 is just for rendering, 1 - for opening
             openProgram("danser");
-            std::this_thread::sleep_for(300s);
+            std::this_thread::sleep_for(120s);
         }
 
         //Set proper danser state
@@ -737,7 +745,9 @@ namespace YAUIO {
         SetClickDanser(753, 95); //record
     }
 
-    void renderReplays(std::vector<Score> weeklyScores, int qScores, std::vector<InputTable> InputTableV, std::filesystem::path pathD, std::filesystem::path pathConf, std::filesystem::path pathV, int removeMode){
+    void renderReplays(std::vector<Score> weeklyScores, int qScores, std::vector<InputTable> InputTableV,
+                       std::filesystem::path pathD, std::filesystem::path pathConf, std::filesystem::path pathV,
+                       int removeMode) {
         using namespace std::chrono_literals;
         bool isBegChecked;
         bool rendered;
@@ -746,7 +756,7 @@ namespace YAUIO {
         int i = 0;
         //fmt::println("{}",pathD.generic_string().append("/").append(std::to_string(score.pp).append(".osr")));
 
-        while (i<qScores) {
+        while (i < qScores) {
             //Starting to configure recording
             SetClickDanser(745, 423); //select replay
             std::this_thread::sleep_for(40ms);
@@ -763,6 +773,7 @@ namespace YAUIO {
             typeInStringPP(std::to_string(weeklyScores[i].pp), InputTableV);
             SetClickDanser(410, 194); //escape configure
 
+            rendered = false;
             auto length = ReplayParser::parseReplay(pathD, weeklyScores[i].pp);
             length = length / 440; //get approximate length in seconds
             std::this_thread::sleep_for(40ms);
@@ -792,6 +803,7 @@ namespace YAUIO {
                     configPath = entry;
                     break;
                 }
+                configPath = "NoConf";
                 configNumber++;
             }
             //fmt::println("{} {}", configPath, configNumber);
@@ -799,7 +811,9 @@ namespace YAUIO {
             SetClickDanser(238, 466); //enter config menu
             SetCursorPosDanser(246, 366); //hover over first cfg
             configNumber++;
-
+            if(configPath=="NoConf"){
+                configNumber = 1;
+            }
             if (configNumber <= 11) {
                 std::this_thread::sleep_for(40ms);
                 MouseScroll(20);
@@ -829,9 +843,28 @@ namespace YAUIO {
                     }
                 }
             }
-            if(removeMode==1) {
+            if (removeMode == 1) {
                 std::filesystem::remove(
                         pathD.generic_string().append("/").append(std::to_string(weeklyScores[i].pp).append(".osr")));
+            }
+            i++;
+        }
+    }
+
+    void moveMaps(std::filesystem::path pathD, std::filesystem::path pathOsuSongs, int removeMode) {
+        namespace fs = std::filesystem;
+        auto maps = std::vector<std::string>();
+        int i = 0;
+        for (const auto &entry: fs::directory_iterator(pathD)) {
+            if (std::regex_match(entry.path().generic_string(),
+                                 std::regex(".*\\.osz"))) {
+                maps.push_back(entry.path().generic_string());
+            }
+        }
+        while (i < maps.size()) {
+            fs::copy_file(maps[i], pathOsuSongs.generic_string().append(maps[i].substr(30)));
+            if (removeMode == 1) {
+                fs::remove(maps[i]);
             }
             i++;
         }
@@ -849,21 +882,27 @@ auto main() -> int {
     auto pathD = fs::path("F:\\Users\\User\\Downloads\\Scores"); //replays
     auto pathConf = fs::path("D:\\Users\\User\\Desktop\\Files\\danser-0.9.0-win\\settings"); //configs
     auto pathV = fs::path("D:\\Users\\User\\Desktop\\Files\\danser-0.9.0-win\\videos"); //rendered videos
+    auto pathOsuSongs = fs::path("G:\\osu!\\Songs"); // osu!/songs path
 
     //Parsing data
     auto scores = parseScores(path);
     auto InputTableV = ParseInputTable();
     auto weeklyScores = sortScores(scores);
 
-    int cycle = weeklyScores.size(); //How many scores out of 400pp+ ones you want to iterate over
-    int doRemove = 0; //0 - not remove replay file after rendering, 1 - remove
-    int openDanser = 0; //0 - just config danser, 1 - open and configure
-    int downloadMode = 0; //mode 0 - only replays ,1 - only maps, 2 - replays + maps
+    int cycle = 6; //How many scores out of 400pp+ ones you want to iterate over
+    int doRemove = 0; //0 - not remove replay&map file after rendering, 1 - remove
+    int openDanser = 1; //0 - just config danser, 1 - open and configure
+    int downloadMode = 2; //mode 0 - only replays ,1 - only maps, 2 - replays + maps
 
     printScoresVector(weeklyScores);
     downloadData(weeklyScores, InputTableV, cycle, downloadMode);
-    renameFiles(weeklyScores, pathD); //renames all replays to their pp value
+    fmt::println("Downloaded all data successfully!");
+    renameFiles(weeklyScores, cycle, pathD); //renames all replays to their pp value
+    fmt::println("Renamed all data successfully!");
+    moveMaps(pathD, pathOsuSongs, doRemove);
+    fmt::println("Moved all data successfully!");
     setProperDancerState(openDanser);
-    renderReplays(weeklyScores,cycle,InputTableV,pathD,pathConf,pathV,doRemove);
+    fmt::println("Set dancer state successfully!");
+    renderReplays(weeklyScores, cycle, InputTableV, pathD, pathConf, pathV, doRemove);
     return 0;
 }
