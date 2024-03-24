@@ -349,6 +349,25 @@ namespace YAUIO {
         ::SendInput(1, &Input, sizeof(INPUT));
     }
 
+    void LeftUp(){
+        using namespace std::chrono_literals;
+        INPUT Input = {0};
+        Input.type = INPUT_MOUSE;
+        Input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
+        ::SendInput(1, &Input, sizeof(INPUT));
+        std::this_thread::sleep_for(50ms);
+    }
+
+    void LeftDown(){
+        using namespace std::chrono_literals;
+        INPUT Input = {0};
+        // left down
+        Input.type = INPUT_MOUSE;
+        Input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
+        ::SendInput(1, &Input, sizeof(INPUT));
+        std::this_thread::sleep_for(50ms);
+    }
+
     void MouseScroll(double RY) {
         using namespace std::chrono_literals;
         INPUT Input = {0};
@@ -520,24 +539,54 @@ namespace YAUIO {
     }
 
     void openLink(std::string link) {
+        int t = 0;
         char *linkChar = new char[link.length() + 1];
-        std::copy(link.begin(), link.end(), linkChar);
+        //std::copy(link.begin(), link.end(), linkChar);
+        while (t < link.length()) {
+            linkChar[t] = link[t];
+            //fmt::println("{} == {}",linkChar[t],link[t]);
+            t++;
+        }
+        fmt::println("{} == {}", linkChar, link);
         ShellExecute(NULL, NULL, linkChar, NULL, NULL, SW_SHOWNORMAL);
     }
 
     void openProgram(std::string app) {
         if (app == "danser") {
             app = "D:\\Users\\User\\Desktop\\Files\\danser-0.9.0-win\\danser.exe";
-        } else if (app == "premiere") {
-            app = "D:\\Soft\\Programs\\Adobe\\Adobe Premiere Pro 2020\\Adobe\\Adobe Premiere Pro 2020\\Adobe Premiere Pro.exe";
         } else if (app == "chrome") {
             app = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+        } else if (app == "premiere") {
+            app = "F:\\Users\\User\\Videos\\trying to yt\\OBC!Weekly\\auto\\premiere.prproj";
         } else {
             app = "G:\\osu!\\osu!.exe";
         }
         char *pathChar = new char[app.length() + 1];
         std::copy(app.begin(), app.end(), pathChar);
         ShellExecute(NULL, "open", pathChar, NULL, NULL, SW_SHOWDEFAULT);
+    }
+
+    void openExplorer(std::string pathToFoler){
+        using namespace std::chrono_literals;
+        int h = 0;
+        char *pathFChar = new char[pathToFoler.length() + 1];
+        while (h < pathToFoler.length()) {
+            pathFChar[h] = pathToFoler[h];
+            h++;
+        }
+        //fmt::println("{}",pathFChar);
+        ShellExecute(NULL,"explore", pathFChar, 0,0,SW_MAXIMIZE);
+
+        std::this_thread::sleep_for(10ms);
+        HWND window = FindWindow(NULL, "videos");
+        if (window) {
+            RECT rect = {0};
+            GetWindowRect(window, &rect);
+
+            SetForegroundWindow(window);
+            SetActiveWindow(window);
+            SetFocus(window);
+        }
     }
 
     void SetCursorPosDanser(int x, int y) {
@@ -586,7 +635,7 @@ namespace YAUIO {
         SetClickExplorer(248, 58);
     }
 
-    void renameFiles(std::vector<Score> vector,int qScores, std::filesystem::path path) {
+    void renameFiles(std::vector<Score> vector, int qScores, std::filesystem::path path) {
         int i = 0;
         namespace fs = std::filesystem;
         std::string pathM[vector.size() * 2];
@@ -690,16 +739,15 @@ namespace YAUIO {
         }
 
         std::this_thread::sleep_for(2s);
-        SetCursorPos(900,500);
-        pressKey("F11",InputTableV);
-
+        SetCursorPos(900, 500);
+        pressKey("F11", InputTableV);
         while (i < cycle) {
             if (mode == 0 || mode == 2) {
                 openLink(weeklyScores[i].scoreLink);
                 SetCursorPos(1284, 440); //Replay download
                 std::this_thread::sleep_for(2s);
                 LeftClick();
-                std::this_thread::sleep_for(150ms);
+                std::this_thread::sleep_for(1s);
             }
             if (mode == 1 || mode == 2) { //Map download
                 SetCursorPos(513, 168);
@@ -714,9 +762,9 @@ namespace YAUIO {
             pressTwoKeys("CTRL", "W", InputTableV);
             i++;
         }
-        pressKey("F11",InputTableV);
-        std::this_thread::sleep_for(20ms);
-        pressTwoKeys("ALT","F4",InputTableV);
+        pressKey("F11", InputTableV);
+        std::this_thread::sleep_for(4s);
+        pressTwoKeys("ALT", "F4", InputTableV);
         std::this_thread::sleep_for(20ms);
     }
 
@@ -811,7 +859,7 @@ namespace YAUIO {
             SetClickDanser(238, 466); //enter config menu
             SetCursorPosDanser(246, 366); //hover over first cfg
             configNumber++;
-            if(configPath=="NoConf"){
+            if (configPath == "NoConf") {
                 configNumber = 1;
             }
             if (configNumber <= 11) {
@@ -869,6 +917,43 @@ namespace YAUIO {
             i++;
         }
     }
+
+    void removeAllFilesInFolder(std::filesystem::path folder) {
+        auto fileToRemove = std::vector<std::string>();
+        namespace fs = std::filesystem;
+        for (const auto &entry: fs::directory_iterator(folder)) {
+            fileToRemove.push_back(entry.path().generic_string());
+        }
+        int p = 0;
+        while (p < fileToRemove.size()) {
+            fs::remove(fileToRemove[p]);
+            p++;
+        }
+    }
+
+    void makePremiereProject(std::vector<InputTable> InputTableV, std::filesystem::path pathProject, std::filesystem::path pathV) {
+        namespace fs = std::filesystem;
+        using namespace std::chrono_literals;
+        fmt::println("{}",pathProject.generic_string().append("/template/premiere.prproj"));
+        fs::remove_all(pathProject.generic_string().append("/auto"));
+        fs::create_directory(pathProject.generic_string().append("/auto"));
+        fs::copy(pathProject.generic_string().append("/template/premiere.prproj"), pathProject.generic_string().append("/auto/premiere.prproj"));
+
+        openExplorer(pathV.generic_string());
+        std::this_thread::sleep_for(2s);
+        SetCursorPos(220,180);
+        LeftClick();
+        pressTwoKeys("CTRL","A",InputTableV);
+        SetCursorPos(284,248);
+        LeftDown();
+        SetCursorPos(400,800);
+        openProgram("premiere");
+        std::this_thread::sleep_for(10s);
+        SetCursorPos(294,834);
+        std::this_thread::sleep_for(10s);
+        LeftUp();
+    }
+
 }
 
 auto main() -> int {
@@ -883,6 +968,7 @@ auto main() -> int {
     auto pathConf = fs::path("D:\\Users\\User\\Desktop\\Files\\danser-0.9.0-win\\settings"); //configs
     auto pathV = fs::path("D:\\Users\\User\\Desktop\\Files\\danser-0.9.0-win\\videos"); //rendered videos
     auto pathOsuSongs = fs::path("G:\\osu!\\Songs"); // osu!/songs path
+    auto pathProjects = fs::path("F:\\Users\\User\\Videos\\trying to yt\\OBC!Weekly"); // osu!/songs path
 
     //Parsing data
     auto scores = parseScores(path);
@@ -892,17 +978,25 @@ auto main() -> int {
     int cycle = 6; //How many scores out of 400pp+ ones you want to iterate over
     int doRemove = 0; //0 - not remove replay&map file after rendering, 1 - remove
     int openDanser = 1; //0 - just config danser, 1 - open and configure
-    int downloadMode = 2; //mode 0 - only replays ,1 - only maps, 2 - replays + maps
+    int downloadMode = 0; //mode 0 - only replays ,1 - only maps, 2 - replays + maps
 
-    printScoresVector(weeklyScores);
+    if (doRemove == 1) {
+        removeAllFilesInFolder(pathV); //delete all recorded videos
+        removeAllFilesInFolder(pathD); //delete all files in replay folder
+    }
+
+    /*printScoresVector(weeklyScores);
     downloadData(weeklyScores, InputTableV, cycle, downloadMode);
-    fmt::println("Downloaded all data successfully!");
+    fmt::println("\n\nDownloaded all data successfully!");
     renameFiles(weeklyScores, cycle, pathD); //renames all replays to their pp value
-    fmt::println("Renamed all data successfully!");
+    fmt::println("\n\nRenamed all data successfully!");
     moveMaps(pathD, pathOsuSongs, doRemove);
-    fmt::println("Moved all data successfully!");
+    fmt::println("\n\nMoved all data successfully!");
     setProperDancerState(openDanser);
-    fmt::println("Set dancer state successfully!");
+    fmt::println("\n\nSet dancer state successfully!");
     renderReplays(weeklyScores, cycle, InputTableV, pathD, pathConf, pathV, doRemove);
+    fmt::println("\n\nAll replays rendered successfully!");
+*/
+    makePremiereProject(InputTableV,pathProjects,pathV);
     return 0;
 }
