@@ -11,7 +11,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(fmt)
 
-add_executable(WeeklyScript main.cpp OsuReplayParser.cpp)
+add_executable(WeeklyScript main.cpp)
 TARGET_LINK_LIBRARIES(WeeklyScript fmt)
 
 add_executable(WeeklyScriptGetC mainGet.cpp)
