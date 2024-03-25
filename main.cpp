@@ -740,6 +740,8 @@ namespace YAUIO {
 
         std::this_thread::sleep_for(2s);
         SetCursorPos(900, 500);
+        openLink("https://twitter.com");
+        std::this_thread::sleep_for(2s);
         pressKey("F11", InputTableV);
         while (i < cycle) {
             if (mode == 0 || mode == 2) {
@@ -975,7 +977,7 @@ auto main() -> int {
     auto InputTableV = ParseInputTable();
     auto weeklyScores = sortScores(scores);
 
-    int cycle = 6; //How many scores out of 400pp+ ones you want to iterate over
+    int cycle = 2; //How many scores out of 400pp+ ones you want to iterate over
     int doRemove = 0; //0 - not remove replay&map file after rendering, 1 - remove
     int openDanser = 1; //0 - just config danser, 1 - open and configure
     int downloadMode = 0; //mode 0 - only replays ,1 - only maps, 2 - replays + maps
@@ -985,7 +987,7 @@ auto main() -> int {
         removeAllFilesInFolder(pathD); //delete all files in replay folder
     }
 
-    /*printScoresVector(weeklyScores);
+    printScoresVector(weeklyScores);
     downloadData(weeklyScores, InputTableV, cycle, downloadMode);
     fmt::println("\n\nDownloaded all data successfully!");
     renameFiles(weeklyScores, cycle, pathD); //renames all replays to their pp value
@@ -996,7 +998,7 @@ auto main() -> int {
     fmt::println("\n\nSet dancer state successfully!");
     renderReplays(weeklyScores, cycle, InputTableV, pathD, pathConf, pathV, doRemove);
     fmt::println("\n\nAll replays rendered successfully!");
-*/
+
     makePremiereProject(InputTableV,pathProjects,pathV);
     return 0;
 }

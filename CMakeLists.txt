@@ -14,5 +14,8 @@ FetchContent_MakeAvailable(fmt)
 add_executable(WeeklyScript main.cpp)
 TARGET_LINK_LIBRARIES(WeeklyScript fmt)
 
+add_executable(WeeklyScriptBETA mainBeta.cpp)
+TARGET_LINK_LIBRARIES(WeeklyScriptBETA fmt)
+
 add_executable(WeeklyScriptGetC mainGet.cpp)
 TARGET_LINK_LIBRARIES(WeeklyScriptGetC fmt)
