@@ -743,6 +743,7 @@ namespace YAUIO {
         openLink("https://twitter.com");
         std::this_thread::sleep_for(2s);
         pressKey("F11", InputTableV);
+        pressTwoKeys("CTRL", "W", InputTableV);
         while (i < cycle) {
             if (mode == 0 || mode == 2) {
                 openLink(weeklyScores[i].scoreLink);
