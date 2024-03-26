@@ -1,52 +1,52 @@
 #include <Windows.h>
 #include <fmt/core.h>
-#include <fmt/ranges.h>
 #include <ranges>
 #include <algorithm>
 #include <filesystem>
 #include <fstream>
+#include <utility>
 #include <vector>
 #include <thread>
 #include <regex>
 #include <string>
 #include <iostream>
 #include <sstream>
-#include <stdint.h>
-#include <codecvt>
-#include <locale>
-//#include "cmake-build-debug/_deps/mediainfolib-src/Source/MediaInfo/MediaInfo.h"
+
+//BETA BRANCH BETA BRANCH BETA BRANCH BETA BRANCH BETA BRANCH BETA BRANCH BETA BRANCH BETA BRANCH BETA BRANCH BETA BRANCH BETA BRANCH
+
 //Before running the code, don't forget to move inputTable.txt to cmake-build-debug, add STOP in the end of csv and properly set paths in main() and openProgram()
 //Also, adjust locale for IpWindowName in OpenFocusChrome()
+//Look at 937
 
 namespace ReplayParser {
 // https://github.com/qtkite/Osu-Replay-Parser
 // https://osu.ppy.sh/help/wiki/osu!_File_Formats/Osr_(file_format)
 
     struct ReplayFormat {
-        unsigned char m_chGameMode = 0;
-        int m_iGameVersion = 0;
+        /*unsigned char m_chGameMode = 0;
+        int m_iGameVersion = 0;*/
         std::string m_strMapMD5Hash;
         std::string m_strPlayerName;
         std::string m_strReplayHash;
-        short m_sh300;
-        short m_sh100;
-        short m_sh50;
-        short m_shGekis;
-        short m_shKatus;
-        short m_shMisses;
-        int m_iTotalScore;
-        short m_shHighestCombo;
-        unsigned char m_chFC;
-        int m_iMods;
+        /*short m_sh300{};
+        short m_sh100{};
+        short m_sh50{};
+        short m_shGekis{};
+        short m_shKatus{};
+        short m_shMisses{};
+        int m_iTotalScore{};
+        short m_shHighestCombo{};
+        unsigned char m_chFC{};
+        int m_iMods{};*/
         std::string m_strLifeBar;
-        long long m_lTimeStamp;
-        int m_iLenCompressedReplay;
+        //long long m_lTimeStamp{};
+        int m_iLenCompressedReplay{};
         std::vector<unsigned char> compressed_data;
-        long long unknown;
+        //long long unknown{};
     };
 
 /// Utility function to decode a ULEB128 value.
-    static inline uint64_t decodeULEB128(const uint8_t *p, unsigned *n = 0) {
+    /*static inline uint64_t decodeULEB128(const uint8_t *p, unsigned *n = nullptr) {
         const uint8_t *orig_p = p;
         uint64_t Value = 0;
         unsigned Shift = 0;
@@ -57,23 +57,23 @@ namespace ReplayParser {
         if (n)
             *n = (unsigned) (p - orig_p);
         return Value;
-    }
+    }*/
 
-    std::wstring s2ws(const std::string &str) {
+    /*std::wstring s2ws(const std::string &str) {
         using convert_typeX = std::codecvt_utf8<wchar_t>;
         std::wstring_convert<convert_typeX, wchar_t> converterX;
 
         return converterX.from_bytes(str);
-    }
+    }*/
 
-    std::string ws2s(const std::wstring &wstr) {
+    /*std::string ws2s(const std::wstring &wstr) {
         using convert_typeX = std::codecvt_utf8<wchar_t>;
         std::wstring_convert<convert_typeX, wchar_t> converterX;
 
         return converterX.to_bytes(wstr);
-    }
+    }*/
 
-    std::string parse_osu_string(std::ifstream &infile) {
+    /*std::string parse_osu_string(std::ifstream &infile) {
         unsigned char header_info;
 
         infile.read((char *) &header_info, sizeof(header_info));
@@ -108,9 +108,9 @@ namespace ReplayParser {
             return stringfromwide;
         }
         return "";
-    }
+    }*/
 
-    enum Mods {
+    /*enum Mods {
         None = 0,
         NoFail = 1,
         Easy = 2,
@@ -147,42 +147,61 @@ namespace ReplayParser {
         FreeModAllowed =
         NoFail | Easy | Hidden | HardRock | SuddenDeath | Flashlight | FadeIn | Relax | Relax2 | SpunOut | KeyMod,
         ScoreIncreaseMods = Hidden | HardRock | DoubleTime | Flashlight | FadeIn
-    };
+    };*/ //Mods enums
 
-    void print_mods(int mods) {
+    /* void print_mods(int mods) {
 
-        if (mods & Mods::NoFail)
-            std::cout << "No fail on" << std::endl;
-        if (mods & Mods::Easy)
-            std::cout << "Easy on" << std::endl;
-        if (mods & Mods::TouchDevice)
-            std::cout << "TouchDevice" << std::endl;
-        if (mods & Mods::Hidden)
-            std::cout << "Hidden on" << std::endl;
-        if (mods & Mods::HardRock)
-            std::cout << "HardRock on" << std::endl;
-        if (mods & Mods::SuddenDeath)
-            std::cout << "SuddenDeath on" << std::endl;
-        if (mods & Mods::DoubleTime)
-            std::cout << "DoubleTime on" << std::endl;
-        if (mods & Mods::Relax)
-            std::cout << "Relax on" << std::endl;
-        if (mods & Mods::Nightcore)
-            std::cout << "Nightcore on" << std::endl;
-        if (mods & Mods::Flashlight)
-            std::cout << "Flashlight on" << std::endl;
-        if (mods & Mods::Autoplay)
-            std::cout << "Autoplay on" << std::endl;
-        if (mods & Mods::SpunOut)
-            std::cout << "SpunOut on" << std::endl;
-        if (mods & Mods::Relax2)
-            std::cout << "Relax2 on" << std::endl;
-        if (mods & Mods::Perfect)
-            std::cout << "Perfect on" << std::endl;
+         if (mods & Mods::NoFail)
+             std::cout << "No fail on" << std::endl;
+         if (mods & Mods::Easy)
+             std::cout << "Easy on" << std::endl;
+         if (mods & Mods::TouchDevice)
+             std::cout << "TouchDevice" << std::endl;
+         if (mods & Mods::Hidden)
+             std::cout << "Hidden on" << std::endl;
+         if (mods & Mods::HardRock)
+             std::cout << "HardRock on" << std::endl;
+         if (mods & Mods::SuddenDeath)
+             std::cout << "SuddenDeath on" << std::endl;
+         if (mods & Mods::DoubleTime)
+             std::cout << "DoubleTime on" << std::endl;
+         if (mods & Mods::Relax)
+             std::cout << "Relax on" << std::endl;
+         if (mods & Mods::Nightcore)
+             std::cout << "Nightcore on" << std::endl;
+         if (mods & Mods::Flashlight)
+             std::cout << "Flashlight on" << std::endl;
+         if (mods & Mods::Autoplay)
+             std::cout << "Autoplay on" << std::endl;
+         if (mods & Mods::SpunOut)
+             std::cout << "SpunOut on" << std::endl;
+         if (mods & Mods::Relax2)
+             std::cout << "Relax2 on" << std::endl;
+         if (mods & Mods::Perfect)
+             std::cout << "Perfect on" << std::endl;
 
-    }
+         if (mods & Mods::None)
+             std::cout << "No mods" << std::endl;
+         if (mods & Mods::HalfTime)
+             std::cout << "HalfTime on" << std::endl;
+         if (mods & Mods::Random)
+             std::cout << "Random on" << std::endl;
+         if (mods & Mods::Cinema)
+             std::cout << "Cinema on" << std::endl;
+         if (mods & Mods::Target)
+             std::cout << "Target on" << std::endl;
+         if (mods & Mods::ScoreV2)
+             std::cout << "SV2 on" << std::endl;
+         if (mods & Mods::LastMod)
+             std::cout << "LastMod on" << std::endl;
+         if (mods & Mods::FreeModAllowed)
+             std::cout << "FreeModAllowed on" << std::endl;
+         if (mods & Mods::ScoreIncreaseMods)
+             std::cout << "ScoreIncreaseMods on" << std::endl;
 
-    auto parseReplay(std::filesystem::path pathD, double pp) {
+     }*/ //Print mods from int
+
+    auto parseReplay(const std::filesystem::path &pathD, double pp) {
         auto s = pathD.generic_string();
         s.append("/");
         s.append(std::to_string(pp));
@@ -203,7 +222,7 @@ namespace ReplayParser {
         if (infile.is_open()) {
             std::cout << "Successfully opened file" << std::endl;
 
-            infile.read((char *) &replay_data.m_chGameMode, sizeof(replay_data.m_chGameMode));
+            /*infile.read((char *) &replay_data.m_chGameMode, sizeof(replay_data.m_chGameMode));
             std::cout << "m_chGameMode:" << replay_data.m_chGameMode << std::endl;
 
             infile.read((char *) &replay_data.m_iGameVersion, sizeof(replay_data.m_iGameVersion));
@@ -252,7 +271,7 @@ namespace ReplayParser {
             std::cout << "m_strLifeBar:" << replay_data.m_strLifeBar << std::endl;
 
             infile.read((char *) &replay_data.m_lTimeStamp, sizeof(replay_data.m_lTimeStamp));
-            std::cout << "m_lTimeStamp:" << replay_data.m_lTimeStamp << std::endl;
+            std::cout << "m_lTimeStamp:" << replay_data.m_lTimeStamp << std::endl;*/
 
             infile.read((char *) &replay_data.m_iLenCompressedReplay, sizeof(replay_data.m_iLenCompressedReplay));
             std::cout << "m_iLenCompressedReplay:" << replay_data.m_iLenCompressedReplay << std::endl;
@@ -280,16 +299,17 @@ namespace YAUIO {
     class Score {
     public:
         std::string username;
-        double pp;
+        double pp{};
         std::string dateTime;
-        bool replay;
+        bool replay{};
+        char *scoreLinkC{};
         std::string scoreLink;
         std::string map;
         std::string diff;
         std::string mods;
-        int country_rank;
-        int global_rank;
-        double total_pp;
+        int country_rank{};
+        int global_rank{};
+        double total_pp{};
     };
 
     class InputTable {
@@ -298,7 +318,7 @@ namespace YAUIO {
         std::string key;
     };
 
-    std::string getKeyCode(std::string keyI, std::vector<InputTable> table) {
+    std::string getKeyCode(const std::string &keyI, std::vector<InputTable> table) {
         int i = 0;
         while (i < table.size()) {
             if (table[i].key == keyI) {
@@ -308,15 +328,6 @@ namespace YAUIO {
         }
         return "0x30";
     }
-
-    /*int getVideoDuration(std::string fileName){
-        using namespace MediaInfoLib;
-        MediaInfo MI;
-        MI.Open(fileName);
-        //int duration = std::stoi(MI.Get(Stream_General, 0, "Duration"));
-        MI.Close();
-        return 0; //duration;
-    }*/
 
     std::vector<InputTable> ParseInputTable() {
         namespace fs = std::filesystem;
@@ -334,14 +345,14 @@ namespace YAUIO {
             }
             std::getline(file, bufN, ' ');
             //fmt::println("-{}",bufN);
-            vector.push_back(InputTable());
+            vector.emplace_back();
             vector[i].keyCode = buf;
             vector[i].key = bufN;
             std::getline(file, buf, '\n');
             i++;
         }
         return vector;
-    };
+    }
 
     void LeftClick() {
         using namespace std::chrono_literals;
@@ -358,7 +369,7 @@ namespace YAUIO {
         ::SendInput(1, &Input, sizeof(INPUT));
     }
 
-    void LeftUp(){
+    void LeftUp() {
         using namespace std::chrono_literals;
         INPUT Input = {0};
         Input.type = INPUT_MOUSE;
@@ -367,7 +378,7 @@ namespace YAUIO {
         std::this_thread::sleep_for(50ms);
     }
 
-    void LeftDown(){
+    void LeftDown() {
         using namespace std::chrono_literals;
         INPUT Input = {0};
         // left down
@@ -377,7 +388,7 @@ namespace YAUIO {
         std::this_thread::sleep_for(50ms);
     }
 
-    void MouseScroll(double RY) {
+    void MouseScroll(unsigned long RY) {
         using namespace std::chrono_literals;
         INPUT Input = {0};
         Input.type = INPUT_MOUSE;
@@ -388,7 +399,7 @@ namespace YAUIO {
         ::SendInput(1, &Input, sizeof(INPUT));
     }
 
-    void pressTwoKeys(std::string s, std::string s1, std::vector<InputTable> InputTableV) {
+    void pressTwoKeys(std::string s, std::string s1, const std::vector<InputTable> &InputTableV) {
         s = getKeyCode(s, InputTableV);
         s1 = getKeyCode(s1, InputTableV);
         INPUT ip;
@@ -398,28 +409,28 @@ namespace YAUIO {
         ip.ki.dwExtraInfo = 0;
 
         // Press the "A" key
-        ip.ki.wVk = static_cast< unsigned short >( std::strtoul(s.c_str(), NULL,
+        ip.ki.wVk = static_cast< unsigned short >( std::strtoul(s.c_str(), nullptr,
                                                                 0)); // virtual-key code for the "a" key
         ip.ki.dwFlags = 0; // 0 for key press
         SendInput(1, &ip, sizeof(INPUT));
 
-        ip.ki.wVk = static_cast< unsigned short >( std::strtoul(s1.c_str(), NULL,
+        ip.ki.wVk = static_cast< unsigned short >( std::strtoul(s1.c_str(), nullptr,
                                                                 0)); // virtual-key code for the "a" key
         ip.ki.dwFlags = 0; // 0 for key press
         SendInput(1, &ip, sizeof(INPUT));
 
         // Release the "A" key
-        ip.ki.wVk = static_cast< unsigned short >( std::strtoul(s.c_str(), NULL, 0));
+        ip.ki.wVk = static_cast< unsigned short >( std::strtoul(s.c_str(), nullptr, 0));
         ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
         SendInput(1, &ip, sizeof(INPUT));
 
-        ip.ki.wVk = static_cast< unsigned short >( std::strtoul(s1.c_str(), NULL, 0));
+        ip.ki.wVk = static_cast< unsigned short >( std::strtoul(s1.c_str(), nullptr, 0));
         ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
         SendInput(1, &ip, sizeof(INPUT));
     }
 
     void pressKey(std::string s, std::vector<InputTable> InputTableV) {
-        s = getKeyCode(s, InputTableV);
+        s = getKeyCode(s, std::move(InputTableV));
         INPUT ip;
         ip.type = INPUT_KEYBOARD;
         ip.ki.wScan = 0;
@@ -427,7 +438,7 @@ namespace YAUIO {
         ip.ki.dwExtraInfo = 0;
 
         // Press the "A" key
-        ip.ki.wVk = static_cast< unsigned short >( std::strtoul(s.c_str(), NULL,
+        ip.ki.wVk = static_cast< unsigned short >( std::strtoul(s.c_str(), nullptr,
                                                                 0)); // virtual-key code for the "a" key
         ip.ki.dwFlags = 0; // 0 for key press
         SendInput(1, &ip, sizeof(INPUT));
@@ -437,16 +448,12 @@ namespace YAUIO {
         SendInput(1, &ip, sizeof(INPUT));
     }
 
-    void typeInStringPP(std::string s, std::vector<InputTable> InputTableV) {
+    void typeInStringPP(std::string s, const std::vector<InputTable> &InputTableV) {
         using namespace std::chrono_literals;
         int i = 0;
         auto c = std::string();
         while (i < s.size()) {
-            if(s[i]==' '){
-                c = "SPACEBAR";
-            }else{
-                c = s[i];
-            }
+            c = s[i];
             pressKey(c, InputTableV);
             std::this_thread::sleep_for(5ms);
             i++;
@@ -459,13 +466,11 @@ namespace YAUIO {
             return false;
         }
         while (i < arg.size()) {
-            if (arg[i] >= 'a' && arg[i] <= 'z') {
+            if ((arg[i] >= 'a' && arg[i] <= 'z') || (arg[i] >= '0' && arg[i] <= '9'))
                 return false;
-            } else if (arg[i] >= '0' && arg[i] <= '9') {
-                return false;
-            } else {
+            else
                 i++;
-            }
+
         }
         return true;
     }
@@ -478,11 +483,12 @@ namespace YAUIO {
         auto argument = std::string();
         auto scores = std::vector<Score>();
         int i = 11;
-        int check = 0;
+        int ii;
+        int check;
         int scoreN = 0;
         std::getline(file, argument);
         while (i != 12) {
-            scores.push_back(Score());
+            scores.emplace_back();
             i = 11;
             while (i != 0) {
                 if (i == 1) {
@@ -521,7 +527,13 @@ namespace YAUIO {
                         scores[scoreN].replay = false;
                     }
                 } else if (i == 7) {
+                    ii = 0;
                     scores[scoreN].scoreLink = argument;
+                    scores[scoreN].scoreLinkC = new char[argument.length() + 1];
+                    while(ii<argument.size()) {
+                        scores[scoreN].scoreLinkC[ii] = *reinterpret_cast<char *>(argument[ii]);
+                        ii++;
+                    }
                 } else if (i == 3) {
                     if (argument.size() > 3) {
                         std::getline(file, argument, ',');
@@ -551,35 +563,28 @@ namespace YAUIO {
         }
     }
 
-    void openLink(std::string link) {
-        int t = 0;
-        char *linkChar = new char[link.length() + 1];
+    void openLink(char *linkChar) {
         //std::copy(link.begin(), link.end(), linkChar);
-        while (t < link.length()) {
-            linkChar[t] = link[t];
-            //fmt::println("{} == {}",linkChar[t],link[t]);
-            t++;
-        }
-        fmt::println("{} == {}", linkChar, link);
-        ShellExecute(NULL, NULL, linkChar, NULL, NULL, SW_SHOWNORMAL);
+        fmt::println("{}", linkChar);
+        ShellExecute(nullptr, nullptr, linkChar, nullptr, nullptr, SW_SHOWNORMAL);
     }
 
     void openProgram(std::string app) {
         if (app == "danser") {
-            app = "D:\\Users\\User\\Desktop\\Files\\danser-0.9.0-win\\danser.exe";
+            app = R"(D:\Users\User\Desktop\Files\danser-0.9.0-win\danser.exe)"; // #fix maybe put in variables?
         } else if (app == "chrome") {
-            app = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+            app = R"(C:\Program Files\Google\Chrome\Application\chrome.exe)";
         } else if (app == "premiere") {
-            app = "F:\\Users\\User\\Videos\\trying to yt\\OBC!Weekly\\auto\\premiere.prproj";
+            app = R"(F:\Users\User\Videos\trying to yt\OBC!Weekly\auto\premiere.prproj)";
         } else {
             app = "G:\\osu!\\osu!.exe";
         }
         char *pathChar = new char[app.length() + 1];
         std::copy(app.begin(), app.end(), pathChar);
-        ShellExecute(NULL, "open", pathChar, NULL, NULL, SW_SHOWDEFAULT);
+        ShellExecute(nullptr, "open", pathChar, nullptr, nullptr, SW_SHOWDEFAULT);
     }
 
-    void openExplorer(std::string pathToFoler){
+    void openExplorer(std::string pathToFoler) {
         using namespace std::chrono_literals;
         int h = 0;
         char *pathFChar = new char[pathToFoler.length() + 1];
@@ -588,12 +593,14 @@ namespace YAUIO {
             h++;
         }
         //fmt::println("{}",pathFChar);
-        ShellExecute(NULL,"explore", pathFChar, 0,0,SW_MAXIMIZE);
+        ShellExecute(nullptr, "explore", pathFChar, nullptr, nullptr, SW_MAXIMIZE);
 
-        fmt::println("Setting focus to explorer");
         std::this_thread::sleep_for(10ms);
-        HWND window = FindWindow(NULL, "videos");
+        HWND window = FindWindow(nullptr, "videos");
         if (window) {
+            RECT rect = {0};
+            GetWindowRect(window, &rect);
+
             SetForegroundWindow(window);
             SetActiveWindow(window);
             SetFocus(window);
@@ -601,7 +608,7 @@ namespace YAUIO {
     }
 
     void SetCursorPosDanser(int x, int y) {
-        HWND window = FindWindow(NULL, "danser-go 0.9.1 launcher");
+        HWND window = FindWindow(nullptr, "danser-go 0.9.1 launcher");
         if (window) {
             RECT rect = {0};
             GetWindowRect(window, &rect);
@@ -614,7 +621,7 @@ namespace YAUIO {
     }
 
     void SetCursorPosExplorer(int x, int y) {
-        HWND window = FindWindow(NULL, "Select replay file");
+        HWND window = FindWindow(nullptr, "Select replay file");
         if (window) {
             RECT rect = {0};
             GetWindowRect(window, &rect);
@@ -646,7 +653,7 @@ namespace YAUIO {
         SetClickExplorer(248, 58);
     }
 
-    void renameFiles(std::vector<Score> vector, int qScores, std::filesystem::path path) {
+    void renameFiles(std::vector<Score> vector, int qScores, const std::filesystem::path& path) {
         int i = 0;
         namespace fs = std::filesystem;
         std::string pathM[vector.size() * 2];
@@ -669,7 +676,6 @@ namespace YAUIO {
             i++;
         }
         i = 0;
-        ii = 0;
         auto found = std::vector<int>();
         auto matches = std::vector<std::string>();
         while (i < ids.size()) {
@@ -706,7 +712,7 @@ namespace YAUIO {
             }
             i++;
         }
-        std::ranges::sort(weeklyScores, [](Score a, Score b) {
+        std::ranges::sort(weeklyScores, [](const Score& a, const Score& b) {
             if (a.pp < b.pp) {
                 return true;
             } else {
@@ -719,7 +725,7 @@ namespace YAUIO {
     std::vector<std::string> sortOBC(std::vector<std::string> v) {
         std::ranges::sort(v, [](std::string a, std::string b) {
             //fmt::println("{} {} - {} {}",int(static_cast<unsigned char>(a[58])),a[58],int(static_cast<unsigned char>(b[58])),b[58]);
-            if (int(static_cast<unsigned char>(a[58])) < int(static_cast<unsigned char>(b[58]))
+            if (int(static_cast<unsigned char>(a[58])) < int(static_cast<unsigned char>(b[58])) // #fix this char hell
 
                 || (int(static_cast<unsigned char>(a[58])) == int(static_cast<unsigned char>(b[58]))
                     && (int(static_cast<unsigned char>(a[59])) < int(static_cast<unsigned char>(b[59])))
@@ -737,12 +743,12 @@ namespace YAUIO {
         return v;
     }
 
-    void downloadData(std::vector<Score> weeklyScores, std::vector<InputTable> InputTableV, int cycle, int mode) {
+    void downloadData(std::vector<Score> weeklyScores, const std::vector<InputTable>& InputTableV, int cycle, int mode) {
         int i = 0;
         using namespace std::chrono_literals;
 
         openProgram("chrome");
-        HWND window = FindWindow(NULL, "Новая Вкладка - Google Chrome");
+        HWND window = FindWindow(nullptr, "Новая Вкладка - Google Chrome");
         if (window) {
             SetForegroundWindow(window);
             SetActiveWindow(window);
@@ -751,13 +757,15 @@ namespace YAUIO {
 
         std::this_thread::sleep_for(2s);
         SetCursorPos(900, 500);
-        openLink("https://twitter.com");
-        std::this_thread::sleep_for(2s);
+        openLink(weeklyScores[i].scoreLinkC);
+        std::this_thread::sleep_for(10ms);
         pressKey("F11", InputTableV);
+        std::this_thread::sleep_for(10ms);
         pressTwoKeys("CTRL", "W", InputTableV);
+        fmt::println("Download begin");
         while (i < cycle) {
             if (mode == 0 || mode == 2) {
-                openLink(weeklyScores[i].scoreLink);
+                openLink(weeklyScores[i].scoreLinkC);
                 SetCursorPos(1284, 440); //Replay download
                 std::this_thread::sleep_for(2s);
                 LeftClick();
@@ -782,11 +790,11 @@ namespace YAUIO {
         std::this_thread::sleep_for(20ms);
     }
 
-    std::vector<std::string> getOBCConfNames(std::filesystem::path path) {
+    std::vector<std::string> getOBCConfNames(const std::filesystem::path& path, const std::string& config_prefix) {
         auto pathM = std::vector<std::string>();
         namespace fs = std::filesystem;
         for (const auto &entry: fs::directory_iterator(path)) {
-            if (std::regex_match(entry.path().generic_string(), std::regex(".*obc.*"))) {
+            if (std::regex_match(entry.path().generic_string(), std::regex(".*" + config_prefix + ".*"))) {
                 pathM.push_back(entry.path().generic_string());
             }
         }
@@ -807,8 +815,9 @@ namespace YAUIO {
         SetClickDanser(753, 95); //record
     }
 
-    void renderReplays(std::vector<Score> weeklyScores, int qScores, std::vector<InputTable> InputTableV,
-                       std::filesystem::path pathD, std::filesystem::path pathConf, std::filesystem::path pathV,
+    void renderReplays(std::vector<Score> weeklyScores, const std::string& configPrefix, int qScores,
+                       const std::vector<InputTable>& InputTableV,
+                       const std::filesystem::path& pathD, const std::filesystem::path& pathConf, const std::filesystem::path& pathV,
                        int removeMode) {
         using namespace std::chrono_literals;
         bool isBegChecked;
@@ -816,6 +825,12 @@ namespace YAUIO {
         double lastPart;
         double multiplier;
         int i = 0;
+        auto length = std::vector<int>();
+        while (i < qScores) { //Parse lengths
+            length.push_back(ReplayParser::parseReplay(pathD, weeklyScores[i].pp));
+            i++;
+        }
+        i = 0;
         //fmt::println("{}",pathD.generic_string().append("/").append(std::to_string(score.pp).append(".osr")));
 
         while (i < qScores) {
@@ -836,10 +851,10 @@ namespace YAUIO {
             SetClickDanser(410, 194); //escape configure
 
             rendered = false;
-            auto length = ReplayParser::parseReplay(pathD, weeklyScores[i].pp);
-            length = length / 440; //get approximate length in seconds
+
+            length[i] = length[i] / 440; //get approximate length in seconds
             std::this_thread::sleep_for(40ms);
-            if (length <= 40) {
+            if (length[i] <= 40) {
                 if (!isBegChecked) {
                     SetClickDanser(690, 166); //time/offset menu
                     SetClickDanser(582, 388); //check skip map beginning
@@ -847,7 +862,7 @@ namespace YAUIO {
                 }
             } else {
                 if (i != 0) { multiplier = double(i) / double(qScores); } else { multiplier = 1 / double(qScores); }
-                lastPart = (40.0 + ((double(length) / 4) * multiplier)) / length;
+                lastPart = (40.0 + ((double(length[i]) / 4) * multiplier)) / length[i];
                 SetClickDanser(690, 166); //time/offset menu
                 if (lastPart > 1) { lastPart = 1; }
                 SetClickDanser(214 + (378 * lastPart), 328); //part select
@@ -855,7 +870,7 @@ namespace YAUIO {
             }
             //fmt::println("length {}\nmultiplier {}\nqScores {}\ni {}\nlastPart {}",length,multiplier,qScores,i,lastPart);
 
-            auto configs = getOBCConfNames(pathConf); //configs
+            auto configs = getOBCConfNames(pathConf, configPrefix); //configs
             configs = sortOBC(configs);
             auto configPath = std::string();
             namespace fs = std::filesystem;
@@ -876,7 +891,7 @@ namespace YAUIO {
             if (configPath == "NoConf") {
                 configNumber = 1;
             }
-            if (configNumber <= 11) {
+            if (configNumber <= 11) { // #fix rewrite this for any number of cfgs, like configNumber <= configNumber-9
                 std::this_thread::sleep_for(40ms);
                 MouseScroll(20);
                 std::this_thread::sleep_for(80ms);
@@ -913,7 +928,7 @@ namespace YAUIO {
         }
     }
 
-    void moveMaps(std::filesystem::path pathD, std::filesystem::path pathOsuSongs, int removeMode) {
+    void moveMaps(const std::filesystem::path& pathD, const std::filesystem::path& pathOsuSongs, int removeMode) {
         namespace fs = std::filesystem;
         auto maps = std::vector<std::string>();
         int i = 0;
@@ -932,7 +947,7 @@ namespace YAUIO {
         }
     }
 
-    void removeAllFilesInFolder(std::filesystem::path folder) {
+    void removeAllFilesInFolder(const std::filesystem::path& folder) {
         auto fileToRemove = std::vector<std::string>();
         namespace fs = std::filesystem;
         for (const auto &entry: fs::directory_iterator(folder)) {
@@ -945,102 +960,30 @@ namespace YAUIO {
         }
     }
 
-    void makePremiereProject(int qReplays, std::vector<InputTable> InputTableV, std::filesystem::path pathProject, std::filesystem::path pathV, std::vector<Score> inpVec) {
+    void makePremiereProject(const std::vector<InputTable>& InputTableV, const std::filesystem::path& pathProject,
+                             const std::filesystem::path& pathV) {
         namespace fs = std::filesystem;
         using namespace std::chrono_literals;
-        int premR = 0;
-        int textScale;
-        auto genericPauseSize = 100ms;
-        std::string bufS;
-        fmt::println("{}",pathProject.generic_string().append("/template/premiere.prproj"));
-        fs::remove(pathProject.generic_string().append("/auto/premiere.prproj"));
-        fs::copy(pathProject.generic_string().append("/template/premiere.prproj"), pathProject.generic_string().append("/auto/premiere.prproj"));
+        fmt::println("{}", pathProject.generic_string().append(
+                "/template/premiere.prproj")); //remake all the directories here for yourself
+        fs::remove_all(pathProject.generic_string().append("/auto"));
+        fs::create_directory(pathProject.generic_string().append("/auto"));
+        fs::copy(pathProject.generic_string().append("/template/premiere.prproj"),
+                 pathProject.generic_string().append("/auto/premiere.prproj"));
 
         openExplorer(pathV.generic_string());
         std::this_thread::sleep_for(2s);
-        SetCursorPos(220,180);
+        SetCursorPos(220, 180);
         LeftClick();
-        pressTwoKeys("CTRL","A",InputTableV);
-        SetCursorPos(284,248);
+        pressTwoKeys("CTRL", "A", InputTableV);
+        SetCursorPos(284, 248);
         LeftDown();
-        SetCursorPos(400,800);
+        SetCursorPos(400, 800);
         openProgram("premiere");
         std::this_thread::sleep_for(10s);
-        SetCursorPos(294,834);
+        SetCursorPos(294, 834);
         std::this_thread::sleep_for(10s);
         LeftUp();
-        SetCursorPos(1594,760);
-        std::this_thread::sleep_for(genericPauseSize);
-        LeftClick();
-        std::this_thread::sleep_for(genericPauseSize);
-
-        SetCursorPos(900,524);
-        std::this_thread::sleep_for(genericPauseSize);
-        pressKey("T",InputTableV);
-        std::this_thread::sleep_for(1s);
-        LeftClick();
-        SetCursorPos(1446,202);
-        std::this_thread::sleep_for(genericPauseSize);
-        LeftClick();
-        std::this_thread::sleep_for(genericPauseSize);
-        SetCursorPos(1524,272); //FONT
-        std::this_thread::sleep_for(genericPauseSize);
-        LeftClick();
-        std::this_thread::sleep_for(genericPauseSize);
-        typeInStringPP("LEMON MILK BOLD",InputTableV);
-        std::this_thread::sleep_for(genericPauseSize);
-        pressKey("ENTER",InputTableV);
-        std::this_thread::sleep_for(genericPauseSize);
-        SetCursorPos(900,524);
-        std::this_thread::sleep_for(genericPauseSize);
-        LeftClick();
-        std::this_thread::sleep_for(genericPauseSize);
-        bufS = inpVec[premR].username.append(" BY");
-        bufS.append(std::to_string(inpVec[premR].country_rank));
-        fmt::println("Output text: {}",bufS);
-        typeInStringPP(bufS,InputTableV);
-        std::this_thread::sleep_for(genericPauseSize);
-        SetCursorPos(940,520);
-        std::this_thread::sleep_for(genericPauseSize);
-        LeftClick();
-        std::this_thread::sleep_for(genericPauseSize);
-        pressTwoKeys("CTRL","A",InputTableV);
-        std::this_thread::sleep_for(genericPauseSize);
-        SetCursorPos(1640,300); //TEXT SIZE
-        std::this_thread::sleep_for(genericPauseSize);
-        LeftClick();
-        std::this_thread::sleep_for(genericPauseSize);
-        if (bufS.size()>16){
-            textScale=34;
-        }else{
-            textScale=40;
-        }
-        typeInStringPP(std::to_string(textScale),InputTableV);
-        pressKey("ENTER",InputTableV);
-        std::this_thread::sleep_for(genericPauseSize);
-
-        SetCursorPos(1524,330); //TEXT ALIGN
-        std::this_thread::sleep_for(genericPauseSize);
-        LeftClick();
-        std::this_thread::sleep_for(genericPauseSize);
-
-        SetCursorPos(1630,634); //X text
-        std::this_thread::sleep_for(genericPauseSize);
-        LeftClick();
-        std::this_thread::sleep_for(genericPauseSize);
-        typeInStringPP("1664",InputTableV);
-        std::this_thread::sleep_for(genericPauseSize);
-        pressKey("ENTER",InputTableV);
-        std::this_thread::sleep_for(genericPauseSize);
-
-        SetCursorPos(1674,634); //Y text
-        std::this_thread::sleep_for(genericPauseSize);
-        LeftClick();
-        std::this_thread::sleep_for(genericPauseSize);
-        typeInStringPP("1044",InputTableV);
-        std::this_thread::sleep_for(genericPauseSize);
-        pressKey("ENTER",InputTableV);
-        std::this_thread::sleep_for(genericPauseSize);
     }
 
 }
@@ -1052,29 +995,31 @@ auto main() -> int {
     using namespace YAUIO;
 
     //Paths
-    auto path = fs::path("D:\\Users\\User\\Desktop\\Files\\OsuScores\\output.csv"); //csv
-    auto pathD = fs::path("F:\\Users\\User\\Downloads\\Scores"); //replays
-    auto pathConf = fs::path("D:\\Users\\User\\Desktop\\Files\\danser-0.9.0-win\\settings"); //configs
-    auto pathV = fs::path("D:\\Users\\User\\Desktop\\Files\\danser-0.9.0-win\\videos"); //rendered videos
-    auto pathOsuSongs = fs::path("G:\\osu!\\Songs"); // osu!/songs path
-    auto pathProjects = fs::path("F:\\Users\\User\\Videos\\trying to yt\\OBC!Weekly"); // osu!/songs path
+    auto const path = fs::path(R"(D:\Users\User\Desktop\Files\OsuScores\output.csv)"); //csv
+    auto const pathD = fs::path(R"(F:\Users\User\Downloads\Scores)"); //replays
+    auto const pathConf = fs::path(R"(D:\Users\User\Desktop\Files\danser-0.9.0-win\settings)"); //configs
+    auto const pathV = fs::path(R"(D:\Users\User\Desktop\Files\danser-0.9.0-win\videos)"); //rendered videos
+    auto const pathOsuSongs = fs::path("G:\\osu!\\Songs"); // osu!/songs path
+    auto const pathProjects = fs::path(R"(F:\Users\User\Videos\trying to yt\OBC!Weekly)"); // osu!/songs path
 
     //Parsing data
     auto scores = parseScores(path);
+    fmt::println("Begin parsing");
     auto InputTableV = ParseInputTable();
     auto weeklyScores = sortScores(scores);
 
-    int cycle = 2; //How many scores out of 400pp+ ones you want to iterate over
-    int doRemove = 0; //0 - not remove replay&map file after rendering, 1 - remove
-    int openDanser = 1; //0 - just config danser, 1 - open and configure
-    int downloadMode = 0; //mode 0 - only replays ,1 - only maps, 2 - replays + maps
+    auto const searchConfigPrefix = "obc"; //danser configs name, see line 775
+    int const cycle = 4; //How many scores out of 400pp+ ones you want to iterate over
+    int const doRemove = 0; //0 - not remove replay&map file after rendering, 1 - remove
+    int const openDanser = 1; //0 - just config danser, 1 - open and configure
+    int const downloadMode = 0; //mode 0 - only replays ,1 - only maps, 2 - replays + maps
 
     if (doRemove == 1) {
         removeAllFilesInFolder(pathV); //delete all recorded videos
         removeAllFilesInFolder(pathD); //delete all files in replay folder
     }
 
-    /*printScoresVector(weeklyScores);
+    printScoresVector(weeklyScores);
     downloadData(weeklyScores, InputTableV, cycle, downloadMode);
     fmt::println("\n\nDownloaded all data successfully!");
     renameFiles(weeklyScores, cycle, pathD); //renames all replays to their pp value
@@ -1083,10 +1028,9 @@ auto main() -> int {
     fmt::println("\n\nMoved all data successfully!");
     setProperDancerState(openDanser);
     fmt::println("\n\nSet dancer state successfully!");
-    renderReplays(weeklyScores, cycle, InputTableV, pathD, pathConf, pathV, doRemove);
-    fmt::println("\n\nAll replays rendered successfully!");*/
+    renderReplays(weeklyScores, searchConfigPrefix, cycle, InputTableV, pathD, pathConf, pathV, doRemove);
+    fmt::println("\n\nAll replays rendered successfully!");
 
-    makePremiereProject(cycle,InputTableV,pathProjects,pathV,weeklyScores);
-
+    makePremiereProject(InputTableV, pathProjects, pathV);
     return 0;
 }
