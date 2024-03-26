@@ -1074,7 +1074,7 @@ auto main() -> int {
         removeAllFilesInFolder(pathD); //delete all files in replay folder
     }
 
-    /*printScoresVector(weeklyScores);
+    printScoresVector(weeklyScores);
     downloadData(weeklyScores, InputTableV, cycle, downloadMode);
     fmt::println("\n\nDownloaded all data successfully!");
     renameFiles(weeklyScores, cycle, pathD); //renames all replays to their pp value
@@ -1084,9 +1084,9 @@ auto main() -> int {
     setProperDancerState(openDanser);
     fmt::println("\n\nSet dancer state successfully!");
     renderReplays(weeklyScores, cycle, InputTableV, pathD, pathConf, pathV, doRemove);
-    fmt::println("\n\nAll replays rendered successfully!");*/
+    fmt::println("\n\nAll replays rendered successfully!");
 
-    makePremiereProject(cycle,InputTableV,pathProjects,pathV,weeklyScores);
+    //makePremiereProject(cycle,InputTableV,pathProjects,pathV,weeklyScores);
 
     return 0;
 }
