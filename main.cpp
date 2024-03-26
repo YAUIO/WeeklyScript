@@ -433,7 +433,11 @@ namespace YAUIO {
         int i = 0;
         auto c = std::string();
         while (i < s.size()) {
-            c = s[i];
+            if(s[i]==' '){
+                c = "SPACEBAR";
+            }else{
+                c = s[i];
+            }
             pressKey(c, InputTableV);
             std::this_thread::sleep_for(5ms);
             i++;
@@ -577,12 +581,10 @@ namespace YAUIO {
         //fmt::println("{}",pathFChar);
         ShellExecute(NULL,"explore", pathFChar, 0,0,SW_MAXIMIZE);
 
+        fmt::println("Setting focus to explorer");
         std::this_thread::sleep_for(10ms);
         HWND window = FindWindow(NULL, "videos");
         if (window) {
-            RECT rect = {0};
-            GetWindowRect(window, &rect);
-
             SetForegroundWindow(window);
             SetActiveWindow(window);
             SetFocus(window);
@@ -934,12 +936,15 @@ namespace YAUIO {
         }
     }
 
-    void makePremiereProject(std::vector<InputTable> InputTableV, std::filesystem::path pathProject, std::filesystem::path pathV) {
+    void makePremiereProject(int qReplays, std::vector<InputTable> InputTableV, std::filesystem::path pathProject, std::filesystem::path pathV, std::vector<Score> inpVec) {
         namespace fs = std::filesystem;
         using namespace std::chrono_literals;
+        int premR = 0;
+        int textScale;
+        auto genericPauseSize = 100ms;
+        std::string bufS;
         fmt::println("{}",pathProject.generic_string().append("/template/premiere.prproj"));
-        fs::remove_all(pathProject.generic_string().append("/auto"));
-        fs::create_directory(pathProject.generic_string().append("/auto"));
+        fs::remove(pathProject.generic_string().append("/auto/premiere.prproj"));
         fs::copy(pathProject.generic_string().append("/template/premiere.prproj"), pathProject.generic_string().append("/auto/premiere.prproj"));
 
         openExplorer(pathV.generic_string());
@@ -955,6 +960,78 @@ namespace YAUIO {
         SetCursorPos(294,834);
         std::this_thread::sleep_for(10s);
         LeftUp();
+        SetCursorPos(1594,760);
+        std::this_thread::sleep_for(genericPauseSize);
+        LeftClick();
+        std::this_thread::sleep_for(genericPauseSize);
+
+        SetCursorPos(900,524);
+        std::this_thread::sleep_for(genericPauseSize);
+        pressKey("T",InputTableV);
+        std::this_thread::sleep_for(1s);
+        LeftClick();
+        SetCursorPos(1446,202);
+        std::this_thread::sleep_for(genericPauseSize);
+        LeftClick();
+        std::this_thread::sleep_for(genericPauseSize);
+        SetCursorPos(1524,272); //FONT
+        std::this_thread::sleep_for(genericPauseSize);
+        LeftClick();
+        std::this_thread::sleep_for(genericPauseSize);
+        typeInStringPP("LEMON MILK BOLD",InputTableV);
+        std::this_thread::sleep_for(genericPauseSize);
+        pressKey("ENTER",InputTableV);
+        std::this_thread::sleep_for(genericPauseSize);
+        SetCursorPos(900,524);
+        std::this_thread::sleep_for(genericPauseSize);
+        LeftClick();
+        std::this_thread::sleep_for(genericPauseSize);
+        bufS = inpVec[premR].username.append(" BY");
+        bufS.append(std::to_string(inpVec[premR].country_rank));
+        fmt::println("Output text: {}",bufS);
+        typeInStringPP(bufS,InputTableV);
+        std::this_thread::sleep_for(genericPauseSize);
+        SetCursorPos(940,520);
+        std::this_thread::sleep_for(genericPauseSize);
+        LeftClick();
+        std::this_thread::sleep_for(genericPauseSize);
+        pressTwoKeys("CTRL","A",InputTableV);
+        std::this_thread::sleep_for(genericPauseSize);
+        SetCursorPos(1640,300); //TEXT SIZE
+        std::this_thread::sleep_for(genericPauseSize);
+        LeftClick();
+        std::this_thread::sleep_for(genericPauseSize);
+        if (bufS.size()>16){
+            textScale=34;
+        }else{
+            textScale=40;
+        }
+        typeInStringPP(std::to_string(textScale),InputTableV);
+        pressKey("ENTER",InputTableV);
+        std::this_thread::sleep_for(genericPauseSize);
+
+        SetCursorPos(1524,330); //TEXT ALIGN
+        std::this_thread::sleep_for(genericPauseSize);
+        LeftClick();
+        std::this_thread::sleep_for(genericPauseSize);
+
+        SetCursorPos(1630,634); //X text
+        std::this_thread::sleep_for(genericPauseSize);
+        LeftClick();
+        std::this_thread::sleep_for(genericPauseSize);
+        typeInStringPP("1664",InputTableV);
+        std::this_thread::sleep_for(genericPauseSize);
+        pressKey("ENTER",InputTableV);
+        std::this_thread::sleep_for(genericPauseSize);
+
+        SetCursorPos(1674,634); //Y text
+        std::this_thread::sleep_for(genericPauseSize);
+        LeftClick();
+        std::this_thread::sleep_for(genericPauseSize);
+        typeInStringPP("1044",InputTableV);
+        std::this_thread::sleep_for(genericPauseSize);
+        pressKey("ENTER",InputTableV);
+        std::this_thread::sleep_for(genericPauseSize);
     }
 
 }
@@ -988,7 +1065,7 @@ auto main() -> int {
         removeAllFilesInFolder(pathD); //delete all files in replay folder
     }
 
-    printScoresVector(weeklyScores);
+    /*printScoresVector(weeklyScores);
     downloadData(weeklyScores, InputTableV, cycle, downloadMode);
     fmt::println("\n\nDownloaded all data successfully!");
     renameFiles(weeklyScores, cycle, pathD); //renames all replays to their pp value
@@ -998,8 +1075,9 @@ auto main() -> int {
     setProperDancerState(openDanser);
     fmt::println("\n\nSet dancer state successfully!");
     renderReplays(weeklyScores, cycle, InputTableV, pathD, pathConf, pathV, doRemove);
-    fmt::println("\n\nAll replays rendered successfully!");
+    fmt::println("\n\nAll replays rendered successfully!");*/
 
-    makePremiereProject(InputTableV,pathProjects,pathV);
+    makePremiereProject(cycle,InputTableV,pathProjects,pathV,weeklyScores);
+
     return 0;
 }
