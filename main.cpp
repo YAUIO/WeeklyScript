@@ -804,6 +804,7 @@ namespace YAUIO {
         using namespace std::chrono_literals;
         if (mode == 1) { //mode 0 is just for rendering, 1 - for opening
             openProgram("danser");
+            fmt::println("Waiting 2 mins for danser to load properly...");
             std::this_thread::sleep_for(120s);
         }
 
@@ -833,6 +834,7 @@ namespace YAUIO {
             typeInStringPP(std::to_string(weeklyScores[i].pp).append(".OSR"), InputTableV);
             SetClickExplorer(136, 36);
 
+            std::this_thread::sleep_for(80ms);
             SetClickDanser(542, 40); //configure
             std::this_thread::sleep_for(40ms);
             SetClickDanser(388, 262); //focus text field
@@ -902,6 +904,7 @@ namespace YAUIO {
                 std::this_thread::sleep_for(80ms);
             }
             SetClickDanser(422, 440); //exit menu
+            std::this_thread::sleep_for(80ms);
 
             //Render
             SetClickDanser(182, 58); //render
@@ -970,7 +973,7 @@ namespace YAUIO {
             var++;
         }
 
-        while(var<9){
+        while(var<10){
             std::getline(cfg, bufCfg, '=');
             std::getline(cfg, bufCfg, '\n');
             parsedCfg.push_back(bufCfg);
@@ -1106,23 +1109,31 @@ auto main() -> int {
     int doRemove = std::stoi(conf[6]); //0 - not remove replay&map file after rendering, 1 - remove
     int openDanser = std::stoi(conf[7]); //0 - just config danser, 1 - open and configure
     int downloadMode = std::stoi(conf[8]); //mode 0 - only replays ,1 - only maps, 2 - replays + maps
+    int startMode = std::stoi(conf[9]); //stage to start with - 0 downloading, 1 renaming, 2 render
 
     if (doRemove == 1) {
         removeAllFilesInFolder(pathV); //delete all recorded videos
         removeAllFilesInFolder(pathD); //delete all files in replay folder
     }
 
+    std::this_thread::sleep_for(5s);
     printScoresVector(weeklyScores);
-    downloadData(weeklyScores, InputTableV, cycle, downloadMode);
-    fmt::println("\n\nDownloaded all data successfully!");
-    renameFiles(weeklyScores, cycle, pathD); //renames all replays to their pp value
-    fmt::println("\n\nRenamed all data successfully!");
-    moveMaps(pathD, pathOsuSongs, doRemove);
-    fmt::println("\n\nMoved all data successfully!");
-    setProperDancerState(openDanser);
-    fmt::println("\n\nSet dancer state successfully!");
-    renderReplays(weeklyScores, cycle, InputTableV, pathD, pathConf, pathV, doRemove);
-    fmt::println("\n\nAll replays rendered successfully!");
+    if (startMode<1){
+        downloadData(weeklyScores, InputTableV, cycle, downloadMode);
+        fmt::println("\n\nDownloaded all data successfully!");
+    }
+    if (startMode<2){
+        renameFiles(weeklyScores, cycle, pathD); //renames all replays to their pp value
+        fmt::println("\n\nRenamed all data successfully!");
+        moveMaps(pathD, pathOsuSongs, doRemove);
+        fmt::println("\n\nMoved all data successfully!");
+    }
+    if (startMode<3){
+        setProperDancerState(openDanser);
+        fmt::println("\n\nSet dancer state successfully!");
+        renderReplays(weeklyScores, cycle, InputTableV, pathD, pathConf, pathV, doRemove);
+        fmt::println("\n\nAll replays rendered successfully!");
+    }
 
     //makePremiereProject(cycle,InputTableV,pathProjects,pathV,weeklyScores);
 
