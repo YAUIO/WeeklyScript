@@ -463,6 +463,8 @@ namespace YAUIO {
                 return false;
             } else if (arg[i] >= '0' && arg[i] <= '9') {
                 return false;
+            } else if (arg[i] == 'A' || arg[i] == 'I' || arg[i] == '"') {
+                return false;
             } else {
                 i++;
             }
@@ -495,17 +497,19 @@ namespace YAUIO {
                         std::getline(file, debugStr[check], ',');
                     }
                     i = 3;
-                    /*fmt::print("6 ----- {}, {} check", debugStr[check - 2],check);
+                    fmt::print("6 ----- {}, {} check", debugStr[check - 2],check);
                     fmt::print("\n5 ----- {}", debugStr[check - 1]);
-                    fmt::print("\n4 ----- {}\n", debugStr[check]);*/
+                    fmt::print("\n4 ----- {}\n", debugStr[check]);
                     scores[scoreN].map = debugStr[check - 2];
                     scores[scoreN].diff = debugStr[check - 1];
                     scores[scoreN].mods = debugStr[check];
                 } else {
                     std::getline(file, argument, ',');
                 }
+                //fmt::println("{} ---- {}",i,argument);
                 if (i == 11) {
                     if (argument == "STOP") {
+                        //fmt::println("WTF");
                         i = 12;
                         break;
                     }
@@ -530,9 +534,12 @@ namespace YAUIO {
                 } else if (i == 2) {
                     scores[scoreN].global_rank = std::stoi(argument);
                 } else if (i == 1) {
+                    fmt::println("{} total pp: /{}/",i,argument);
                     scores[scoreN].total_pp = std::stod(argument);
                 }
-                //fmt::println("{} ---- {}", i, argument);
+                if(i==12) {
+                    break;
+                }
                 i--;
             }
             scoreN++;
@@ -846,8 +853,8 @@ namespace YAUIO {
                     SetClickDanser(422, 440); //exit menu
                 }
             } else {
-                if (i != 0) { multiplier = double(i) / double(qScores); } else { multiplier = 1 / double(qScores); }
-                lastPart = (40.0 + ((double(length) / 4) * multiplier)) / length;
+                if (i != 0) { multiplier = double(i) / (double(qScores)*double(qScores)); } else { multiplier = 1 / double(qScores); }
+                lastPart = (24.0 + ((double(length) / 4) * multiplier)) / length;
                 SetClickDanser(690, 166); //time/offset menu
                 if (lastPart > 1) { lastPart = 1; }
                 SetClickDanser(214 + (378 * lastPart), 328); //part select
@@ -855,6 +862,7 @@ namespace YAUIO {
             }
             //fmt::println("length {}\nmultiplier {}\nqScores {}\ni {}\nlastPart {}",length,multiplier,qScores,i,lastPart);
 
+            //Config selection
             auto configs = getOBCConfNames(pathConf); //configs
             configs = sortOBC(configs);
             auto configPath = std::string();
@@ -869,14 +877,13 @@ namespace YAUIO {
                 configNumber++;
             }
             //fmt::println("{} {}", configPath, configNumber);
-
             SetClickDanser(238, 466); //enter config menu
             SetCursorPosDanser(246, 366); //hover over first cfg
             configNumber++;
             if (configPath == "NoConf") {
                 configNumber = 1;
             }
-            if (configNumber <= 11) {
+            if (configNumber <= configs.size()-7) {
                 std::this_thread::sleep_for(40ms);
                 MouseScroll(20);
                 std::this_thread::sleep_for(80ms);
@@ -890,10 +897,13 @@ namespace YAUIO {
                 std::this_thread::sleep_for(80ms);
                 MouseScroll(-0.18 * configNumber);
                 std::this_thread::sleep_for(80ms);
-                SetClickDanser(246, 196 + (24.286 * (configNumber - 11)));
+                fmt::println("config number: {}",configNumber);
+                SetClickDanser(246, 168 + (25 * (configs.size()-configNumber+1)));
                 std::this_thread::sleep_for(80ms);
             }
             SetClickDanser(422, 440); //exit menu
+
+            //Render
             SetClickDanser(182, 58); //render
             while (!rendered) {
                 std::this_thread::sleep_for(4s);
@@ -943,6 +953,31 @@ namespace YAUIO {
             fs::remove(fileToRemove[p]);
             p++;
         }
+    }
+
+    std::vector<std::string> loadCfg(){
+        namespace fs = std::filesystem;
+        auto cfg = std::fstream("weeklyConfig.txt");
+        auto bufCfg = std::string();
+        auto parsedCfg = std::vector<std::string>();
+        int var = 0;
+
+        while(var<6) {
+            std::getline(cfg, bufCfg, '"');
+            std::getline(cfg, bufCfg, '"');
+            parsedCfg.push_back(bufCfg);
+            fmt::println("{} ---- {}", var, bufCfg);
+            var++;
+        }
+
+        while(var<9){
+            std::getline(cfg, bufCfg, '=');
+            std::getline(cfg, bufCfg, '\n');
+            parsedCfg.push_back(bufCfg);
+            //fmt::println("{} ---- {}", var, bufCfg);
+            var++;
+        }
+        return parsedCfg;
     }
 
     void makePremiereProject(int qReplays, std::vector<InputTable> InputTableV, std::filesystem::path pathProject, std::filesystem::path pathV, std::vector<Score> inpVec) {
@@ -1051,23 +1086,26 @@ auto main() -> int {
     using namespace std::chrono_literals;
     using namespace YAUIO;
 
+    //Load config
+    auto conf = loadCfg();
+
     //Paths
-    auto path = fs::path("D:\\Users\\User\\Desktop\\Files\\OsuScores\\output.csv"); //csv
-    auto pathD = fs::path("F:\\Users\\User\\Downloads\\Scores"); //replays
-    auto pathConf = fs::path("D:\\Users\\User\\Desktop\\Files\\danser-0.9.0-win\\settings"); //configs
-    auto pathV = fs::path("D:\\Users\\User\\Desktop\\Files\\danser-0.9.0-win\\videos"); //rendered videos
-    auto pathOsuSongs = fs::path("G:\\osu!\\Songs"); // osu!/songs path
-    auto pathProjects = fs::path("F:\\Users\\User\\Videos\\trying to yt\\OBC!Weekly"); // osu!/songs path
+    auto path = fs::path(conf[0]); //csv
+    auto pathD = fs::path(conf[1]); //replays
+    auto pathConf = fs::path(conf[2]); //configs
+    auto pathV = fs::path(conf[3]); //rendered videos
+    auto pathOsuSongs = fs::path(conf[4]); // osu!/songs path
+    auto pathProjects = fs::path(conf[5]); // premiereProjects path
 
     //Parsing data
     auto scores = parseScores(path);
     auto InputTableV = ParseInputTable();
     auto weeklyScores = sortScores(scores);
 
-    int cycle = 2; //How many scores out of 400pp+ ones you want to iterate over
-    int doRemove = 0; //0 - not remove replay&map file after rendering, 1 - remove
-    int openDanser = 1; //0 - just config danser, 1 - open and configure
-    int downloadMode = 0; //mode 0 - only replays ,1 - only maps, 2 - replays + maps
+    int cycle = weeklyScores.size(); //How many scores out of 400pp+ ones you want to iterate over
+    int doRemove = std::stoi(conf[6]); //0 - not remove replay&map file after rendering, 1 - remove
+    int openDanser = std::stoi(conf[7]); //0 - just config danser, 1 - open and configure
+    int downloadMode = std::stoi(conf[8]); //mode 0 - only replays ,1 - only maps, 2 - replays + maps
 
     if (doRemove == 1) {
         removeAllFilesInFolder(pathV); //delete all recorded videos
