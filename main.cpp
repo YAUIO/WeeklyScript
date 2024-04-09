@@ -463,7 +463,7 @@ namespace YAUIO {
                 return false;
             } else if (arg[i] >= '0' && arg[i] <= '9') {
                 return false;
-            } else if (arg[i] == 'A' || arg[i] == 'I' || arg[i] == '"') {
+            } else if (arg[i] == '!' ||arg[i] == 'V' || arg[i] == 'A' || arg[i] == 'I' || arg[i] == '"') {
                 return false;
             } else {
                 i++;
@@ -900,7 +900,19 @@ namespace YAUIO {
                 MouseScroll(-0.18 * configNumber);
                 std::this_thread::sleep_for(80ms);
                 fmt::println("config number: {}",configNumber);
-                SetClickDanser(246, 168 + (25 * (configs.size()-configNumber+1)));
+                int y = 0;
+                switch(configs.size()-configNumber){
+                    case 0: {y = 170;break;}
+                    case 1: {y = 200;break;}
+                    case 2: {y = 225;break;}
+                    case 3: {y = 250;break;}
+                    case 4: {y = 281;break;}
+                    case 5: {y = 310;break;}
+                    case 6: {y = 336;break;}
+                    case 7: {y = 368;break;}
+                    default: {MouseScroll(20);y = 366;}
+                }
+                SetClickDanser(246, y);
                 std::this_thread::sleep_for(80ms);
             }
             SetClickDanser(422, 440); //exit menu

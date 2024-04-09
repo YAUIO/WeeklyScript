@@ -9,3 +9,4 @@ premiereProjects "F:\\Users\\User\\Videos\\trying to yt\\OBC!Weekly"
 0 - not remove replay&map file after rendering, 1 - remove =1
 0 - just config danser, 1 - open and configure             =1
 mode 0 - only replays ,1 - only maps, 2 - replays + maps   =2
+stage to start with - 0 downloading, 1 renaming, 2 render  =0
