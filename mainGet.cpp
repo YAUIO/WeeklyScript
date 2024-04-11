@@ -33,4 +33,6 @@ auto main() -> int {
         std::this_thread::sleep_for(1s);
         std::cout << p.x << " " << p.y << "\n";
     }*/
+
+    SetCursorPosDanser(215,268);
 }

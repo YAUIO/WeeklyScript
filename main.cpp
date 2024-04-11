@@ -668,12 +668,12 @@ namespace YAUIO {
             SetActiveWindow(window);
             SetFocus(window);
 
-            p.x = x;
-            p.y = y;
+            p.x = rect.right - x;
+            p.y = rect.bottom - y;
         }
 
         // Get the device context for the screen
-        hDC = GetDC(window);
+        hDC = GetDC(NULL);
         if (hDC == NULL)
             fmt::println("hdc null");
 
@@ -689,11 +689,11 @@ namespace YAUIO {
         return std::vector<int>{GetRValue(color), GetGValue(color), GetBValue(color)};
     }
 
-    int GetStrainDanser(){
+    int GetStrainDanser(long long length){
         using namespace std::chrono_literals;
         //xmin = 208 xmax = 591  ymin=190 ymax = 262
         int x = 208;
-        int y = 268;
+        int y = 264;
         int yf = 0;
         int xf = 0;
         bool found = false;
@@ -717,36 +717,39 @@ namespace YAUIO {
             }
             y--;
         }
+        fmt::print("Found strain {} {} ", xf, yf);
 
-        x = 208;
-        y = yf;
-        int yf1 = 0;
-        int xf1 = 0;
-        bool foundE = false;
+        if(length<300) {
+            x = 208;
+            y = yf;
+            int yf1 = 0;
+            int xf1 = 0;
+            bool foundE = false;
 
-        //last x is 290
-        while (y>(yf-6)){
-            x=208;
-            while(x<290){
-                if(GetColorDanser(x,y)==std::vector<int>{255,255,255}){
-                    xf1 = x;
-                    yf1 = y;
-                    foundE = true;
+            //last x is 290
+            while (y > (yf - 6)) {
+                x = 208;
+                while (x < 290) {
+                    if (GetColorDanser(x, y) == std::vector<int>{255, 255, 255}) {
+                        xf1 = x;
+                        yf1 = y;
+                        foundE = true;
+                        break;
+                    }
+                    x++;
+                }
+                if (foundE) {
                     break;
                 }
-                x++;
+                y--;
             }
-            if(foundE){
-                break;
+
+            std::this_thread::sleep_for(80ms);
+            fmt::print("- Found end strain {} {}", xf1, yf1);
+            fmt::println("\n");
+            if (foundE) {
+                return xf1;
             }
-            y--;
-        }
-
-        std::this_thread::sleep_for(80ms);
-
-        fmt::println("Found strain {} {}, Found end strain {} {}",xf,yf,xf1,yf1);
-        if(foundE){
-            return xf1;
         }
         return xf;
     }
@@ -961,18 +964,20 @@ namespace YAUIO {
 
                 int fullX = 382;
                 fmt::println("Getting strain graph");
-                int foundSpike = GetStrainDanser();
+                int foundSpike = GetStrainDanser(length);
+                int firstPart;
 
                 std::this_thread::sleep_for(80ms);
-                if(foundSpike<294){
-                    SetClickDanser(foundSpike+((foundSpike-212)*(lastPart/2)),328); //start time
-                    fmt::println("Starting x: {}, Found Spike: {}",foundSpike+((foundSpike-212)*(lastPart/2)),foundSpike);
+                if(foundSpike<294 && length < 300){
+                    firstPart = foundSpike-212+(lastPart*fullX-foundSpike+212);
+                    SetClickDanser(foundSpike+firstPart,328); //start time
+                    fmt::println("Starting x: {}, Found Spike: {}, LastPart: {} ",foundSpike+firstPart,foundSpike,lastPart);
                     std::this_thread::sleep_for(2s);
                     SetClickDanser(214, 276); //full end time
                 }
                 else{
-                    int startx = foundSpike+((foundSpike-212)*(lastPart/2));
-                    int endx = foundSpike-((fullX+212-foundSpike)*(lastPart/2));
+                    int startx = foundSpike+((foundSpike-212)*(lastPart/1.5));
+                    int endx = foundSpike-((fullX+212-foundSpike)*(lastPart/1.5));
                     SetClickDanser(startx,328);//start time
                     std::this_thread::sleep_for(80ms);
                     SetClickDanser(endx,278);//end time
@@ -1236,7 +1241,7 @@ auto main() -> int {
     auto InputTableV = ParseInputTable();
     auto weeklyScores = sortScores(scores);
 
-    int cycle = 4; //How many scores out of 400pp+ ones you want to iterate over
+    int cycle = 6; //How many scores out of 400pp+ ones you want to iterate over
     int doRemove = std::stoi(conf[6]); //0 - not remove replay&map file after rendering, 1 - remove
     int openDanser = std::stoi(conf[7]); //0 - just config danser, 1 - open and configure
     int downloadMode = std::stoi(conf[8]); //mode 0 - only replays ,1 - only maps, 2 - replays + maps
