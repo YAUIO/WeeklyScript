@@ -653,6 +653,91 @@ namespace YAUIO {
         SetClickExplorer(248, 58);
     }
 
+    std::vector<int> GetColorDanser(int x, int y){
+
+        HWND window = FindWindow(NULL, "danser-go 0.9.1 launcher");
+        POINT p;
+        COLORREF color;
+        HDC hDC;
+
+        if (window) {
+            RECT rect = {0};
+            GetWindowRect(window, &rect);
+
+            p.x = rect.right - x;
+            p.y = rect.bottom - y;
+        }
+
+        // Get the device context for the screen
+        hDC = GetDC(NULL);
+        if (hDC == NULL)
+            fmt::println("hdc null");
+
+        // Retrieve the color at that position
+        color = GetPixel(hDC, p.x, p.y);
+        if (color == CLR_INVALID)
+            fmt::println("color null");
+
+        // Release the device context again
+        ReleaseDC(GetDesktopWindow(), hDC);
+
+        fmt::println("R {} G {} B {}; x {} y {}", GetRValue(color), GetGValue(color), GetBValue(color),x,y);
+        return std::vector<int>{GetRValue(color), GetGValue(color), GetBValue(color)};
+    }
+
+    int GetStrainDanser(){
+        //xmin = 208 xmax = 591  ymin=190 ymax = 262
+        int x = 208;
+        int y = 262;
+        int yf = 0;
+        int xf = 0;
+        bool found = false;
+
+        while (y>190){
+            while(x<591){
+                if(GetColorDanser(x,y)==std::vector<int>{255,255,255}){
+                    xf = x;
+                    yf = y;
+                    found = true;
+                    break;
+                }
+                x++;
+            }
+            if(found){
+                break;
+            }
+            y--;
+        }
+
+        x = 208;
+        y = 262;
+        int yf1 = 0;
+        int xf1 = 0;
+        found = false;
+
+        //last x is 290
+        while (y>190){
+            while(x<290){
+                if(GetColorDanser(x,y)==std::vector<int>{255,255,255}){
+                    xf1 = x;
+                    yf1 = y;
+                    found = true;
+                    break;
+                }
+                x++;
+            }
+            if(found){
+                break;
+            }
+            y--;
+        }
+
+        if(yf1-yf<6){
+            return xf1;
+        }
+        return xf;
+    }
+
     void renameFiles(std::vector<Score> vector, int qScores, std::filesystem::path path) {
         int i = 0;
         namespace fs = std::filesystem;
