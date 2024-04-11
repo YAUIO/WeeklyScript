@@ -903,10 +903,15 @@ namespace YAUIO {
 
     void setProperDancerState(int mode) {
         using namespace std::chrono_literals;
+
         if (mode == 1) { //mode 0 is just for rendering, 1 - for opening
             openProgram("danser");
             fmt::println("Waiting 2 mins for danser to load properly...");
             std::this_thread::sleep_for(120s);
+        }else if (mode == 0){
+            openProgram("danser");
+            fmt::println("Waiting 14 sec for danser to load properly...");
+            std::this_thread::sleep_for(14s);
         }
 
         //Set proper danser state
@@ -951,15 +956,25 @@ namespace YAUIO {
             std::this_thread::sleep_for(40ms);
             if (length <= 40) {
                 if (!isBegChecked) {
+                    fmt::println("Rendering full replay (length<=40s), {}s",length);
                     SetClickDanser(690, 166); //time/offset menu
                     std::this_thread::sleep_for(80ms);
                     SetClickDanser(582, 388); //check skip map beginning
+                    std::this_thread::sleep_for(80ms);
+                    SetClickDanser(590, 330); //full start time
+                    std::this_thread::sleep_for(80ms);
+                    SetClickDanser(214, 276); //full end time
                     std::this_thread::sleep_for(80ms);
                     SetClickDanser(422, 440); //exit menu
                 }
             } else {
                 if (i != 0) { multiplier = double(i) / (double(qScores)*double(qScores)); } else { multiplier = 1 / double(qScores); }
-                lastPart = (24.0 + ((double(length) / 4) * multiplier)) / length;
+                if(length<100){
+                    lastPart = (28.0 + ((double(length) / 2) * multiplier)) / length;
+                }else{
+                    lastPart = (24.0 + ((double(length) / 6) * multiplier)) / length;
+                }
+
                 if (lastPart > 1) { lastPart = 1; }
 
                 int fullX = 382;
@@ -972,7 +987,7 @@ namespace YAUIO {
                     firstPart = foundSpike-212+(lastPart*fullX-foundSpike+212);
                     SetClickDanser(foundSpike+firstPart,328); //start time
                     fmt::println("Starting x: {}, Found Spike: {}, LastPart: {} ",foundSpike+firstPart,foundSpike,lastPart);
-                    std::this_thread::sleep_for(2s);
+                    std::this_thread::sleep_for(100ms);
                     SetClickDanser(214, 276); //full end time
                 }
                 else{
@@ -1241,7 +1256,7 @@ auto main() -> int {
     auto InputTableV = ParseInputTable();
     auto weeklyScores = sortScores(scores);
 
-    int cycle = 6; //How many scores out of 400pp+ ones you want to iterate over
+    int cycle = weeklyScores.size(); //How many scores out of 400pp+ ones you want to iterate over
     int doRemove = std::stoi(conf[6]); //0 - not remove replay&map file after rendering, 1 - remove
     int openDanser = std::stoi(conf[7]); //0 - just config danser, 1 - open and configure
     int downloadMode = std::stoi(conf[8]); //mode 0 - only replays ,1 - only maps, 2 - replays + maps
