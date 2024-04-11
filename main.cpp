@@ -182,7 +182,7 @@ namespace ReplayParser {
 
     }
 
-    auto parseReplay(std::filesystem::path pathD, double pp) {
+    long long parseReplay(std::filesystem::path pathD, double pp) {
         auto s = pathD.generic_string();
         s.append("/");
         s.append(std::to_string(pp));
@@ -653,12 +653,11 @@ namespace YAUIO {
         SetClickExplorer(248, 58);
     }
 
-    std::vector<int> GetColorDanser(int x, int y){
+    std::vector<int> GetColorDanser(int x, int y,HDC hDC){
 
         HWND window = FindWindow(NULL, "danser-go 0.9.1 launcher");
         POINT p;
         COLORREF color;
-        HDC hDC;
 
         if (window) {
             RECT rect = {0};
@@ -668,11 +667,6 @@ namespace YAUIO {
             p.y = rect.bottom - y;
         }
 
-        // Get the device context for the screen
-        hDC = GetDC(NULL);
-        if (hDC == NULL)
-            fmt::println("hdc null");
-
         // Retrieve the color at that position
         color = GetPixel(hDC, p.x, p.y);
         if (color == CLR_INVALID)
@@ -681,11 +675,12 @@ namespace YAUIO {
         // Release the device context again
         ReleaseDC(GetDesktopWindow(), hDC);
 
-        fmt::println("R {} G {} B {}; x {} y {}", GetRValue(color), GetGValue(color), GetBValue(color),x,y);
+        //fmt::println("R {} G {} B {}; x {} y {}", GetRValue(color), GetGValue(color), GetBValue(color),x,y);
         return std::vector<int>{GetRValue(color), GetGValue(color), GetBValue(color)};
     }
 
-    int GetStrainDanser(){
+    int GetStrainDanser(HDC hDC){
+        using namespace std::chrono_literals;
         //xmin = 208 xmax = 591  ymin=190 ymax = 262
         int x = 208;
         int y = 262;
@@ -694,10 +689,12 @@ namespace YAUIO {
         bool found = false;
 
         SetClickDanser(690, 166); //time/offset menu
+        std::this_thread::sleep_for(80ms);
 
         while (y>190){
+            x=208;
             while(x<591){
-                if(GetColorDanser(x,y)==std::vector<int>{255,255,255}){
+                if(GetColorDanser(x,y, hDC)==std::vector<int>{255,255,255}){
                     xf = x;
                     yf = y;
                     found = true;
@@ -719,8 +716,9 @@ namespace YAUIO {
 
         //last x is 290
         while (y>190){
+            x=208;
             while(x<290){
-                if(GetColorDanser(x,y)==std::vector<int>{255,255,255}){
+                if(GetColorDanser(x,y,hDC)==std::vector<int>{255,255,255}){
                     xf1 = x;
                     yf1 = y;
                     found = true;
@@ -735,8 +733,9 @@ namespace YAUIO {
         }
 
         SetClickDanser(422, 440); //exit menu
+        std::this_thread::sleep_for(80ms);
 
-        if(yf1-yf<6){
+        if(yf-yf1<6){
             return xf1;
         }
         return xf;
@@ -915,6 +914,12 @@ namespace YAUIO {
         int i = 0;
         //fmt::println("{}",pathD.generic_string().append("/").append(std::to_string(score.pp).append(".osr")));
 
+        // Get the device context for the screen
+        HDC hDC;
+        hDC = GetDC(NULL);
+        if (hDC == NULL)
+            fmt::println("hdc null");
+
         while (i < qScores) {
             //Starting to configure recording
             SetClickDanser(745, 423); //select replay
@@ -934,28 +939,37 @@ namespace YAUIO {
             SetClickDanser(410, 194); //escape configure
 
             rendered = false;
-            auto length = ReplayParser::parseReplay(pathD, weeklyScores[i].pp);
+            long long length = ReplayParser::parseReplay(pathD, weeklyScores[i].pp);
             length = length / 440; //get approximate length in seconds
             std::this_thread::sleep_for(40ms);
             if (length <= 40) {
                 if (!isBegChecked) {
                     SetClickDanser(690, 166); //time/offset menu
+                    std::this_thread::sleep_for(80ms);
                     SetClickDanser(582, 388); //check skip map beginning
+                    std::this_thread::sleep_for(80ms);
                     SetClickDanser(422, 440); //exit menu
                 }
             } else {
                 if (i != 0) { multiplier = double(i) / (double(qScores)*double(qScores)); } else { multiplier = 1 / double(qScores); }
                 lastPart = (24.0 + ((double(length) / 4) * multiplier)) / length;
-                SetClickDanser(690, 166); //time/offset menu
                 if (lastPart > 1) { lastPart = 1; }
 
+                SetClickDanser(690, 166); //time/offset menu
                 int fullX = 382;
-                int foundSpike = GetStrainDanser();
-                if(foundSpike<294){SetClickDanser((double)foundSpike+(fullX*(lastPart/2)),328);} //end time
+                fmt::println("Getting strain graph");
+                int foundSpike = GetStrainDanser(hDC);
+                SetClickDanser(422, 440); //exit menu
+
+                SetClickDanser(690, 166); //time/offset menu
+                std::this_thread::sleep_for(80ms);
+                if(foundSpike<294){SetClickDanser((double)foundSpike+(fullX*(lastPart/2)),328);} //start time
                 else{
-                    SetClickDanser((double)foundSpike-((fullX+208-foundSpike)*(lastPart/2)),328);//start time
-                    SetClickDanser((double)foundSpike-(foundSpike-((foundSpike-208)*(lastPart/2))),278);//end time
+                    SetClickDanser(foundSpike+((foundSpike-208)*(lastPart/2)),328);//start time
+                    std::this_thread::sleep_for(80ms);
+                    SetClickDanser((double)foundSpike-((fullX+208-foundSpike)*(lastPart/2)),278);//end time
                 }
+                std::this_thread::sleep_for(80ms);
                 SetClickDanser(422, 440); //exit menu
             }
             //fmt::println("length {}\nmultiplier {}\nqScores {}\ni {}\nlastPart {}",length,multiplier,qScores,i,lastPart);
