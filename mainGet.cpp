@@ -12,11 +12,25 @@ void MouseScroll(double RY) {
     SendInput(1, &Input, sizeof(Input));
     ::SendInput(1, &Input, sizeof(INPUT));
 }
+
+void SetCursorPosDanser(int x, int y) {
+    HWND window = FindWindow(NULL, "danser-go 0.9.1 launcher");
+    if (window) {
+        RECT rect = {0};
+        GetWindowRect(window, &rect);
+
+        SetForegroundWindow(window);
+        SetActiveWindow(window);
+        SetFocus(window);
+        SetCursorPos(rect.right - x, rect.bottom - y);
+    }
+}
+
 auto main() -> int {
-    using namespace std::chrono_literals;
+    /*using namespace std::chrono_literals;
     POINT p;
     while (GetCursorPos(&p)) {
         std::this_thread::sleep_for(1s);
         std::cout << p.x << " " << p.y << "\n";
-    }
+    }*/
 }

@@ -653,19 +653,29 @@ namespace YAUIO {
         SetClickExplorer(248, 58);
     }
 
-    std::vector<int> GetColorDanser(int x, int y,HDC hDC){
+    std::vector<int> GetColorDanser(int x, int y){
 
+        using namespace std::chrono_literals;
         HWND window = FindWindow(NULL, "danser-go 0.9.1 launcher");
         POINT p;
         COLORREF color;
+        HDC hDC;
 
         if (window) {
             RECT rect = {0};
             GetWindowRect(window, &rect);
+            SetForegroundWindow(window);
+            SetActiveWindow(window);
+            SetFocus(window);
 
-            p.x = rect.right - x;
-            p.y = rect.bottom - y;
+            p.x = x;
+            p.y = y;
         }
+
+        // Get the device context for the screen
+        hDC = GetDC(window);
+        if (hDC == NULL)
+            fmt::println("hdc null");
 
         // Retrieve the color at that position
         color = GetPixel(hDC, p.x, p.y);
@@ -679,11 +689,11 @@ namespace YAUIO {
         return std::vector<int>{GetRValue(color), GetGValue(color), GetBValue(color)};
     }
 
-    int GetStrainDanser(HDC hDC){
+    int GetStrainDanser(){
         using namespace std::chrono_literals;
         //xmin = 208 xmax = 591  ymin=190 ymax = 262
         int x = 208;
-        int y = 262;
+        int y = 268;
         int yf = 0;
         int xf = 0;
         bool found = false;
@@ -694,7 +704,7 @@ namespace YAUIO {
         while (y>190){
             x=208;
             while(x<591){
-                if(GetColorDanser(x,y, hDC)==std::vector<int>{255,255,255}){
+                if(GetColorDanser(x,y)==std::vector<int>{255,255,255}){
                     xf = x;
                     yf = y;
                     found = true;
@@ -709,33 +719,33 @@ namespace YAUIO {
         }
 
         x = 208;
-        y = 262;
+        y = yf;
         int yf1 = 0;
         int xf1 = 0;
-        found = false;
+        bool foundE = false;
 
         //last x is 290
-        while (y>190){
+        while (y>(yf-6)){
             x=208;
             while(x<290){
-                if(GetColorDanser(x,y,hDC)==std::vector<int>{255,255,255}){
+                if(GetColorDanser(x,y)==std::vector<int>{255,255,255}){
                     xf1 = x;
                     yf1 = y;
-                    found = true;
+                    foundE = true;
                     break;
                 }
                 x++;
             }
-            if(found){
+            if(foundE){
                 break;
             }
             y--;
         }
 
-        SetClickDanser(422, 440); //exit menu
         std::this_thread::sleep_for(80ms);
 
-        if(yf-yf1<6){
+        fmt::println("Found strain {} {}, Found end strain {} {}",xf,yf,xf1,yf1);
+        if(foundE){
             return xf1;
         }
         return xf;
@@ -914,12 +924,6 @@ namespace YAUIO {
         int i = 0;
         //fmt::println("{}",pathD.generic_string().append("/").append(std::to_string(score.pp).append(".osr")));
 
-        // Get the device context for the screen
-        HDC hDC;
-        hDC = GetDC(NULL);
-        if (hDC == NULL)
-            fmt::println("hdc null");
-
         while (i < qScores) {
             //Starting to configure recording
             SetClickDanser(745, 423); //select replay
@@ -955,19 +959,24 @@ namespace YAUIO {
                 lastPart = (24.0 + ((double(length) / 4) * multiplier)) / length;
                 if (lastPart > 1) { lastPart = 1; }
 
-                SetClickDanser(690, 166); //time/offset menu
                 int fullX = 382;
                 fmt::println("Getting strain graph");
-                int foundSpike = GetStrainDanser(hDC);
-                SetClickDanser(422, 440); //exit menu
+                int foundSpike = GetStrainDanser();
 
-                SetClickDanser(690, 166); //time/offset menu
                 std::this_thread::sleep_for(80ms);
-                if(foundSpike<294){SetClickDanser((double)foundSpike+(fullX*(lastPart/2)),328);} //start time
+                if(foundSpike<294){
+                    SetClickDanser(foundSpike+((foundSpike-212)*(lastPart/2)),328); //start time
+                    fmt::println("Starting x: {}, Found Spike: {}",foundSpike+((foundSpike-212)*(lastPart/2)),foundSpike);
+                    std::this_thread::sleep_for(2s);
+                    SetClickDanser(214, 276); //full end time
+                }
                 else{
-                    SetClickDanser(foundSpike+((foundSpike-208)*(lastPart/2)),328);//start time
+                    int startx = foundSpike+((foundSpike-212)*(lastPart/2));
+                    int endx = foundSpike-((fullX+212-foundSpike)*(lastPart/2));
+                    SetClickDanser(startx,328);//start time
                     std::this_thread::sleep_for(80ms);
-                    SetClickDanser((double)foundSpike-((fullX+208-foundSpike)*(lastPart/2)),278);//end time
+                    SetClickDanser(endx,278);//end time
+                    fmt::println("FS {} start {} end {}",foundSpike,startx,endx);
                 }
                 std::this_thread::sleep_for(80ms);
                 SetClickDanser(422, 440); //exit menu
@@ -1227,7 +1236,7 @@ auto main() -> int {
     auto InputTableV = ParseInputTable();
     auto weeklyScores = sortScores(scores);
 
-    int cycle = weeklyScores.size(); //How many scores out of 400pp+ ones you want to iterate over
+    int cycle = 4; //How many scores out of 400pp+ ones you want to iterate over
     int doRemove = std::stoi(conf[6]); //0 - not remove replay&map file after rendering, 1 - remove
     int openDanser = std::stoi(conf[7]); //0 - just config danser, 1 - open and configure
     int downloadMode = std::stoi(conf[8]); //mode 0 - only replays ,1 - only maps, 2 - replays + maps
