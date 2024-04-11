@@ -693,6 +693,8 @@ namespace YAUIO {
         int xf = 0;
         bool found = false;
 
+        SetClickDanser(690, 166); //time/offset menu
+
         while (y>190){
             while(x<591){
                 if(GetColorDanser(x,y)==std::vector<int>{255,255,255}){
@@ -731,6 +733,8 @@ namespace YAUIO {
             }
             y--;
         }
+
+        SetClickDanser(422, 440); //exit menu
 
         if(yf1-yf<6){
             return xf1;
@@ -944,7 +948,14 @@ namespace YAUIO {
                 lastPart = (24.0 + ((double(length) / 4) * multiplier)) / length;
                 SetClickDanser(690, 166); //time/offset menu
                 if (lastPart > 1) { lastPart = 1; }
-                SetClickDanser(214 + (378 * lastPart), 328); //part select
+
+                int fullX = 382;
+                int foundSpike = GetStrainDanser();
+                if(foundSpike<294){SetClickDanser((double)foundSpike+(fullX*(lastPart/2)),328);} //end time
+                else{
+                    SetClickDanser((double)foundSpike-((fullX+208-foundSpike)*(lastPart/2)),328);//start time
+                    SetClickDanser((double)foundSpike-(foundSpike-((foundSpike-208)*(lastPart/2))),278);//end time
+                }
                 SetClickDanser(422, 440); //exit menu
             }
             //fmt::println("length {}\nmultiplier {}\nqScores {}\ni {}\nlastPart {}",length,multiplier,qScores,i,lastPart);
