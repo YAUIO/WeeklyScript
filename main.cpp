@@ -14,6 +14,7 @@
 #include <stdint.h>
 #include <codecvt>
 #include <locale>
+#include <SFML/Graphics.hpp>
 //#include "cmake-build-debug/_deps/mediainfolib-src/Source/MediaInfo/MediaInfo.h"
 //Before running the code, don't forget to move inputTable.txt to cmake-build-debug, add STOP in the end of csv and properly set paths in main() and openProgram()
 //Also, adjust locale for IpWindowName in OpenFocusChrome()
@@ -182,7 +183,7 @@ namespace ReplayParser {
 
     }
 
-    long long parseReplay(std::filesystem::path pathD, double pp) {
+    ReplayFormat parseReplay(std::filesystem::path pathD, double pp) {
         auto s = pathD.generic_string();
         s.append("/");
         s.append(std::to_string(pp));
@@ -204,55 +205,55 @@ namespace ReplayParser {
             std::cout << "Successfully opened file" << std::endl;
 
             infile.read((char *) &replay_data.m_chGameMode, sizeof(replay_data.m_chGameMode));
-            std::cout << "m_chGameMode:" << replay_data.m_chGameMode << std::endl;
+            //std::cout << "m_chGameMode:" << replay_data.m_chGameMode << std::endl;
 
             infile.read((char *) &replay_data.m_iGameVersion, sizeof(replay_data.m_iGameVersion));
-            std::cout << "m_iGameVersion:" << replay_data.m_iGameVersion << std::endl;
+            //std::cout << "m_iGameVersion:" << replay_data.m_iGameVersion << std::endl;
 
             replay_data.m_strMapMD5Hash = parse_osu_string(infile);
-            std::cout << "m_strMapMD5Hash:" << replay_data.m_strMapMD5Hash << std::endl;
+            //std::cout << "m_strMapMD5Hash:" << replay_data.m_strMapMD5Hash << std::endl;
 
             replay_data.m_strPlayerName = parse_osu_string(infile);
             std::cout << "m_strPlayerName:" << replay_data.m_strPlayerName << std::endl;
 
             replay_data.m_strReplayHash = parse_osu_string(infile);
-            std::cout << "m_strReplayHash:" << replay_data.m_strReplayHash << std::endl;
+            //std::cout << "m_strReplayHash:" << replay_data.m_strReplayHash << std::endl;
 
             infile.read((char *) &replay_data.m_sh300, sizeof(replay_data.m_sh300));
-            std::cout << "m_sh300:" << replay_data.m_sh300 << std::endl;
+            //std::cout << "m_sh300:" << replay_data.m_sh300 << std::endl;
 
             infile.read((char *) &replay_data.m_sh100, sizeof(replay_data.m_sh100));
-            std::cout << "m_sh100:" << replay_data.m_sh100 << std::endl;
+            //std::cout << "m_sh100:" << replay_data.m_sh100 << std::endl;
 
             infile.read((char *) &replay_data.m_sh50, sizeof(replay_data.m_sh50));
-            std::cout << "m_sh50:" << replay_data.m_sh50 << std::endl;
+            //std::cout << "m_sh50:" << replay_data.m_sh50 << std::endl;
 
             infile.read((char *) &replay_data.m_shGekis, sizeof(replay_data.m_shGekis));
-            std::cout << "m_shGekis:" << replay_data.m_shGekis << std::endl;
+            //std::cout << "m_shGekis:" << replay_data.m_shGekis << std::endl;
 
             infile.read((char *) &replay_data.m_shKatus, sizeof(replay_data.m_shKatus));
-            std::cout << "m_shKatus:" << replay_data.m_shKatus << std::endl;
+            //std::cout << "m_shKatus:" << replay_data.m_shKatus << std::endl;
 
             infile.read((char *) &replay_data.m_shMisses, sizeof(replay_data.m_shMisses));
-            std::cout << "m_shMisses:" << replay_data.m_shMisses << std::endl;
+            //std::cout << "m_shMisses:" << replay_data.m_shMisses << std::endl;
 
             infile.read((char *) &replay_data.m_iTotalScore, sizeof(replay_data.m_iTotalScore));
-            std::cout << "m_iTotalScore:" << replay_data.m_iTotalScore << std::endl;
+            //std::cout << "m_iTotalScore:" << replay_data.m_iTotalScore << std::endl;
 
             infile.read((char *) &replay_data.m_shHighestCombo, sizeof(replay_data.m_shHighestCombo));
             std::cout << "m_shHighestCombo:" << replay_data.m_shHighestCombo << std::endl;
 
             infile.read((char *) &replay_data.m_chFC, sizeof(replay_data.m_chFC));
-            std::cout << "m_chFC:" << replay_data.m_chFC << std::endl;
+            //std::cout << "m_chFC:" << replay_data.m_chFC << std::endl;
 
             infile.read((char *) &replay_data.m_iMods, sizeof(replay_data.m_iMods));
             std::cout << "m_iMods:" << replay_data.m_iMods << std::endl;
 
             replay_data.m_strLifeBar = parse_osu_string(infile);
-            std::cout << "m_strLifeBar:" << replay_data.m_strLifeBar << std::endl;
+            //std::cout << "m_strLifeBar:" << replay_data.m_strLifeBar << std::endl;
 
             infile.read((char *) &replay_data.m_lTimeStamp, sizeof(replay_data.m_lTimeStamp));
-            std::cout << "m_lTimeStamp:" << replay_data.m_lTimeStamp << std::endl;
+            //std::cout << "m_lTimeStamp:" << replay_data.m_lTimeStamp << std::endl;
 
             infile.read((char *) &replay_data.m_iLenCompressedReplay, sizeof(replay_data.m_iLenCompressedReplay));
             std::cout << "m_iLenCompressedReplay:" << replay_data.m_iLenCompressedReplay << std::endl;
@@ -271,7 +272,7 @@ namespace ReplayParser {
 
         std::cout << "Finished parsing" << std::endl;
 
-        return replay_data.m_iLenCompressedReplay;
+        return replay_data;
     }
 }
 
@@ -320,7 +321,7 @@ namespace YAUIO {
 
     std::vector<InputTable> ParseInputTable() {
         namespace fs = std::filesystem;
-        auto pathToTable = fs::path("inputTable.txt");
+        auto pathToTable = fs::path("reqfiles/inputTable.txt");
         auto file = std::fstream(pathToTable);
         auto buf = std::string();
         auto bufN = std::string();
@@ -358,7 +359,7 @@ namespace YAUIO {
         ::SendInput(1, &Input, sizeof(INPUT));
     }
 
-    void LeftUp(){
+    void LeftUp() {
         using namespace std::chrono_literals;
         INPUT Input = {0};
         Input.type = INPUT_MOUSE;
@@ -367,7 +368,7 @@ namespace YAUIO {
         std::this_thread::sleep_for(50ms);
     }
 
-    void LeftDown(){
+    void LeftDown() {
         using namespace std::chrono_literals;
         INPUT Input = {0};
         // left down
@@ -442,9 +443,9 @@ namespace YAUIO {
         int i = 0;
         auto c = std::string();
         while (i < s.size()) {
-            if(s[i]==' '){
+            if (s[i] == ' ') {
                 c = "SPACEBAR";
-            }else{
+            } else {
                 c = s[i];
             }
             pressKey(c, InputTableV);
@@ -463,7 +464,7 @@ namespace YAUIO {
                 return false;
             } else if (arg[i] >= '0' && arg[i] <= '9') {
                 return false;
-            } else if (arg[i] == '!' ||arg[i] == 'V' || arg[i] == 'A' || arg[i] == 'I' || arg[i] == '"') {
+            } else if (arg[i] == '!' || arg[i] == 'V' || arg[i] == 'A' || arg[i] == 'I' || arg[i] == '"') {
                 return false;
             } else {
                 i++;
@@ -497,7 +498,7 @@ namespace YAUIO {
                         std::getline(file, debugStr[check], ',');
                     }
                     i = 3;
-                    fmt::print("6 ----- {}, {} check", debugStr[check - 2],check);
+                    fmt::print("6 ----- {}, {} check", debugStr[check - 2], check);
                     fmt::print("\n5 ----- {}", debugStr[check - 1]);
                     fmt::print("\n4 ----- {}\n", debugStr[check]);
                     scores[scoreN].map = debugStr[check - 2];
@@ -534,10 +535,10 @@ namespace YAUIO {
                 } else if (i == 2) {
                     scores[scoreN].global_rank = std::stoi(argument);
                 } else if (i == 1) {
-                    fmt::println("{} total pp: /{}/",i,argument);
+                    fmt::println("{} total pp: /{}/", i, argument);
                     scores[scoreN].total_pp = std::stod(argument);
                 }
-                if(i==12) {
+                if (i == 12) {
                     break;
                 }
                 i--;
@@ -586,7 +587,7 @@ namespace YAUIO {
         ShellExecute(NULL, "open", pathChar, NULL, NULL, SW_SHOWDEFAULT);
     }
 
-    void openExplorer(std::string pathToFoler){
+    void openExplorer(std::string pathToFoler) {
         using namespace std::chrono_literals;
         int h = 0;
         char *pathFChar = new char[pathToFoler.length() + 1];
@@ -595,7 +596,7 @@ namespace YAUIO {
             h++;
         }
         //fmt::println("{}",pathFChar);
-        ShellExecute(NULL,"explore", pathFChar, 0,0,SW_MAXIMIZE);
+        ShellExecute(NULL, "explore", pathFChar, 0, 0, SW_MAXIMIZE);
 
         fmt::println("Setting focus to explorer");
         std::this_thread::sleep_for(10ms);
@@ -653,7 +654,7 @@ namespace YAUIO {
         SetClickExplorer(248, 58);
     }
 
-    std::vector<int> GetColorDanser(int x, int y){
+    std::vector<int> GetColorDanser(int x, int y) {
 
         using namespace std::chrono_literals;
         HWND window = FindWindow(NULL, "danser-go 0.9.1 launcher");
@@ -689,7 +690,7 @@ namespace YAUIO {
         return std::vector<int>{GetRValue(color), GetGValue(color), GetBValue(color)};
     }
 
-    int GetStrainDanser(long long length){
+    int GetStrainDanser(long long length) {
         using namespace std::chrono_literals;
         //xmin = 208 xmax = 591  ymin=190 ymax = 262
         int x = 208;
@@ -701,10 +702,10 @@ namespace YAUIO {
         SetClickDanser(690, 166); //time/offset menu
         std::this_thread::sleep_for(80ms);
 
-        while (y>190){
-            x=208;
-            while(x<591){
-                if(GetColorDanser(x,y)==std::vector<int>{255,255,255}){
+        while (y > 190) {
+            x = 208;
+            while (x < 591) {
+                if (GetColorDanser(x, y) == std::vector<int>{255, 255, 255}) {
                     xf = x;
                     yf = y;
                     found = true;
@@ -712,14 +713,14 @@ namespace YAUIO {
                 }
                 x++;
             }
-            if(found){
+            if (found) {
                 break;
             }
             y--;
         }
         fmt::print("Found strain {} {} ", xf, yf);
 
-        if(length<300) {
+        if (length < 300) {
             x = 208;
             y = yf;
             int yf1 = 0;
@@ -754,7 +755,7 @@ namespace YAUIO {
         return xf;
     }
 
-    void renameFiles(std::vector<Score> vector, int qScores, std::filesystem::path path) {
+    bool renameFiles(std::vector<Score> vector, int qScores, std::filesystem::path path) {
         int i = 0;
         namespace fs = std::filesystem;
         std::string pathM[vector.size() * 2];
@@ -802,7 +803,7 @@ namespace YAUIO {
                        path.generic_string().append("/").append(std::to_string(vector[found[i]].pp)).append(".osr"));
             i++;
         }
-
+        return true;
     }
 
     std::vector<Score> sortScores(std::vector<Score> v) {
@@ -845,18 +846,28 @@ namespace YAUIO {
         return v;
     }
 
-    void downloadData(std::vector<Score> weeklyScores, std::vector<InputTable> InputTableV, int cycle, int mode) {
+    bool downloadData(std::vector<Score> weeklyScores, std::vector<InputTable> InputTableV, int cycle, int mode,
+                      std::filesystem::path pathD) {
         int i = 0;
+        int ii = 0;
+        bool foundReplay = false;
         using namespace std::chrono_literals;
 
-        openProgram("chrome");
-        HWND window = FindWindow(NULL, "Новая Вкладка - Google Chrome");
-        if (window) {
-            SetForegroundWindow(window);
-            SetActiveWindow(window);
-            SetFocus(window);
+        while(i == 0) {
+            HWND window = FindWindow(NULL, "Google Chrome");
+            if (window) {
+                SetForegroundWindow(window);
+                SetActiveWindow(window);
+                SetFocus(window);
+                break;
+            } else {
+                openProgram("chrome");
+            }
+            std::this_thread::sleep_for(2s);
+            i++;
         }
 
+        i = 0;
         std::this_thread::sleep_for(2s);
         SetCursorPos(900, 500);
         openLink("https://twitter.com");
@@ -882,12 +893,34 @@ namespace YAUIO {
                 std::this_thread::sleep_for(2s);
             }
             pressTwoKeys("CTRL", "W", InputTableV);
-            i++;
+            namespace fs = std::filesystem;
+            auto pathM = std::vector<std::string>{};
+            for (const auto &entry: fs::directory_iterator(pathD)) {
+                pathM.push_back(entry.path().generic_string());
+            }
+            ii = 0;
+            foundReplay = false;
+            while (ii < weeklyScores[i].scoreLink.size()) {
+                if (weeklyScores[i].scoreLink[ii] >= '0' && weeklyScores[i].scoreLink[ii] <= '9') {
+                    break;
+                }
+                ii++;
+            }
+            std::string currentLink = weeklyScores[i].scoreLink.substr(ii, weeklyScores[i].scoreLink.size());
+            for (const auto &str: pathM) {
+                if (std::regex_match(str, std::regex(".*" + currentLink + ".*"))) {
+                    foundReplay = true;
+                }
+            }
+            if (foundReplay) {
+                i++;
+            }
         }
         pressKey("F11", InputTableV);
         std::this_thread::sleep_for(4s);
         pressTwoKeys("ALT", "F4", InputTableV);
         std::this_thread::sleep_for(20ms);
+        return true;
     }
 
     std::vector<std::string> getOBCConfNames(std::filesystem::path path) {
@@ -904,14 +937,17 @@ namespace YAUIO {
     void setProperDancerState(int mode) {
         using namespace std::chrono_literals;
 
-        if (mode == 1) { //mode 0 is just for rendering, 1 - for opening
+        if (mode == 1) { //mode 0 is just for rendering, 1 - for opening (basically useless now)
             openProgram("danser");
-            fmt::println("Waiting 2 mins for danser to load properly...");
-            std::this_thread::sleep_for(120s);
-        }else if (mode == 0){
-            openProgram("danser");
-            fmt::println("Waiting 14 sec for danser to load properly...");
-            std::this_thread::sleep_for(14s);
+            fmt::println("Waiting for danser to load properly...");
+            auto color = std::vector<int>(3);
+            while (mode == 1){
+                color = GetColorDanser(178,408);
+                std::this_thread::sleep_for(2s);
+                if(color[0] == 255 && color[1] == 255 && color[2] == 255){
+                    break;
+                }
+            }
         }
 
         //Set proper danser state
@@ -921,14 +957,17 @@ namespace YAUIO {
         SetClickDanser(753, 95); //record
     }
 
-    void renderReplays(std::vector<Score> weeklyScores, int qScores, std::vector<InputTable> InputTableV,
+    bool renderReplays(std::vector<Score> weeklyScores, int qScores, std::vector<InputTable> InputTableV,
                        std::filesystem::path pathD, std::filesystem::path pathConf, std::filesystem::path pathV,
                        int removeMode) {
         using namespace std::chrono_literals;
         bool isBegChecked;
         bool rendered;
+        bool retry = false;
         double lastPart;
         double multiplier;
+        long long length;
+        int mods;
         int i = 0;
         //fmt::println("{}",pathD.generic_string().append("/").append(std::to_string(score.pp).append(".osr")));
 
@@ -944,19 +983,20 @@ namespace YAUIO {
             SetClickDanser(542, 40); //configure
             std::this_thread::sleep_for(40ms);
             SetClickDanser(388, 262); //focus text field
-            std::this_thread::sleep_for(40ms);
+            std::this_thread::sleep_for(200ms);
             pressTwoKeys("CTRL", "A", InputTableV);
             pressKey("DEL", InputTableV);
             typeInStringPP(std::to_string(weeklyScores[i].pp), InputTableV);
             SetClickDanser(410, 194); //escape configure
 
             rendered = false;
-            long long length = ReplayParser::parseReplay(pathD, weeklyScores[i].pp);
+            length = ReplayParser::parseReplay(pathD, weeklyScores[i].pp).m_iLenCompressedReplay;
+            mods = ReplayParser::parseReplay(pathD, weeklyScores[i].pp).m_iMods;
             length = length / 440; //get approximate length in seconds
             std::this_thread::sleep_for(40ms);
             if (length <= 40) {
                 if (!isBegChecked) {
-                    fmt::println("Rendering full replay (length<=40s), {}s",length);
+                    fmt::println("Rendering full replay (length<=40s), {}s", length);
                     SetClickDanser(690, 166); //time/offset menu
                     std::this_thread::sleep_for(80ms);
                     SetClickDanser(582, 388); //check skip map beginning
@@ -968,35 +1008,50 @@ namespace YAUIO {
                     SetClickDanser(422, 440); //exit menu
                 }
             } else {
-                if (i != 0) { multiplier = double(i) / (double(qScores)*double(qScores)); } else { multiplier = 1 / double(qScores); }
-                if(length<100){
-                    lastPart = (28.0 + ((double(length) / 2) * multiplier)) / length;
-                }else{
-                    lastPart = (24.0 + ((double(length) / 6) * multiplier)) / length;
+                if (i != 0) { multiplier = double(i) / (double(qScores) * double(qScores)); }
+                else {
+                    multiplier = 1 /
+                                 double(qScores);
                 }
-
-                if (lastPart > 1) { lastPart = 1; }
+                if (length < 100) {
+                    lastPart = (28.0 + ((double(length) / 6) * multiplier)) / length;
+                } else if (length > 180) {
+                    lastPart = (18.0 + ((double(length) / 10) * multiplier)) / length;
+                } else {
+                    lastPart = (20.0 + ((double(length) / 8) * multiplier)) / length;
+                }
 
                 int fullX = 382;
                 fmt::println("Getting strain graph");
                 int foundSpike = GetStrainDanser(length);
                 int firstPart;
 
+                if (mods & ReplayParser::Mods::DoubleTime) {
+                    lastPart = lastPart * 4;
+                    fmt::println("\n\nIt is, indeed, a gigachad DoubleTime score.");
+                    if(foundSpike < 294 && length < 300){
+                        lastPart = lastPart/2;
+                    }
+                }
+
+                if (lastPart > 1) { lastPart = 1; }
+
+                fmt::println("\nLastPart var is {}\n", lastPart);
+
                 std::this_thread::sleep_for(80ms);
-                if(foundSpike<294 && length < 300){
-                    firstPart = foundSpike-212+(lastPart*fullX-foundSpike+212);
-                    SetClickDanser(foundSpike+firstPart,328); //start time
-                    fmt::println("Starting x: {}, Found Spike: {}, LastPart: {} ",foundSpike+firstPart,foundSpike,lastPart);
+                if (foundSpike < 294 && length < 300) {
+                    firstPart = (lastPart-((foundSpike-212)/fullX)) * fullX;
+                    SetClickDanser(foundSpike + firstPart, 328); //start time
+                    fmt::println("Starting x: {}, Found Spike: {}", foundSpike + firstPart, foundSpike);
                     std::this_thread::sleep_for(100ms);
                     SetClickDanser(214, 276); //full end time
-                }
-                else{
-                    int startx = foundSpike+((foundSpike-212)*(lastPart/1.5));
-                    int endx = foundSpike-((fullX+212-foundSpike)*(lastPart/1.5));
-                    SetClickDanser(startx,328);//start time
+                } else {
+                    int startx = foundSpike + ((foundSpike - 212) * (lastPart / 1.5));
+                    int endx = foundSpike - ((fullX + 212 - foundSpike) * (lastPart / 1.5));
+                    SetClickDanser(startx, 328);//start time
                     std::this_thread::sleep_for(80ms);
-                    SetClickDanser(endx,278);//end time
-                    fmt::println("FS {} start {} end {}",foundSpike,startx,endx);
+                    SetClickDanser(endx, 278);//end time
+                    fmt::println("Found Spike: {}, Starting x: {}, Ending x: {}", foundSpike, startx, endx);
                 }
                 std::this_thread::sleep_for(80ms);
                 SetClickDanser(422, 440); //exit menu
@@ -1024,7 +1079,7 @@ namespace YAUIO {
             if (configPath == "NoConf") {
                 configNumber = 1;
             }
-            if (configNumber <= configs.size()-7) {
+            if (configNumber <= configs.size() - 7) {
                 std::this_thread::sleep_for(40ms);
                 MouseScroll(20);
                 std::this_thread::sleep_for(80ms);
@@ -1038,18 +1093,45 @@ namespace YAUIO {
                 std::this_thread::sleep_for(80ms);
                 MouseScroll(-0.18 * configNumber);
                 std::this_thread::sleep_for(80ms);
-                fmt::println("config number: {}",configNumber);
+                fmt::println("config number: {}", configNumber);
                 int y = 0;
-                switch(configs.size()-configNumber){
-                    case 0: {y = 170;break;}
-                    case 1: {y = 200;break;}
-                    case 2: {y = 225;break;}
-                    case 3: {y = 250;break;}
-                    case 4: {y = 281;break;}
-                    case 5: {y = 310;break;}
-                    case 6: {y = 336;break;}
-                    case 7: {y = 368;break;}
-                    default: {MouseScroll(20);y = 366;}
+                switch (configs.size() - configNumber) {
+                    case 0: {
+                        y = 170;
+                        break;
+                    }
+                    case 1: {
+                        y = 200;
+                        break;
+                    }
+                    case 2: {
+                        y = 225;
+                        break;
+                    }
+                    case 3: {
+                        y = 250;
+                        break;
+                    }
+                    case 4: {
+                        y = 281;
+                        break;
+                    }
+                    case 5: {
+                        y = 310;
+                        break;
+                    }
+                    case 6: {
+                        y = 336;
+                        break;
+                    }
+                    case 7: {
+                        y = 368;
+                        break;
+                    }
+                    default: {
+                        MouseScroll(20);
+                        y = 366;
+                    }
                 }
                 SetClickDanser(246, y);
                 std::this_thread::sleep_for(80ms);
@@ -1068,13 +1150,26 @@ namespace YAUIO {
                         break;
                     }
                 }
+                HWND window = FindWindow(NULL, "danser-go 0.9.1 launcher");
+                if (!window) {
+                    retry = true;
+                    break;
+                }
             }
-            if (removeMode == 1) {
-                std::filesystem::remove(
-                        pathD.generic_string().append("/").append(std::to_string(weeklyScores[i].pp).append(".osr")));
+
+            if (!retry) {
+                if (removeMode == 1) {
+                    std::filesystem::remove(
+                            pathD.generic_string().append("/").append(
+                                    std::to_string(weeklyScores[i].pp).append(".osr")));
+                }
+                i++;
+            }else if (retry){
+                setProperDancerState(1);
+                retry = false;
             }
-            i++;
         }
+        return true;
     }
 
     void moveMaps(std::filesystem::path pathD, std::filesystem::path pathOsuSongs, int removeMode) {
@@ -1109,14 +1204,14 @@ namespace YAUIO {
         }
     }
 
-    std::vector<std::string> loadCfg(){
+    std::vector<std::string> loadCfg() {
         namespace fs = std::filesystem;
-        auto cfg = std::fstream("weeklyConfig.txt");
+        auto cfg = std::fstream("reqfiles/weeklyConfig.txt");
         auto bufCfg = std::string();
         auto parsedCfg = std::vector<std::string>();
         int var = 0;
 
-        while(var<6) {
+        while (var < 6) {
             std::getline(cfg, bufCfg, '"');
             std::getline(cfg, bufCfg, '"');
             parsedCfg.push_back(bufCfg);
@@ -1124,7 +1219,7 @@ namespace YAUIO {
             var++;
         }
 
-        while(var<10){
+        while (var < 10) {
             std::getline(cfg, bufCfg, '=');
             std::getline(cfg, bufCfg, '\n');
             parsedCfg.push_back(bufCfg);
@@ -1134,101 +1229,114 @@ namespace YAUIO {
         return parsedCfg;
     }
 
-    void makePremiereProject(int qReplays, std::vector<InputTable> InputTableV, std::filesystem::path pathProject, std::filesystem::path pathV, std::vector<Score> inpVec) {
+    bool isCursorOnButton(sf::Window &window, sf::RectangleShape &button1) {
+        return (sf::Mouse::getPosition(window).x - (button1.getPosition().x + button1.getSize().x) <=
+                button1.getSize().x) &&
+               (sf::Mouse::getPosition(window).x - (button1.getPosition().x + button1.getSize().x) >=
+                button1.getSize().x * -1) &&
+               (sf::Mouse::getPosition(window).y - (button1.getPosition().y + button1.getSize().y) <=
+                button1.getSize().y) &&
+               (sf::Mouse::getPosition(window).y - (button1.getPosition().y + button1.getSize().y) >=
+                button1.getSize().y * -1);
+    }
+
+    void makePremiereProject(int qReplays, std::vector<InputTable> InputTableV, std::filesystem::path pathProject,
+                             std::filesystem::path pathV, std::vector<Score> inpVec) {
         namespace fs = std::filesystem;
         using namespace std::chrono_literals;
         int premR = 0;
         int textScale;
         auto genericPauseSize = 100ms;
         std::string bufS;
-        fmt::println("{}",pathProject.generic_string().append("/template/premiere.prproj"));
+        fmt::println("{}", pathProject.generic_string().append("/template/premiere.prproj"));
         fs::remove(pathProject.generic_string().append("/auto/premiere.prproj"));
-        fs::copy(pathProject.generic_string().append("/template/premiere.prproj"), pathProject.generic_string().append("/auto/premiere.prproj"));
+        fs::copy(pathProject.generic_string().append("/template/premiere.prproj"),
+                 pathProject.generic_string().append("/auto/premiere.prproj"));
 
         openExplorer(pathV.generic_string());
         std::this_thread::sleep_for(2s);
-        SetCursorPos(220,180);
+        SetCursorPos(220, 180);
         LeftClick();
-        pressTwoKeys("CTRL","A",InputTableV);
-        SetCursorPos(284,248);
+        pressTwoKeys("CTRL", "A", InputTableV);
+        SetCursorPos(284, 248);
         LeftDown();
-        SetCursorPos(400,800);
+        SetCursorPos(400, 800);
         openProgram("premiere");
         std::this_thread::sleep_for(10s);
-        SetCursorPos(294,834);
+        SetCursorPos(294, 834);
         std::this_thread::sleep_for(10s);
         LeftUp();
-        SetCursorPos(1594,760);
+        SetCursorPos(1594, 760);
         std::this_thread::sleep_for(genericPauseSize);
         LeftClick();
         std::this_thread::sleep_for(genericPauseSize);
 
-        SetCursorPos(900,524);
+        SetCursorPos(900, 524);
         std::this_thread::sleep_for(genericPauseSize);
-        pressKey("T",InputTableV);
+        pressKey("T", InputTableV);
         std::this_thread::sleep_for(1s);
         LeftClick();
-        SetCursorPos(1446,202);
+        SetCursorPos(1446, 202);
         std::this_thread::sleep_for(genericPauseSize);
         LeftClick();
         std::this_thread::sleep_for(genericPauseSize);
-        SetCursorPos(1524,272); //FONT
+        SetCursorPos(1524, 272); //FONT
         std::this_thread::sleep_for(genericPauseSize);
         LeftClick();
         std::this_thread::sleep_for(genericPauseSize);
-        typeInStringPP("LEMON MILK BOLD",InputTableV);
+        typeInStringPP("LEMON MILK BOLD", InputTableV);
         std::this_thread::sleep_for(genericPauseSize);
-        pressKey("ENTER",InputTableV);
+        pressKey("ENTER", InputTableV);
         std::this_thread::sleep_for(genericPauseSize);
-        SetCursorPos(900,524);
+        SetCursorPos(900, 524);
         std::this_thread::sleep_for(genericPauseSize);
         LeftClick();
         std::this_thread::sleep_for(genericPauseSize);
         bufS = inpVec[premR].username.append(" BY");
         bufS.append(std::to_string(inpVec[premR].country_rank));
-        fmt::println("Output text: {}",bufS);
-        typeInStringPP(bufS,InputTableV);
+        fmt::println("Output text: {}", bufS);
+        typeInStringPP(bufS, InputTableV);
         std::this_thread::sleep_for(genericPauseSize);
-        SetCursorPos(940,520);
-        std::this_thread::sleep_for(genericPauseSize);
-        LeftClick();
-        std::this_thread::sleep_for(genericPauseSize);
-        pressTwoKeys("CTRL","A",InputTableV);
-        std::this_thread::sleep_for(genericPauseSize);
-        SetCursorPos(1640,300); //TEXT SIZE
+        SetCursorPos(940, 520);
         std::this_thread::sleep_for(genericPauseSize);
         LeftClick();
         std::this_thread::sleep_for(genericPauseSize);
-        if (bufS.size()>16){
-            textScale=34;
-        }else{
-            textScale=40;
+        pressTwoKeys("CTRL", "A", InputTableV);
+        std::this_thread::sleep_for(genericPauseSize);
+        SetCursorPos(1640, 300); //TEXT SIZE
+        std::this_thread::sleep_for(genericPauseSize);
+        LeftClick();
+        std::this_thread::sleep_for(genericPauseSize);
+        if (bufS.size() > 16) {
+            textScale = 34;
+        } else {
+            textScale = 40;
         }
-        typeInStringPP(std::to_string(textScale),InputTableV);
-        pressKey("ENTER",InputTableV);
+        typeInStringPP(std::to_string(textScale), InputTableV);
+        pressKey("ENTER", InputTableV);
         std::this_thread::sleep_for(genericPauseSize);
 
-        SetCursorPos(1524,330); //TEXT ALIGN
+        SetCursorPos(1524, 330); //TEXT ALIGN
         std::this_thread::sleep_for(genericPauseSize);
         LeftClick();
         std::this_thread::sleep_for(genericPauseSize);
 
-        SetCursorPos(1630,634); //X text
+        SetCursorPos(1630, 634); //X text
         std::this_thread::sleep_for(genericPauseSize);
         LeftClick();
         std::this_thread::sleep_for(genericPauseSize);
-        typeInStringPP("1664",InputTableV);
+        typeInStringPP("1664", InputTableV);
         std::this_thread::sleep_for(genericPauseSize);
-        pressKey("ENTER",InputTableV);
+        pressKey("ENTER", InputTableV);
         std::this_thread::sleep_for(genericPauseSize);
 
-        SetCursorPos(1674,634); //Y text
+        SetCursorPos(1674, 634); //Y text
         std::this_thread::sleep_for(genericPauseSize);
         LeftClick();
         std::this_thread::sleep_for(genericPauseSize);
-        typeInStringPP("1044",InputTableV);
+        typeInStringPP("1044", InputTableV);
         std::this_thread::sleep_for(genericPauseSize);
-        pressKey("ENTER",InputTableV);
+        pressKey("ENTER", InputTableV);
         std::this_thread::sleep_for(genericPauseSize);
     }
 
@@ -1256,18 +1364,143 @@ auto main() -> int {
     auto InputTableV = ParseInputTable();
     auto weeklyScores = sortScores(scores);
 
-    int cycle = weeklyScores.size(); //How many scores out of 400pp+ ones you want to iterate over
+    int cycle = 4; //How many scores out of 400pp+ ones you want to iterate over
     int doRemove = std::stoi(conf[6]); //0 - not remove replay&map file after rendering, 1 - remove
     int openDanser = std::stoi(conf[7]); //0 - just config danser, 1 - open and configure
     int downloadMode = std::stoi(conf[8]); //mode 0 - only replays ,1 - only maps, 2 - replays + maps
-    int startMode = std::stoi(conf[9]); //stage to start with - 0 downloading, 1 renaming, 2 render
+    //int startMode = std::stoi(conf[9]); //stage to start with - 0 downloading, 1 renaming, 2 render
 
-    if (doRemove == 1) {
+    auto window = sf::RenderWindow(sf::VideoMode(800, 600), "WeeklyScript");
+    auto font = sf::Font();
+    font.loadFromFile("reqfiles/font.otf");
+    auto event = sf::Event();
+
+    auto button1Text = sf::Text{"Download", font};
+    button1Text.setPosition(20, 20);
+    auto button2Text = sf::Text{"Rename", font};
+    button2Text.setPosition(20, 80);
+    auto button3Text = sf::Text{"OpenDanser", font};
+    button3Text.setPosition(20, 140);
+    auto button4Text = sf::Text{"Render", font};
+    button4Text.setPosition(20, 200);
+
+    auto textOutputOnTheRight = sf::Text{"", font};
+
+    auto button1 = sf::RectangleShape(sf::Vector2f(205, 30));
+    button1.setPosition(20, 20);
+    button1.setFillColor(sf::Color::Cyan);
+    auto button2 = sf::RectangleShape(sf::Vector2f(142, 30));
+    button2.setPosition(20, 80);
+    button2.setFillColor(sf::Color::Cyan);
+    auto button3 = sf::RectangleShape(sf::Vector2f(220, 30));
+    button3.setPosition(20, 140);
+    button3.setFillColor(sf::Color::Cyan);
+    auto button4 = sf::RectangleShape(sf::Vector2f(205, 30));
+    button4.setPosition(20, 200);
+    button4.setFillColor(sf::Color::Cyan);
+
+    window.setFramerateLimit(240);
+
+    bool download = false;
+    bool rename = false;
+    bool openDanserB = false;
+    bool render = false;
+
+    while (window.isOpen()) {
+        window.clear(sf::Color::Black);
+        window.draw(button1Text);
+        window.draw(button2Text);
+        window.draw(button3Text);
+        window.draw(button4Text);
+        if (download || render || openDanserB || rename) {
+            textOutputOnTheRight = sf::Text{"Please wait, working on it", font};
+            textOutputOnTheRight.setPosition(140, 400);
+        }else{
+            textOutputOnTheRight = sf::Text{"", font};
+        }
+        window.draw(textOutputOnTheRight);
+
+        if (download) {
+            button1Text.setFillColor(sf::Color::Green);
+            window.draw(button1Text);
+            window.display();
+            std::this_thread::sleep_for(2s);
+            if (downloadData(weeklyScores, InputTableV, cycle, downloadMode, pathD)) {
+                fmt::println("\n\nDownloaded all data successfully!");
+                download = false;
+                button1Text.setFillColor(sf::Color::White);
+            } else {
+                button1Text.setFillColor(sf::Color::Red);
+            }
+        }
+
+        if (rename) {
+            button2Text.setFillColor(sf::Color::Green);
+            window.draw(button2Text);
+            window.display();
+            std::this_thread::sleep_for(2s);
+            if (renameFiles(weeklyScores, cycle, pathD)) { //renames all replays to their pp value
+                fmt::println("\n\nRenamed all data successfully!");
+                moveMaps(pathD, pathOsuSongs, doRemove);
+                fmt::println("\n\nMoved all data successfully!");
+                rename = false;
+                button2Text.setFillColor(sf::Color::White);
+            } else {
+                button2Text.setFillColor(sf::Color::Red);
+            }
+        }
+
+        if (openDanserB) {
+            button3Text.setFillColor(sf::Color::Green);
+            window.draw(button3Text);
+            window.display();
+            std::this_thread::sleep_for(2s);
+            setProperDancerState(openDanser);
+            fmt::println("\n\nSet dancer state successfully!");
+            openDanserB = false;
+            button3Text.setFillColor(sf::Color::White);
+
+        }
+
+        if (render) {
+            button4Text.setFillColor(sf::Color::Green);
+            window.draw(button4Text);
+            window.display();
+            std::this_thread::sleep_for(2s);
+            if (renderReplays(weeklyScores, cycle, InputTableV, pathD, pathConf, pathV, doRemove)) {
+                fmt::println("\n\nAll replays rendered successfully!");
+                render = false;
+                button4Text.setFillColor(sf::Color::White);
+            } else {
+                button4Text.setFillColor(sf::Color::Red);
+            }
+        }
+
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+
+            if (event.type == sf::Event::MouseButtonPressed) {
+                if (isCursorOnButton(window, button1)) {
+                    download = true;
+                } else if (isCursorOnButton(window, button2)) {
+                    rename = true;
+                } else if (isCursorOnButton(window, button3)) {
+                    openDanserB = true;
+                } else if (isCursorOnButton(window, button4)) {
+                    render = true;
+                }
+            }
+        }
+        window.display();
+    }
+
+    /*if (doRemove == 1) {
         removeAllFilesInFolder(pathV); //delete all recorded videos
         removeAllFilesInFolder(pathD); //delete all files in replay folder
     }
 
-    std::this_thread::sleep_for(5s);
     printScoresVector(weeklyScores);
     if (startMode<1){
         downloadData(weeklyScores, InputTableV, cycle, downloadMode);
@@ -1286,7 +1519,7 @@ auto main() -> int {
         fmt::println("\n\nAll replays rendered successfully!");
     }
 
-    //makePremiereProject(cycle,InputTableV,pathProjects,pathV,weeklyScores);
+    //makePremiereProject(cycle,InputTableV,pathProjects,pathV,weeklyScores);*/
 
     return 0;
 }
