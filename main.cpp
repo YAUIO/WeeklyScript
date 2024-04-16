@@ -1364,7 +1364,7 @@ auto main() -> int {
     auto InputTableV = ParseInputTable();
     auto weeklyScores = sortScores(scores);
 
-    int cycle = 4; //How many scores out of 400pp+ ones you want to iterate over
+    int cycle = weeklyScores.size(); //How many scores out of 400pp+ ones you want to iterate over
     int doRemove = std::stoi(conf[6]); //0 - not remove replay&map file after rendering, 1 - remove
     int openDanser = std::stoi(conf[7]); //0 - just config danser, 1 - open and configure
     int downloadMode = std::stoi(conf[8]); //mode 0 - only replays ,1 - only maps, 2 - replays + maps
