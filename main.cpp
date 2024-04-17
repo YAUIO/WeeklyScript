@@ -1093,6 +1093,7 @@ namespace YAUIO {
 
         if (mods & ReplayParser::Mods::DoubleTime) {
             lastPart = lastPart * 4;
+            length = length / 1.5;
             fmt::println("\n\nIt is, indeed, a gigachad DoubleTime score.");
             if(foundSpike < 294 && length < 300){
                 lastPart = lastPart/2;
