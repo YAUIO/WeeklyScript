@@ -847,7 +847,7 @@ namespace YAUIO {
     bool renameFiles(std::vector<Score> vector, int qScores, std::filesystem::path path) {
         int i = 0;
         namespace fs = std::filesystem;
-        std::string pathM[vector.size() * 2];
+        std::string pathM[vector.size() * 2 + 1];
         for (const auto &entry: fs::directory_iterator(path)) {
             pathM[i] = entry.path().generic_string();
             i++;
@@ -870,6 +870,7 @@ namespace YAUIO {
         ii = 0;
         auto found = std::vector<int>();
         auto matches = std::vector<std::string>();
+        fmt::println("Starting renaming");
         while (i < ids.size()) {
             for (const auto &str: pathM) {
                 if (std::regex_match(str, std::regex(".*" + ids[i] + ".*"))) {
@@ -1046,6 +1047,70 @@ namespace YAUIO {
         SetClickDanser(753, 95); //record
     }
 
+    long long getLength (long long length){
+        length = length / 440; //get approximate length in seconds
+        if (length<0){
+            length = 120;
+        }
+        fmt::println("Length is {}s",length);
+        return length;
+    }
+
+    long long getLengthOpt (long long length){
+        length = getLength(length);
+
+        if(length>4000){
+            length = length / 33409;
+        }
+
+        if (length<0){
+            length = 120;
+        }
+
+        fmt::println("Length is {}s",length);
+        return length;
+    }
+
+    double getMultiplier (int i, int qScores){
+        double multiplier;
+        if (i != 0) { multiplier = double(i) / (double(qScores) * double(qScores)); }
+        else {
+            multiplier = 1 /
+                         double(qScores);
+        }
+        return multiplier;
+    }
+
+    double getLastPart(int foundSpike, long long length, int mods, double multiplier){
+        double lastPart;
+        if (length < 100) {
+            lastPart = (28.0 + ((double(length) / 4) * multiplier)) / length;
+        } else if (length > 180) {
+            lastPart = (24.0 + ((double(length) / 2) * multiplier)) / length;
+        } else {
+            lastPart = (24.0 + ((double(length) / 3) * multiplier)) / length;
+        }
+
+        if (mods & ReplayParser::Mods::DoubleTime) {
+            lastPart = lastPart * 4;
+            fmt::println("\n\nIt is, indeed, a gigachad DoubleTime score.");
+            if(foundSpike < 294 && length < 300){
+                lastPart = lastPart/2;
+            }
+        }
+
+        if(length*lastPart<40){
+            lastPart = 40.00/length;
+        }else if(length*lastPart>90){
+            lastPart = 90.00/length;
+        }
+
+        if (lastPart > 1) { lastPart = 1; }
+        fmt::println("\n lastPart is {}",lastPart);
+
+        return lastPart;
+    }
+
     bool renderReplays(std::vector<Score> weeklyScores, int qScores, std::vector<InputTable> InputTableV,
                        std::filesystem::path pathD, std::filesystem::path pathConf, std::filesystem::path pathV,
                        int removeMode) {
@@ -1081,8 +1146,9 @@ namespace YAUIO {
             rendered = false;
             length = ReplayParser::parseReplay(pathD, weeklyScores[i].pp).m_iLenCompressedReplay;
             mods = ReplayParser::parseReplay(pathD, weeklyScores[i].pp).m_iMods;
-            length = length / 440; //get approximate length in seconds
+            length = getLength(length);
             std::this_thread::sleep_for(40ms);
+
             if (length <= 40) {
                 if (!isBegChecked) {
                     fmt::println("Rendering full replay (length<=40s), {}s", length);
@@ -1097,35 +1163,13 @@ namespace YAUIO {
                     SetClickDanser(422, 440); //exit menu
                 }
             } else {
-                if (i != 0) { multiplier = double(i) / (double(qScores) * double(qScores)); }
-                else {
-                    multiplier = 1 /
-                                 double(qScores);
-                }
-                if (length < 100) {
-                    lastPart = (28.0 + ((double(length) / 6) * multiplier)) / length;
-                } else if (length > 180) {
-                    lastPart = (18.0 + ((double(length) / 10) * multiplier)) / length;
-                } else {
-                    lastPart = (20.0 + ((double(length) / 8) * multiplier)) / length;
-                }
 
+                multiplier = getMultiplier(i,qScores);
                 int fullX = 382;
                 fmt::println("Getting strain graph");
                 int foundSpike = GetStrainDanser(length);
                 int firstPart;
-
-                if (mods & ReplayParser::Mods::DoubleTime) {
-                    lastPart = lastPart * 4;
-                    fmt::println("\n\nIt is, indeed, a gigachad DoubleTime score.");
-                    if(foundSpike < 294 && length < 300){
-                        lastPart = lastPart/2;
-                    }
-                }
-
-                if (lastPart > 1) { lastPart = 1; }
-
-                fmt::println("\nLastPart var is {}\n", lastPart);
+                lastPart = getLastPart(foundSpike,length,mods,multiplier);
 
                 std::this_thread::sleep_for(80ms);
                 if (foundSpike < 294 && length < 300) {
@@ -1325,15 +1369,7 @@ namespace YAUIO {
             length = ReplayParser::parseReplayOpt(pathD, osrName).m_iLenCompressedReplay;
             mods = ReplayParser::parseReplayOpt(pathD, osrName).m_iMods;
 
-            if(length>1760000){
-                length = length / 14700000;
-            }else{
-                length = length / 440; //get approximate length in seconds
-            }
-
-            if (length<0){
-                length = 120;
-            }
+            length = getLengthOpt(length);
 
             std::this_thread::sleep_for(40ms);
             if (length <= 40) {
@@ -1350,35 +1386,13 @@ namespace YAUIO {
                     SetClickDanser(422, 440); //exit menu
                 }
             } else {
-                if (i != 0) { multiplier = double(i) / (double(pathM.size()) * double(pathM.size())); }
-                else {
-                    multiplier = 1 /
-                                 double(pathM.size());
-                }
-                if (length < 100) {
-                    lastPart = (28.0 + ((double(length) / 6) * multiplier)) / length;
-                } else if (length > 180) {
-                    lastPart = (18.0 + ((double(length) / 10) * multiplier)) / length;
-                } else {
-                    lastPart = (20.0 + ((double(length) / 8) * multiplier)) / length;
-                }
 
+                multiplier = getMultiplier(i,pathM.size());
                 int fullX = 382;
                 fmt::println("Getting strain graph");
                 int foundSpike = GetStrainDanser(length);
                 int firstPart;
-
-                if (mods & ReplayParser::Mods::DoubleTime) {
-                    lastPart = lastPart * 4;
-                    fmt::println("\n\nIt is, indeed, a gigachad DoubleTime score.");
-                    if(foundSpike < 294 && length < 300){
-                        lastPart = lastPart/2;
-                    }
-                }
-
-                if (lastPart > 1) { lastPart = 1; }
-
-                fmt::println("\nLastPart var is {}\n", lastPart);
+                lastPart = getLastPart(foundSpike,length,mods,multiplier);
 
                 std::this_thread::sleep_for(80ms);
                 if (foundSpike < 294 && length < 300) {
@@ -1520,14 +1534,24 @@ namespace YAUIO {
         namespace fs = std::filesystem;
         auto maps = std::vector<std::string>();
         int i = 0;
+        int ii;
         for (const auto &entry: fs::directory_iterator(pathD)) {
             if (std::regex_match(entry.path().generic_string(),
                                  std::regex(".*\\.osz"))) {
                 maps.push_back(entry.path().generic_string());
             }
         }
+
         while (i < maps.size()) {
-            fs::copy_file(maps[i], pathOsuSongs.generic_string().append(maps[i].substr(30)));
+            ii = maps[i].size();
+            while (ii>0){
+                if(maps[i][ii] == '/'){
+                    break;
+                }
+                ii--;
+            }
+            fmt::println("{}",pathOsuSongs.generic_string().append(maps[i].substr(ii)));
+            fs::copy_file(maps[i], pathOsuSongs.generic_string().append(maps[i].substr(ii)));
             if (removeMode == 1) {
                 fs::remove(maps[i]);
             }
