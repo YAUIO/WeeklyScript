@@ -26,6 +26,19 @@ void SetCursorPosDanser(int x, int y) {
     }
 }
 
+void SetCursorPosExplorer(int x, int y) {
+    HWND window = FindWindow(NULL, "Scores");
+    if (window) {
+        RECT rect = {0};
+        GetWindowRect(window, &rect);
+
+        SetForegroundWindow(window);
+        SetActiveWindow(window);
+        SetFocus(window);
+        SetCursorPos(rect.right - x, rect.bottom - y);
+    }
+}
+
 auto main() -> int {
     /*using namespace std::chrono_literals;
     POINT p;
@@ -34,5 +47,6 @@ auto main() -> int {
         std::cout << p.x << " " << p.y << "\n";
     }*/
 
-    SetCursorPosDanser(215,268);
+    //SetCursorPosDanser(215,268);
+    SetCursorPosExplorer(840,320);
 }

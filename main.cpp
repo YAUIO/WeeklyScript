@@ -274,6 +274,95 @@ namespace ReplayParser {
 
         return replay_data;
     }
+
+    ReplayFormat parseReplayOpt(std::filesystem::path pathD, std::string name) {
+        auto s = pathD.generic_string().append("/").append(name);
+
+        ReplayFormat replay_data;
+
+        std::stringstream configfile;
+        configfile << s;
+
+        std::ifstream infile;
+
+        fmt::println("Opening: {}", configfile.str().c_str());
+        //std::cout << "Opening: " << configfile.str().c_str() << std::endl;
+
+        infile.open(configfile.str().c_str(), std::ios::binary);
+
+        if (infile.is_open()) {
+            std::cout << "Successfully opened file" << std::endl;
+
+            infile.read((char *) &replay_data.m_chGameMode, sizeof(replay_data.m_chGameMode));
+            //std::cout << "m_chGameMode:" << replay_data.m_chGameMode << std::endl;
+
+            infile.read((char *) &replay_data.m_iGameVersion, sizeof(replay_data.m_iGameVersion));
+            //std::cout << "m_iGameVersion:" << replay_data.m_iGameVersion << std::endl;
+
+            replay_data.m_strMapMD5Hash = parse_osu_string(infile);
+            //std::cout << "m_strMapMD5Hash:" << replay_data.m_strMapMD5Hash << std::endl;
+
+            replay_data.m_strPlayerName = parse_osu_string(infile);
+            std::cout << "m_strPlayerName:" << replay_data.m_strPlayerName << std::endl;
+
+            replay_data.m_strReplayHash = parse_osu_string(infile);
+            //std::cout << "m_strReplayHash:" << replay_data.m_strReplayHash << std::endl;
+
+            infile.read((char *) &replay_data.m_sh300, sizeof(replay_data.m_sh300));
+            //std::cout << "m_sh300:" << replay_data.m_sh300 << std::endl;
+
+            infile.read((char *) &replay_data.m_sh100, sizeof(replay_data.m_sh100));
+            //std::cout << "m_sh100:" << replay_data.m_sh100 << std::endl;
+
+            infile.read((char *) &replay_data.m_sh50, sizeof(replay_data.m_sh50));
+            //std::cout << "m_sh50:" << replay_data.m_sh50 << std::endl;
+
+            infile.read((char *) &replay_data.m_shGekis, sizeof(replay_data.m_shGekis));
+            //std::cout << "m_shGekis:" << replay_data.m_shGekis << std::endl;
+
+            infile.read((char *) &replay_data.m_shKatus, sizeof(replay_data.m_shKatus));
+            //std::cout << "m_shKatus:" << replay_data.m_shKatus << std::endl;
+
+            infile.read((char *) &replay_data.m_shMisses, sizeof(replay_data.m_shMisses));
+            //std::cout << "m_shMisses:" << replay_data.m_shMisses << std::endl;
+
+            infile.read((char *) &replay_data.m_iTotalScore, sizeof(replay_data.m_iTotalScore));
+            //std::cout << "m_iTotalScore:" << replay_data.m_iTotalScore << std::endl;
+
+            infile.read((char *) &replay_data.m_shHighestCombo, sizeof(replay_data.m_shHighestCombo));
+            std::cout << "m_shHighestCombo:" << replay_data.m_shHighestCombo << std::endl;
+
+            infile.read((char *) &replay_data.m_chFC, sizeof(replay_data.m_chFC));
+            //std::cout << "m_chFC:" << replay_data.m_chFC << std::endl;
+
+            infile.read((char *) &replay_data.m_iMods, sizeof(replay_data.m_iMods));
+            std::cout << "m_iMods:" << replay_data.m_iMods << std::endl;
+
+            replay_data.m_strLifeBar = parse_osu_string(infile);
+            //std::cout << "m_strLifeBar:" << replay_data.m_strLifeBar << std::endl;
+
+            infile.read((char *) &replay_data.m_lTimeStamp, sizeof(replay_data.m_lTimeStamp));
+            //std::cout << "m_lTimeStamp:" << replay_data.m_lTimeStamp << std::endl;
+
+            infile.read((char *) &replay_data.m_iLenCompressedReplay, sizeof(replay_data.m_iLenCompressedReplay));
+            std::cout << "m_iLenCompressedReplay:" << replay_data.m_iLenCompressedReplay << std::endl;
+
+            /*for (auto i = 0; i < replay_data.m_iLenCompressedReplay; i++) {
+
+                unsigned char byte_part = 0x0;
+                infile.read((char *) &byte_part, sizeof(byte_part));
+                replay_data.compressed_data.push_back(byte_part);
+            }*/
+
+        }
+        infile.close();
+
+        //print_mods(replay_data.m_iMods);
+
+        std::cout << "Finished parsing" << std::endl;
+
+        return replay_data;
+    }
 }
 
 namespace YAUIO {
@@ -1172,6 +1261,261 @@ namespace YAUIO {
         return true;
     }
 
+    bool renderReplaysOpt(std::vector<InputTable> InputTableV,
+                       std::filesystem::path pathD, std::filesystem::path pathConf, std::filesystem::path pathV,
+                       int removeMode) {
+        using namespace std::chrono_literals;
+        bool isBegChecked;
+        bool rendered;
+        bool retry = false;
+        double lastPart;
+        double multiplier;
+        double pp;
+        long long length;
+        int mods;
+        int i = 0;
+        int ii;
+        std::string osrName;
+        pathD = pathD.generic_string().append("\\opt");
+        //fmt::println("{}",pathD.generic_string().append("/").append(std::to_string(score.pp).append(".osr")));
+
+        auto pathM = std::vector<std::string>();
+        namespace fs = std::filesystem;
+        for (const auto &entry: fs::directory_iterator(pathD)) {
+            if (std::regex_match(entry.path().generic_string(), std::regex(".*osr"))) {
+                pathM.push_back(entry.path().generic_string());
+            }
+        }
+
+        while (i < pathM.size()) {
+            ii = pathM[i].size()-1;
+            while (ii>0){
+                if(pathM[i][ii]=='/'){
+                    break;
+                }
+                ii--;
+            }
+            fmt::println("{} {}",osrName,pathM[i].substr(ii+1,pathM[i].size()-1));
+            osrName = pathM[i].substr(ii+1,pathM[i].size()-1);
+
+            pp = std::stod(osrName.substr(0,osrName.size()-4));
+            fmt::println("Current replay's pp {}",pp);
+            //Starting to configure recording
+            SetClickDanser(745, 423); //select replay
+            std::this_thread::sleep_for(40ms);
+            SetCursorPosExplorer(740,420);
+            LeftClick();
+            LeftClick();
+            std::this_thread::sleep_for(40ms);
+            ExplorerFocusTextField();
+            typeInStringPP(osrName, InputTableV);
+            SetClickExplorer(136, 36);
+
+            std::this_thread::sleep_for(80ms);
+            SetClickDanser(542, 40); //configure
+            std::this_thread::sleep_for(40ms);
+            SetClickDanser(388, 262); //focus text field
+            std::this_thread::sleep_for(200ms);
+            pressTwoKeys("CTRL", "A", InputTableV);
+            pressKey("DEL", InputTableV);
+            typeInStringPP(std::to_string(pp), InputTableV);
+            SetClickDanser(410, 194); //escape configure
+
+            rendered = false;
+            length = ReplayParser::parseReplayOpt(pathD, osrName).m_iLenCompressedReplay;
+            mods = ReplayParser::parseReplayOpt(pathD, osrName).m_iMods;
+
+            if(length>1760000){
+                length = length / 14700000;
+            }else{
+                length = length / 440; //get approximate length in seconds
+            }
+
+            if (length<0){
+                length = 120;
+            }
+
+            std::this_thread::sleep_for(40ms);
+            if (length <= 40) {
+                if (!isBegChecked) {
+                    fmt::println("Rendering full replay (length<=40s), {}s", length);
+                    SetClickDanser(690, 166); //time/offset menu
+                    std::this_thread::sleep_for(80ms);
+                    SetClickDanser(582, 388); //check skip map beginning
+                    std::this_thread::sleep_for(80ms);
+                    SetClickDanser(590, 330); //full start time
+                    std::this_thread::sleep_for(80ms);
+                    SetClickDanser(214, 276); //full end time
+                    std::this_thread::sleep_for(80ms);
+                    SetClickDanser(422, 440); //exit menu
+                }
+            } else {
+                if (i != 0) { multiplier = double(i) / (double(pathM.size()) * double(pathM.size())); }
+                else {
+                    multiplier = 1 /
+                                 double(pathM.size());
+                }
+                if (length < 100) {
+                    lastPart = (28.0 + ((double(length) / 6) * multiplier)) / length;
+                } else if (length > 180) {
+                    lastPart = (18.0 + ((double(length) / 10) * multiplier)) / length;
+                } else {
+                    lastPart = (20.0 + ((double(length) / 8) * multiplier)) / length;
+                }
+
+                int fullX = 382;
+                fmt::println("Getting strain graph");
+                int foundSpike = GetStrainDanser(length);
+                int firstPart;
+
+                if (mods & ReplayParser::Mods::DoubleTime) {
+                    lastPart = lastPart * 4;
+                    fmt::println("\n\nIt is, indeed, a gigachad DoubleTime score.");
+                    if(foundSpike < 294 && length < 300){
+                        lastPart = lastPart/2;
+                    }
+                }
+
+                if (lastPart > 1) { lastPart = 1; }
+
+                fmt::println("\nLastPart var is {}\n", lastPart);
+
+                std::this_thread::sleep_for(80ms);
+                if (foundSpike < 294 && length < 300) {
+                    firstPart = (lastPart-((foundSpike-212)/fullX)) * fullX;
+                    SetClickDanser(foundSpike + firstPart, 328); //start time
+                    fmt::println("Starting x: {}, Found Spike: {}", foundSpike + firstPart, foundSpike);
+                    std::this_thread::sleep_for(100ms);
+                    SetClickDanser(214, 276); //full end time
+                } else {
+                    int startx = foundSpike + ((foundSpike - 212) * (lastPart / 1.5));
+                    int endx = foundSpike - ((fullX + 212 - foundSpike) * (lastPart / 1.5));
+                    SetClickDanser(startx, 328);//start time
+                    std::this_thread::sleep_for(80ms);
+                    SetClickDanser(endx, 278);//end time
+                    fmt::println("Found Spike: {}, Starting x: {}, Ending x: {}", foundSpike, startx, endx);
+                }
+                std::this_thread::sleep_for(80ms);
+                SetClickDanser(422, 440); //exit menu
+            }
+            //fmt::println("length {}\nmultiplier {}\nqScores {}\ni {}\nlastPart {}",length,multiplier,qScores,i,lastPart);
+
+            //Config selection
+            auto configs = getOBCConfNames(pathConf); //configs
+            configs = sortOBC(configs);
+            auto configPath = std::string();
+            namespace fs = std::filesystem;
+            int configNumber = 0;
+            std::string username;
+            username = ReplayParser::parseReplayOpt(pathD, osrName).m_strPlayerName;
+            for (const auto &entry: configs) {
+                if (std::regex_match(configs[configNumber], std::regex(".*obc!" + username + ".*"))) {
+                    configPath = entry;
+                    break;
+                }
+                configPath = "NoConf";
+                configNumber++;
+            }
+            //fmt::println("{} {}", configPath, configNumber);
+            SetClickDanser(238, 466); //enter config menu
+            SetCursorPosDanser(246, 366); //hover over first cfg
+            configNumber++;
+            if (configPath == "NoConf") {
+                configNumber = 1;
+            }
+            if (configNumber <= configs.size() - 7) {
+                std::this_thread::sleep_for(40ms);
+                MouseScroll(20);
+                std::this_thread::sleep_for(80ms);
+                MouseScroll(-0.18 * configNumber);
+                std::this_thread::sleep_for(80ms);
+                LeftClick();
+                std::this_thread::sleep_for(80ms);
+            } else {
+                std::this_thread::sleep_for(40ms);
+                MouseScroll(20);
+                std::this_thread::sleep_for(80ms);
+                MouseScroll(-0.18 * configNumber);
+                std::this_thread::sleep_for(80ms);
+                fmt::println("config number: {}", configNumber);
+                int y = 0;
+                switch (configs.size() - configNumber) {
+                    case 0: {
+                        y = 170;
+                        break;
+                    }
+                    case 1: {
+                        y = 200;
+                        break;
+                    }
+                    case 2: {
+                        y = 225;
+                        break;
+                    }
+                    case 3: {
+                        y = 250;
+                        break;
+                    }
+                    case 4: {
+                        y = 281;
+                        break;
+                    }
+                    case 5: {
+                        y = 310;
+                        break;
+                    }
+                    case 6: {
+                        y = 336;
+                        break;
+                    }
+                    case 7: {
+                        y = 368;
+                        break;
+                    }
+                    default: {
+                        MouseScroll(20);
+                        y = 366;
+                    }
+                }
+                SetClickDanser(246, y);
+                std::this_thread::sleep_for(80ms);
+            }
+            SetClickDanser(422, 440); //exit menu
+            std::this_thread::sleep_for(80ms);
+
+            //Render
+            SetClickDanser(182, 58); //render
+            while (!rendered) {
+                std::this_thread::sleep_for(4s);
+                for (const auto &entry: fs::directory_iterator(pathV)) {
+                    if (std::regex_match(entry.path().generic_string(),
+                                         std::regex(".*" + std::to_string(pp) + "\\.mp4"))) {
+                        rendered = true;
+                        break;
+                    }
+                }
+                HWND window = FindWindow(NULL, "danser-go 0.9.1 launcher");
+                if (!window) {
+                    retry = true;
+                    break;
+                }
+            }
+
+            if (!retry) {
+                if (removeMode == 1) {
+                    std::filesystem::remove(
+                            pathD.generic_string().append("/").append(
+                                    std::to_string(pp).append(".osr")));
+                }
+                i++;
+            }else if (retry){
+                setProperDancerState(1);
+                retry = false;
+            }
+        }
+        return true;
+    }
+
     void moveMaps(std::filesystem::path pathD, std::filesystem::path pathOsuSongs, int removeMode) {
         namespace fs = std::filesystem;
         auto maps = std::vector<std::string>();
@@ -1383,6 +1727,8 @@ auto main() -> int {
     button3Text.setPosition(20, 140);
     auto button4Text = sf::Text{"Render", font};
     button4Text.setPosition(20, 200);
+    auto button5Text = sf::Text{"RenderOpt", font};
+    button5Text.setPosition(20, 260);
 
     auto textOutputOnTheRight = sf::Text{"", font};
 
@@ -1398,6 +1744,9 @@ auto main() -> int {
     auto button4 = sf::RectangleShape(sf::Vector2f(205, 30));
     button4.setPosition(20, 200);
     button4.setFillColor(sf::Color::Cyan);
+    auto button5 = sf::RectangleShape(sf::Vector2f(220, 30));
+    button5.setPosition(20, 260);
+    button5.setFillColor(sf::Color::Cyan);
 
     window.setFramerateLimit(240);
 
@@ -1405,6 +1754,7 @@ auto main() -> int {
     bool rename = false;
     bool openDanserB = false;
     bool render = false;
+    bool renderOpt = false;
 
     while (window.isOpen()) {
         window.clear(sf::Color::Black);
@@ -1412,7 +1762,9 @@ auto main() -> int {
         window.draw(button2Text);
         window.draw(button3Text);
         window.draw(button4Text);
-        if (download || render || openDanserB || rename) {
+        window.draw(button5Text);
+
+        if (download || render || openDanserB || rename || renderOpt) {
             textOutputOnTheRight = sf::Text{"Please wait, working on it", font};
             textOutputOnTheRight.setPosition(140, 400);
         }else{
@@ -1476,6 +1828,20 @@ auto main() -> int {
             }
         }
 
+        if (renderOpt) {
+            button5Text.setFillColor(sf::Color::Green);
+            window.draw(button5Text);
+            window.display();
+            std::this_thread::sleep_for(2s);
+            if (renderReplaysOpt(InputTableV, pathD, pathConf, pathV, doRemove)) {
+                fmt::println("\n\nAll replays rendered successfully!");
+                renderOpt = false;
+                button5Text.setFillColor(sf::Color::White);
+            } else {
+                button5Text.setFillColor(sf::Color::Red);
+            }
+        }
+
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
@@ -1490,6 +1856,8 @@ auto main() -> int {
                     openDanserB = true;
                 } else if (isCursorOnButton(window, button4)) {
                     render = true;
+                } else if (isCursorOnButton(window,button5)){
+                    renderOpt = true;
                 }
             }
         }
