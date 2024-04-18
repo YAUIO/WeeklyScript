@@ -1184,6 +1184,7 @@ namespace YAUIO {
                     int endx = foundSpike - ((fullX + 212 - foundSpike) * (lastPart / 1.5));
                     SetClickDanser(startx, 328);//start time
                     std::this_thread::sleep_for(80ms);
+                    if(endx < 224 && length < 120){endx = 214;}
                     SetClickDanser(endx, 278);//end time
                     fmt::println("Found Spike: {}, Starting x: {}, Ending x: {}", foundSpike, startx, endx);
                 }
