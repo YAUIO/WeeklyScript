@@ -22,7 +22,15 @@ FETCHCONTENT_DECLARE(
 
 FETCHCONTENT_MAKEAVAILABLE(SFML)
 
-add_executable(WeeklyScript main.cpp)
+add_executable(WeeklyScript main.cpp
+        ReplayParser.cpp
+        ReplayParser.h
+        setget.cpp
+        setget.h
+        action.cpp
+        action.h
+        step.cpp
+        step.h)
 TARGET_LINK_LIBRARIES(WeeklyScript fmt)
 target_link_libraries(WeeklyScript sfml-graphics)
 
