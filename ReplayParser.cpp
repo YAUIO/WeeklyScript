@@ -102,7 +102,7 @@ namespace ReplayParser {
 
     }
 
-    ReplayFormat parseReplay(std::filesystem::path pathD, double pp) {
+    ReplayFormat parseReplay(std::filesystem::path const &pathD, double pp) {
         auto s = pathD.generic_string();
         s.append("/");
         s.append(std::to_string(pp));
@@ -194,7 +194,7 @@ namespace ReplayParser {
         return replay_data;
     }
 
-    ReplayFormat parseReplayOpt(std::filesystem::path pathD, std::string name) {
+    ReplayFormat parseReplayOpt(std::filesystem::path const &pathD, std::string const &name) {
         auto s = pathD.generic_string().append("/").append(name);
 
         ReplayFormat replay_data;

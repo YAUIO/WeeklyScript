@@ -23,31 +23,31 @@ void LeftDown();
 
 void MouseScroll(double RY);
 
-void openLink(std::string link);
+void openLink(std::string const &link);
 
 void openProgram(std::string app);
 
-void openExplorer(std::string pathToFoler);
+void openExplorer(std::string const &pathToFoler);
 
-std::string getKeyCode(std::string keyI, std::vector<InputTable> table);
+std::string getKeyCode(std::string const &keyI, std::vector<InputTable> const &table);
 
 void SetCursorPosExplorer(int x, int y);
 
 void SetClickExplorer(int x, int y);
 
-void pressTwoKeys(std::string s, std::string s1, std::vector<InputTable> InputTableV);
+void pressTwoKeys(std::string s, std::string s1, std::vector<InputTable> const &InputTableV);
 
-void pressKey(std::string s, std::vector<InputTable> InputTableV);
+void pressKey(std::string s, std::vector<InputTable> const &InputTableV);
 
-void typeInStringPP(std::string s, std::vector<InputTable> InputTableV);
+void typeInStringPP(std::string s, std::vector<InputTable> const &InputTableV);
 
 void ExplorerFocusTextField();
 
 std::vector<std::string> sortOBC(std::vector<std::string> v);
 
-void moveMaps(std::filesystem::path pathD, std::filesystem::path pathOsuSongs, int removeMode);
+void moveMaps(std::filesystem::path const &pathD, std::filesystem::path const &pathOsuSongs, int const &removeMode);
 
-void removeAllFilesInFolder(std::filesystem::path folder);
+void removeAllFilesInFolder(std::filesystem::path const &folder);
 
 std::vector<std::string> loadCfg();
 

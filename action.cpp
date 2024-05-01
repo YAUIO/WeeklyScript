@@ -45,7 +45,7 @@ void MouseScroll(double RY) {
     ::SendInput(1, &Input, sizeof(INPUT));
 }
 
-void openLink(std::string link) {
+void openLink(std::string const &link) {
     int t = 0;
     char *linkChar = new char[link.length() + 1];
     //std::copy(link.begin(), link.end(), linkChar);
@@ -73,7 +73,7 @@ void openProgram(std::string app) {
     ShellExecute(NULL, "open", pathChar, NULL, NULL, SW_SHOWDEFAULT);
 }
 
-void openExplorer(std::string pathToFoler) {
+void openExplorer(std::string const &pathToFoler) {
     using namespace std::chrono_literals;
     int h = 0;
     char *pathFChar = new char[pathToFoler.length() + 1];
@@ -94,7 +94,7 @@ void openExplorer(std::string pathToFoler) {
     }
 }
 
-std::string getKeyCode(std::string keyI, std::vector<InputTable> table) {
+std::string getKeyCode(std::string const &keyI, std::vector<InputTable> const &table) {
     int i = 0;
     while (i < table.size()) {
         if (table[i].key == keyI) {
@@ -126,7 +126,7 @@ void SetClickExplorer(int x, int y) {
     std::this_thread::sleep_for(50ms);
 }
 
-void pressTwoKeys(std::string s, std::string s1, std::vector<InputTable> InputTableV) {
+void pressTwoKeys(std::string s, std::string s1, std::vector<InputTable> const &InputTableV) {
     s = getKeyCode(s, InputTableV);
     s1 = getKeyCode(s1, InputTableV);
     INPUT ip;
@@ -156,7 +156,7 @@ void pressTwoKeys(std::string s, std::string s1, std::vector<InputTable> InputTa
     SendInput(1, &ip, sizeof(INPUT));
 }
 
-void pressKey(std::string s, std::vector<InputTable> InputTableV) {
+void pressKey(std::string s, std::vector<InputTable> const &InputTableV) {
     s = getKeyCode(s, InputTableV);
     INPUT ip;
     ip.type = INPUT_KEYBOARD;
@@ -175,7 +175,7 @@ void pressKey(std::string s, std::vector<InputTable> InputTableV) {
     SendInput(1, &ip, sizeof(INPUT));
 }
 
-void typeInStringPP(std::string s, std::vector<InputTable> InputTableV) {
+void typeInStringPP(std::string s, std::vector<InputTable> const &InputTableV) {
     using namespace std::chrono_literals;
     int i = 0;
     auto c = std::string();
@@ -216,7 +216,7 @@ std::vector<std::string> sortOBC(std::vector<std::string> v) {
     return v;
 }
 
-void moveMaps(std::filesystem::path pathD, std::filesystem::path pathOsuSongs, int removeMode) {
+void moveMaps(std::filesystem::path const &pathD, std::filesystem::path const &pathOsuSongs, int const &removeMode) {
     namespace fs = std::filesystem;
     auto maps = std::vector<std::string>();
     int i = 0;
@@ -230,13 +230,13 @@ void moveMaps(std::filesystem::path pathD, std::filesystem::path pathOsuSongs, i
 
     while (i < maps.size()) {
         ii = maps[i].size();
-        while (ii>0){
-            if(maps[i][ii] == '/'){
+        while (ii > 0) {
+            if (maps[i][ii] == '/') {
                 break;
             }
             ii--;
         }
-        fmt::println("{}",pathOsuSongs.generic_string().append(maps[i].substr(ii)));
+        fmt::println("{}", pathOsuSongs.generic_string().append(maps[i].substr(ii)));
         fs::copy_file(maps[i], pathOsuSongs.generic_string().append(maps[i].substr(ii)));
         if (removeMode == 1) {
             fs::remove(maps[i]);
@@ -245,7 +245,7 @@ void moveMaps(std::filesystem::path pathD, std::filesystem::path pathOsuSongs, i
     }
 }
 
-void removeAllFilesInFolder(std::filesystem::path folder) {
+void removeAllFilesInFolder(std::filesystem::path const &folder) {
     auto fileToRemove = std::vector<std::string>();
     namespace fs = std::filesystem;
     for (const auto &entry: fs::directory_iterator(folder)) {
@@ -317,4 +317,4 @@ std::vector<InputTable> ParseInputTable() {
         i++;
     }
     return vector;
-};
+}

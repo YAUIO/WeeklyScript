@@ -1,13 +1,17 @@
 #include "step.h"
 
-bool downloadData(std::vector<Score> weeklyScores, std::vector<InputTable> InputTableV, int cycle, int mode,
-                  std::filesystem::path pathD) {
+bool
+downloadData(std::vector<Score> &weeklyScores, std::vector<InputTable> const &InputTableV, int cycle, int mode,
+             std::filesystem::path const &pathD) {
     int i = 0;
     int ii = 0;
     bool foundReplay = false;
     using namespace std::chrono_literals;
+    namespace fs = std::filesystem;
+    std::vector<std::string> pathM;
+    std::string currentLink;
 
-    while(i == 0) {
+    while (i == 0) {
         HWND window = FindWindow(NULL, "Google Chrome");
         if (window) {
             SetForegroundWindow(window);
@@ -29,26 +33,8 @@ bool downloadData(std::vector<Score> weeklyScores, std::vector<InputTable> Input
     pressKey("F11", InputTableV);
     pressTwoKeys("CTRL", "W", InputTableV);
     while (i < cycle) {
-        if (mode == 0 || mode == 2) {
-            openLink(weeklyScores[i].scoreLink);
-            SetCursorPos(1284, 440); //Replay download
-            std::this_thread::sleep_for(2s);
-            LeftClick();
-            std::this_thread::sleep_for(1s);
-        }
-        if (mode == 1 || mode == 2) { //Map download
-            SetCursorPos(513, 168);
-            std::this_thread::sleep_for(10ms);
-            LeftClick();
-            std::this_thread::sleep_for(2s);
-            SetCursorPos(606, 522);
-            std::this_thread::sleep_for(10ms);
-            LeftClick();
-            std::this_thread::sleep_for(2s);
-        }
-        pressTwoKeys("CTRL", "W", InputTableV);
-        namespace fs = std::filesystem;
-        auto pathM = std::vector<std::string>{};
+
+        pathM = std::vector<std::string>{};
         for (const auto &entry: fs::directory_iterator(pathD)) {
             pathM.push_back(entry.path().generic_string());
         }
@@ -60,14 +46,56 @@ bool downloadData(std::vector<Score> weeklyScores, std::vector<InputTable> Input
             }
             ii++;
         }
-        std::string currentLink = weeklyScores[i].scoreLink.substr(ii, weeklyScores[i].scoreLink.size());
+        currentLink = weeklyScores[i].scoreLink.substr(ii, weeklyScores[i].scoreLink.size());
         for (const auto &str: pathM) {
             if (std::regex_match(str, std::regex(".*" + currentLink + ".*"))) {
                 foundReplay = true;
             }
         }
+
         if (foundReplay) {
             i++;
+        } else {
+            if (mode == 0 || mode == 2) {
+                openLink(weeklyScores[i].scoreLink);
+                SetCursorPos(1284, 448); //Replay download
+                std::this_thread::sleep_for(2s);
+                LeftClick();
+                std::this_thread::sleep_for(1s);
+            }
+            if (mode == 1 || mode == 2) { //Map download
+                SetCursorPos(513, 168);
+                std::this_thread::sleep_for(10ms);
+                LeftClick();
+                std::this_thread::sleep_for(2s);
+                SetCursorPos(606, 522);
+                std::this_thread::sleep_for(10ms);
+                LeftClick();
+                std::this_thread::sleep_for(2s);
+            }
+            pressTwoKeys("CTRL", "W", InputTableV);
+
+            pathM = std::vector<std::string>{};
+            for (const auto &entry: fs::directory_iterator(pathD)) {
+                pathM.push_back(entry.path().generic_string());
+            }
+            ii = 0;
+            foundReplay = false;
+            while (ii < weeklyScores[i].scoreLink.size()) {
+                if (weeklyScores[i].scoreLink[ii] >= '0' && weeklyScores[i].scoreLink[ii] <= '9') {
+                    break;
+                }
+                ii++;
+            }
+            currentLink = weeklyScores[i].scoreLink.substr(ii, weeklyScores[i].scoreLink.size());
+            for (const auto &str: pathM) {
+                if (std::regex_match(str, std::regex(".*" + currentLink + ".*"))) {
+                    foundReplay = true;
+                }
+            }
+            if (foundReplay) {
+                i++;
+            }
         }
     }
     pressKey("F11", InputTableV);
@@ -77,10 +105,12 @@ bool downloadData(std::vector<Score> weeklyScores, std::vector<InputTable> Input
     return true;
 }
 
-bool renderReplays(std::vector<Score> weeklyScores, int qScores, std::vector<InputTable> InputTableV,
-                   std::filesystem::path pathD, std::filesystem::path pathConf, std::filesystem::path pathV,
+bool renderReplays(std::vector<Score> &weeklyScores, int qScores, std::vector<InputTable> const &InputTableV,
+                   std::filesystem::path const &pathD, std::filesystem::path const &pathConf,
+                   std::filesystem::path const &pathV,
                    int removeMode) {
     using namespace std::chrono_literals;
+    namespace fs = std::filesystem;
     bool isBegChecked;
     bool rendered;
     bool retry = false;
@@ -92,188 +122,204 @@ bool renderReplays(std::vector<Score> weeklyScores, int qScores, std::vector<Inp
     //fmt::println("{}",pathD.generic_string().append("/").append(std::to_string(score.pp).append(".osr")));
 
     while (i < qScores) {
-        //Starting to configure recording
-        SetClickDanser(745, 423); //select replay
-        std::this_thread::sleep_for(40ms);
-        ExplorerFocusTextField();
-        typeInStringPP(std::to_string(weeklyScores[i].pp).append(".OSR"), InputTableV);
-        SetClickExplorer(136, 36);
 
-        std::this_thread::sleep_for(80ms);
-        SetClickDanser(542, 40); //configure
-        std::this_thread::sleep_for(40ms);
-        SetClickDanser(388, 262); //focus text field
-        std::this_thread::sleep_for(200ms);
-        pressTwoKeys("CTRL", "A", InputTableV);
-        pressKey("DEL", InputTableV);
-        typeInStringPP(std::to_string(weeklyScores[i].pp), InputTableV);
-        SetClickDanser(410, 194); //escape configure
+        for (const auto &entry: fs::directory_iterator(pathV)) {
+            if (std::regex_match(entry.path().generic_string(),
+                                 std::regex(".*" + std::to_string(weeklyScores[i].pp) + "\\.mp4"))) {
+                rendered = true;
+                break;
+            }
+        }
 
-        rendered = false;
-        length = ReplayParser::parseReplay(pathD, weeklyScores[i].pp).m_iLenCompressedReplay;
-        mods = ReplayParser::parseReplay(pathD, weeklyScores[i].pp).m_iMods;
-        length = getLength(length);
-        std::this_thread::sleep_for(40ms);
+        if (rendered) {
+            rendered = false;
+            i++;
 
-        if (length <= 40) {
-            if (!isBegChecked) {
-                fmt::println("Rendering full replay (length<=40s), {}s", length);
-                SetClickDanser(690, 166); //time/offset menu
+        } else {
+
+            //Starting to configure recording
+            SetClickDanser(745, 423); //select replay
+            std::this_thread::sleep_for(40ms);
+            ExplorerFocusTextField();
+            typeInStringPP(std::to_string(weeklyScores[i].pp).append(".OSR"), InputTableV);
+            SetClickExplorer(136, 36);
+
+            std::this_thread::sleep_for(80ms);
+            SetClickDanser(542, 40); //configure
+            std::this_thread::sleep_for(40ms);
+            SetClickDanser(388, 262); //focus text field
+            std::this_thread::sleep_for(200ms);
+            pressTwoKeys("CTRL", "A", InputTableV);
+            pressKey("DEL", InputTableV);
+            typeInStringPP(std::to_string(weeklyScores[i].pp), InputTableV);
+            SetClickDanser(410, 194); //escape configure
+
+            rendered = false;
+            length = ReplayParser::parseReplay(pathD, weeklyScores[i].pp).m_iLenCompressedReplay;
+            mods = ReplayParser::parseReplay(pathD, weeklyScores[i].pp).m_iMods;
+            length = getLength(length);
+            std::this_thread::sleep_for(40ms);
+
+            if (length <= 40) {
+                if (!isBegChecked) {
+                    fmt::println("Rendering full replay (length<=40s), {}s", length);
+                    SetClickDanser(690, 166); //time/offset menu
+                    std::this_thread::sleep_for(80ms);
+                    SetClickDanser(582, 388); //check skip map beginning
+                    std::this_thread::sleep_for(80ms);
+                    SetClickDanser(590, 330); //full start time
+                    std::this_thread::sleep_for(80ms);
+                    SetClickDanser(214, 276); //full end time
+                    std::this_thread::sleep_for(80ms);
+                    SetClickDanser(422, 440); //exit menu
+                }
+            } else {
+
+                multiplier = getMultiplier(i, qScores);
+                int fullX = 382;
+                fmt::println("Getting strain graph");
+                int foundSpike = GetStrainDanser(length);
+                int firstPart;
+                lastPart = getLastPart(foundSpike, length, mods, multiplier);
+
                 std::this_thread::sleep_for(80ms);
-                SetClickDanser(582, 388); //check skip map beginning
-                std::this_thread::sleep_for(80ms);
-                SetClickDanser(590, 330); //full start time
-                std::this_thread::sleep_for(80ms);
-                SetClickDanser(214, 276); //full end time
+                if (foundSpike < 294) {
+                    firstPart = (lastPart - ((foundSpike - 212) / fullX)) * fullX;
+                    SetClickDanser(foundSpike + firstPart, 328); //start time
+                    fmt::println("Starting x: {}, Found Spike: {}", foundSpike + firstPart, foundSpike);
+                    std::this_thread::sleep_for(100ms);
+                    SetClickDanser(214, 276); //full end time
+                } else {
+                    int startx = foundSpike + ((foundSpike - 212) * (lastPart / 1.5));
+                    int endx = foundSpike - ((fullX + 212 - foundSpike) * (lastPart / 1.5));
+                    SetClickDanser(startx, 328);//start time
+                    std::this_thread::sleep_for(80ms);
+                    if (endx < 224 && length < 120) { endx = 214; }
+                    SetClickDanser(endx, 278);//end time
+                    fmt::println("Found Spike: {}, Starting x: {}, Ending x: {}", foundSpike, startx, endx);
+                }
                 std::this_thread::sleep_for(80ms);
                 SetClickDanser(422, 440); //exit menu
             }
-        } else {
+            //fmt::println("length {}\nmultiplier {}\nqScores {}\ni {}\nlastPart {}",length,multiplier,qScores,i,lastPart);
 
-            multiplier = getMultiplier(i,qScores);
-            int fullX = 382;
-            fmt::println("Getting strain graph");
-            int foundSpike = GetStrainDanser(length);
-            int firstPart;
-            lastPart = getLastPart(foundSpike,length,mods,multiplier);
-
-            std::this_thread::sleep_for(80ms);
-            if (foundSpike < 294 && length < 300) {
-                firstPart = (lastPart-((foundSpike-212)/fullX)) * fullX;
-                SetClickDanser(foundSpike + firstPart, 328); //start time
-                fmt::println("Starting x: {}, Found Spike: {}", foundSpike + firstPart, foundSpike);
-                std::this_thread::sleep_for(100ms);
-                SetClickDanser(214, 276); //full end time
-            } else {
-                int startx = foundSpike + ((foundSpike - 212) * (lastPart / 1.5));
-                int endx = foundSpike - ((fullX + 212 - foundSpike) * (lastPart / 1.5));
-                SetClickDanser(startx, 328);//start time
-                std::this_thread::sleep_for(80ms);
-                if(endx < 224 && length < 120){endx = 214;}
-                SetClickDanser(endx, 278);//end time
-                fmt::println("Found Spike: {}, Starting x: {}, Ending x: {}", foundSpike, startx, endx);
+            //Config selection
+            auto configs = getOBCConfNames(pathConf); //configs
+            configs = sortOBC(configs);
+            auto configPath = std::string();
+            int configNumber = 0;
+            for (const auto &entry: configs) {
+                if (std::regex_match(configs[configNumber], std::regex(".*obc!" + weeklyScores[i].username + ".*"))) {
+                    configPath = entry;
+                    break;
+                }
+                configPath = "NoConf";
+                configNumber++;
             }
-            std::this_thread::sleep_for(80ms);
-            SetClickDanser(422, 440); //exit menu
-        }
-        //fmt::println("length {}\nmultiplier {}\nqScores {}\ni {}\nlastPart {}",length,multiplier,qScores,i,lastPart);
-
-        //Config selection
-        auto configs = getOBCConfNames(pathConf); //configs
-        configs = sortOBC(configs);
-        auto configPath = std::string();
-        namespace fs = std::filesystem;
-        int configNumber = 0;
-        for (const auto &entry: configs) {
-            if (std::regex_match(configs[configNumber], std::regex(".*obc!" + weeklyScores[i].username + ".*"))) {
-                configPath = entry;
-                break;
-            }
-            configPath = "NoConf";
+            //fmt::println("{} {}", configPath, configNumber);
+            SetClickDanser(238, 466); //enter config menu
+            SetCursorPosDanser(246, 366); //hover over first cfg
             configNumber++;
-        }
-        //fmt::println("{} {}", configPath, configNumber);
-        SetClickDanser(238, 466); //enter config menu
-        SetCursorPosDanser(246, 366); //hover over first cfg
-        configNumber++;
-        if (configPath == "NoConf") {
-            configNumber = 1;
-        }
-        if (configNumber <= configs.size() - 7) {
-            std::this_thread::sleep_for(40ms);
-            MouseScroll(20);
-            std::this_thread::sleep_for(80ms);
-            MouseScroll(-0.18 * configNumber);
-            std::this_thread::sleep_for(80ms);
-            LeftClick();
-            std::this_thread::sleep_for(80ms);
-        } else {
-            std::this_thread::sleep_for(40ms);
-            MouseScroll(20);
-            std::this_thread::sleep_for(80ms);
-            MouseScroll(-0.18 * configNumber);
-            std::this_thread::sleep_for(80ms);
-            fmt::println("config number: {}", configNumber);
-            int y = 0;
-            switch (configs.size() - configNumber) {
-                case 0: {
-                    y = 170;
-                    break;
-                }
-                case 1: {
-                    y = 200;
-                    break;
-                }
-                case 2: {
-                    y = 225;
-                    break;
-                }
-                case 3: {
-                    y = 250;
-                    break;
-                }
-                case 4: {
-                    y = 281;
-                    break;
-                }
-                case 5: {
-                    y = 310;
-                    break;
-                }
-                case 6: {
-                    y = 336;
-                    break;
-                }
-                case 7: {
-                    y = 368;
-                    break;
-                }
-                default: {
-                    MouseScroll(20);
-                    y = 366;
-                }
+            if (configPath == "NoConf") {
+                configNumber = 1;
             }
-            SetClickDanser(246, y);
+            if (configNumber <= configs.size() - 7) {
+                std::this_thread::sleep_for(40ms);
+                MouseScroll(20);
+                std::this_thread::sleep_for(80ms);
+                MouseScroll(-0.18 * configNumber);
+                std::this_thread::sleep_for(80ms);
+                LeftClick();
+                std::this_thread::sleep_for(80ms);
+            } else {
+                std::this_thread::sleep_for(40ms);
+                MouseScroll(20);
+                std::this_thread::sleep_for(80ms);
+                MouseScroll(-0.18 * configNumber);
+                std::this_thread::sleep_for(80ms);
+                fmt::println("config number: {}", configNumber);
+                int y = 0;
+                switch (configs.size() - configNumber) {
+                    case 0: {
+                        y = 170;
+                        break;
+                    }
+                    case 1: {
+                        y = 200;
+                        break;
+                    }
+                    case 2: {
+                        y = 225;
+                        break;
+                    }
+                    case 3: {
+                        y = 250;
+                        break;
+                    }
+                    case 4: {
+                        y = 281;
+                        break;
+                    }
+                    case 5: {
+                        y = 310;
+                        break;
+                    }
+                    case 6: {
+                        y = 336;
+                        break;
+                    }
+                    case 7: {
+                        y = 368;
+                        break;
+                    }
+                    default: {
+                        MouseScroll(20);
+                        y = 366;
+                    }
+                }
+                SetClickDanser(246, y);
+                std::this_thread::sleep_for(80ms);
+            }
+            SetClickDanser(422, 440); //exit menu
             std::this_thread::sleep_for(80ms);
-        }
-        SetClickDanser(422, 440); //exit menu
-        std::this_thread::sleep_for(80ms);
 
-        //Render
-        SetClickDanser(182, 58); //render
-        while (!rendered) {
-            std::this_thread::sleep_for(4s);
-            for (const auto &entry: fs::directory_iterator(pathV)) {
-                if (std::regex_match(entry.path().generic_string(),
-                                     std::regex(".*" + std::to_string(weeklyScores[i].pp) + "\\.mp4"))) {
-                    rendered = true;
+            //Render
+            SetClickDanser(182, 58); //render
+            while (!rendered) {
+                std::this_thread::sleep_for(4s);
+                for (const auto &entry: fs::directory_iterator(pathV)) {
+                    if (std::regex_match(entry.path().generic_string(),
+                                         std::regex(".*" + std::to_string(weeklyScores[i].pp) + "\\.mp4"))) {
+                        rendered = true;
+                        break;
+                    }
+                }
+                HWND window = FindWindow(NULL, "danser-go 0.9.1 launcher");
+                if (!window) {
+                    retry = true;
                     break;
                 }
             }
-            HWND window = FindWindow(NULL, "danser-go 0.9.1 launcher");
-            if (!window) {
-                retry = true;
-                break;
-            }
-        }
 
-        if (!retry) {
-            if (removeMode == 1) {
-                std::filesystem::remove(
-                        pathD.generic_string().append("/").append(
-                                std::to_string(weeklyScores[i].pp).append(".osr")));
+            if (!retry) {
+                if (removeMode == 1) {
+                    std::filesystem::remove(
+                            pathD.generic_string().append("/").append(
+                                    std::to_string(weeklyScores[i].pp).append(".osr")));
+                }
+                i++;
+            } else if (retry) {
+                setProperDancerState(1);
+                retry = false;
             }
-            i++;
-        }else if (retry){
-            setProperDancerState(1);
-            retry = false;
         }
     }
     return true;
 }
 
-bool renderReplaysOpt(std::vector<InputTable> InputTableV,
-                      std::filesystem::path pathD, std::filesystem::path pathConf, std::filesystem::path pathV,
+bool renderReplaysOpt(std::vector<InputTable> const &InputTableV,
+                      std::filesystem::path &pathD, std::filesystem::path const &pathConf,
+                      std::filesystem::path const &pathV,
                       int removeMode) {
     using namespace std::chrono_literals;
     bool isBegChecked;
@@ -299,22 +345,22 @@ bool renderReplaysOpt(std::vector<InputTable> InputTableV,
     }
 
     while (i < pathM.size()) {
-        ii = pathM[i].size()-1;
-        while (ii>0){
-            if(pathM[i][ii]=='/'){
+        ii = pathM[i].size() - 1;
+        while (ii > 0) {
+            if (pathM[i][ii] == '/') {
                 break;
             }
             ii--;
         }
-        fmt::println("{} {}",osrName,pathM[i].substr(ii+1,pathM[i].size()-1));
-        osrName = pathM[i].substr(ii+1,pathM[i].size()-1);
+        fmt::println("{} {}", osrName, pathM[i].substr(ii + 1, pathM[i].size() - 1));
+        osrName = pathM[i].substr(ii + 1, pathM[i].size() - 1);
 
-        pp = std::stod(osrName.substr(0,osrName.size()-4));
-        fmt::println("Current replay's pp {}",pp);
+        pp = std::stod(osrName.substr(0, osrName.size() - 4));
+        fmt::println("Current replay's pp {}", pp);
         //Starting to configure recording
         SetClickDanser(745, 423); //select replay
         std::this_thread::sleep_for(40ms);
-        SetCursorPosExplorer(740,420);
+        SetCursorPosExplorer(740, 420);
         LeftClick();
         LeftClick();
         std::this_thread::sleep_for(40ms);
@@ -354,16 +400,16 @@ bool renderReplaysOpt(std::vector<InputTable> InputTableV,
             }
         } else {
 
-            multiplier = getMultiplier(i,pathM.size());
+            multiplier = getMultiplier(i, pathM.size());
             int fullX = 382;
             fmt::println("Getting strain graph");
             int foundSpike = GetStrainDanser(length);
             int firstPart;
-            lastPart = getLastPart(foundSpike,length,mods,multiplier);
+            lastPart = getLastPart(foundSpike, length, mods, multiplier);
 
             std::this_thread::sleep_for(80ms);
             if (foundSpike < 294 && length < 300) {
-                firstPart = (lastPart-((foundSpike-212)/fullX)) * fullX;
+                firstPart = (lastPart - ((foundSpike - 212) / fullX)) * fullX;
                 SetClickDanser(foundSpike + firstPart, 328); //start time
                 fmt::println("Starting x: {}, Found Spike: {}", foundSpike + firstPart, foundSpike);
                 std::this_thread::sleep_for(100ms);
@@ -489,7 +535,7 @@ bool renderReplaysOpt(std::vector<InputTable> InputTableV,
                                 std::to_string(pp).append(".osr")));
             }
             i++;
-        }else if (retry){
+        } else if (retry) {
             setProperDancerState(1);
             retry = false;
         }
@@ -497,7 +543,7 @@ bool renderReplaysOpt(std::vector<InputTable> InputTableV,
     return true;
 }
 
-std::vector<Score> parseScores(std::filesystem::path path) {
+std::vector<Score> parseScores(std::filesystem::path const &path) {
     namespace fs = std::filesystem;
     auto file = std::fstream(path);
     auto line = std::string();
@@ -583,7 +629,7 @@ void printScoresVector(std::vector<Score> v) {
     }
 }
 
-bool renameFiles(std::vector<Score> vector, int qScores, std::filesystem::path path) {
+bool renameFiles(std::vector<Score> &vector, int qScores, std::filesystem::path const &path) {
     int i = 0;
     namespace fs = std::filesystem;
     std::string pathM[vector.size() * 2 + 1];
@@ -635,7 +681,7 @@ bool renameFiles(std::vector<Score> vector, int qScores, std::filesystem::path p
     return true;
 }
 
-std::vector<Score> sortScores(std::vector<Score> v) {
+std::vector<Score> sortScores(std::vector<Score> &v) {
     auto weeklyScores = std::vector<Score>();
     int i = 0;
     while (i < v.size()) {
@@ -654,8 +700,9 @@ std::vector<Score> sortScores(std::vector<Score> v) {
     return weeklyScores;
 }
 
-void makePremiereProject(int qReplays, std::vector<InputTable> InputTableV, std::filesystem::path pathProject,
-                         std::filesystem::path pathV, std::vector<Score> inpVec) {
+void
+makePremiereProject(int qReplays, std::vector<InputTable> const &InputTableV, std::filesystem::path const &pathProject,
+                    std::filesystem::path const &pathV, std::vector<Score> &inpVec) {
     namespace fs = std::filesystem;
     using namespace std::chrono_literals;
     int premR = 0;

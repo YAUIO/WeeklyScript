@@ -19,15 +19,15 @@ std::vector<int> GetColorDanser(int x, int y);
 
 int GetStrainDanser(long long length);
 
-std::vector<std::string> getOBCConfNames(std::filesystem::path path);
+std::vector<std::string> getOBCConfNames(std::filesystem::path const &path);
 
 void setProperDancerState(int mode);
 
-long long getLength (long long length);
+long long getLength(long long length);
 
-long long getLengthOpt (long long length);
+long long getLengthOpt(long long length);
 
-double getMultiplier (int i, int qScores);
+double getMultiplier(int i, int qScores);
 
 double getLastPart(int foundSpike, long long length, int mods, double multiplier);
 

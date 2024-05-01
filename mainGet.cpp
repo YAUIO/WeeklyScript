@@ -40,12 +40,12 @@ void SetCursorPosExplorer(int x, int y) {
 }
 
 auto main() -> int {
-    /*using namespace std::chrono_literals;
+    using namespace std::chrono_literals;
     POINT p;
     while (GetCursorPos(&p)) {
         std::this_thread::sleep_for(1s);
         std::cout << p.x << " " << p.y << "\n";
-    }*/
+    }
 
     //SetCursorPosDanser(215,268);
     SetCursorPosExplorer(840,320);

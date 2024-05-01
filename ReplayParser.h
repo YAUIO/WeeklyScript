@@ -11,28 +11,28 @@
 #include <filesystem>
 #include <fmt/core.h>
 
-namespace ReplayParser{
+namespace ReplayParser {
     struct ReplayFormat {
-            unsigned char m_chGameMode = 0;
-            int m_iGameVersion = 0;
-            std::string m_strMapMD5Hash;
-            std::string m_strPlayerName;
-            std::string m_strReplayHash;
-            short m_sh300;
-            short m_sh100;
-            short m_sh50;
-            short m_shGekis;
-            short m_shKatus;
-            short m_shMisses;
-            int m_iTotalScore;
-            short m_shHighestCombo;
-            unsigned char m_chFC;
-            int m_iMods;
-            std::string m_strLifeBar;
-            long long m_lTimeStamp;
-            int m_iLenCompressedReplay;
-            std::vector<unsigned char> compressed_data;
-            long long unknown;
+        unsigned char m_chGameMode = 0;
+        int m_iGameVersion = 0;
+        std::string m_strMapMD5Hash;
+        std::string m_strPlayerName;
+        std::string m_strReplayHash;
+        short m_sh300;
+        short m_sh100;
+        short m_sh50;
+        short m_shGekis;
+        short m_shKatus;
+        short m_shMisses;
+        int m_iTotalScore;
+        short m_shHighestCombo;
+        unsigned char m_chFC;
+        int m_iMods;
+        std::string m_strLifeBar;
+        long long m_lTimeStamp;
+        int m_iLenCompressedReplay;
+        std::vector<unsigned char> compressed_data;
+        long long unknown;
     };
     enum Mods {
         None = 0,
@@ -72,6 +72,8 @@ namespace ReplayParser{
         NoFail | Easy | Hidden | HardRock | SuddenDeath | Flashlight | FadeIn | Relax | Relax2 | SpunOut | KeyMod,
         ScoreIncreaseMods = Hidden | HardRock | DoubleTime | Flashlight | FadeIn
     };
-    ReplayFormat parseReplay(std::filesystem::path pathD, double pp);
-    ReplayFormat parseReplayOpt(std::filesystem::path pathD, std::string name);
+
+    ReplayFormat parseReplay(std::filesystem::path const &pathD, double pp);
+
+    ReplayFormat parseReplayOpt(std::filesystem::path const &pathD, std::string const &name);
 }

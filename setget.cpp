@@ -122,7 +122,7 @@ int GetStrainDanser(long long length) {
     return xf;
 }
 
-std::vector<std::string> getOBCConfNames(std::filesystem::path path) {
+std::vector<std::string> getOBCConfNames(std::filesystem::path const &path) {
     auto pathM = std::vector<std::string>();
     namespace fs = std::filesystem;
     for (const auto &entry: fs::directory_iterator(path)) {
@@ -140,10 +140,10 @@ void setProperDancerState(int mode) {
         openProgram("danser");
         fmt::println("Waiting for danser to load properly...");
         auto color = std::vector<int>(3);
-        while (mode == 1){
-            color = GetColorDanser(178,408);
+        while (mode == 1) {
+            color = GetColorDanser(178, 408);
             std::this_thread::sleep_for(2s);
-            if(color[0] == 255 && color[1] == 255 && color[2] == 255){
+            if (color[0] == 255 && color[1] == 255 && color[2] == 255) {
                 break;
             }
         }
@@ -156,31 +156,31 @@ void setProperDancerState(int mode) {
     SetClickDanser(753, 95); //record
 }
 
-long long getLength (long long length){
+long long getLength(long long length) {
     length = length / 440; //get approximate length in seconds
-    if (length<0){
+    if (length < 0) {
         length = 120;
     }
-    fmt::println("Length is {}s",length);
+    fmt::println("Length is {}s", length);
     return length;
 }
 
-long long getLengthOpt (long long length){
+long long getLengthOpt(long long length) {
     length = getLength(length);
 
-    if(length>4000){
+    if (length > 4000) {
         length = length / 33409;
     }
 
-    if (length<0){
+    if (length < 0) {
         length = 120;
     }
 
-    fmt::println("Length is {}s",length);
+    fmt::println("Length is {}s", length);
     return length;
 }
 
-double getMultiplier (int i, int qScores){
+double getMultiplier(int i, int qScores) {
     double multiplier;
     if (i != 0) { multiplier = double(i) / (double(qScores) * double(qScores)); }
     else {
@@ -190,7 +190,7 @@ double getMultiplier (int i, int qScores){
     return multiplier;
 }
 
-double getLastPart(int foundSpike, long long length, int mods, double multiplier){
+double getLastPart(int foundSpike, long long length, int mods, double multiplier) {
     double lastPart;
     if (length < 100) {
         lastPart = (28.0 + ((double(length) / 4) * multiplier)) / length;
@@ -204,19 +204,19 @@ double getLastPart(int foundSpike, long long length, int mods, double multiplier
         lastPart = lastPart * 4;
         length = length / 1.5;
         fmt::println("\n\nIt is, indeed, a gigachad DoubleTime score.");
-        if(foundSpike < 294 && length < 300){
-            lastPart = lastPart/2;
+        if (foundSpike < 294 && length < 300) {
+            lastPart = lastPart / 2;
         }
     }
 
-    if(length*lastPart<40){
-        lastPart = 40.00/length;
-    }else if(length*lastPart>90){
-        lastPart = 90.00/length;
+    if (length * lastPart < 40) {
+        lastPart = 40.00 / length;
+    } else if (length * lastPart > 90) {
+        lastPart = 90.00 / length;
     }
 
     if (lastPart > 1) { lastPart = 1; }
-    fmt::println("\n lastPart is {}",lastPart);
+    fmt::println("\n lastPart is {}", lastPart);
 
     return lastPart;
 }
@@ -224,6 +224,9 @@ double getLastPart(int foundSpike, long long length, int mods, double multiplier
 bool isMods(std::string arg) {
     int i = 0;
     if (arg.size() > 6) {
+        return false;
+    }
+    if (arg.size() % 2 != 0) {
         return false;
     }
     while (i < arg.size()) {
