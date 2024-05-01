@@ -123,6 +123,8 @@ bool renderReplays(std::vector<Score> &weeklyScores, int qScores, std::vector<In
 
     while (i < qScores) {
 
+        rendered = false;
+
         for (const auto &entry: fs::directory_iterator(pathV)) {
             if (std::regex_match(entry.path().generic_string(),
                                  std::regex(".*" + std::to_string(weeklyScores[i].pp) + "\\.mp4"))) {
@@ -132,9 +134,7 @@ bool renderReplays(std::vector<Score> &weeklyScores, int qScores, std::vector<In
         }
 
         if (rendered) {
-            rendered = false;
             i++;
-
         } else {
 
             //Starting to configure recording
