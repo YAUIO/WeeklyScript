@@ -408,7 +408,7 @@ bool renderReplaysOpt(std::vector<InputTable> const &InputTableV,
             lastPart = getLastPart(foundSpike, length, mods, multiplier);
 
             std::this_thread::sleep_for(80ms);
-            if (foundSpike < 294 && length < 300) {
+            if (foundSpike < 294) {
                 firstPart = (lastPart - ((foundSpike - 212) / fullX)) * fullX;
                 SetClickDanser(foundSpike + firstPart, 328); //start time
                 fmt::println("Starting x: {}, Found Spike: {}", foundSpike + firstPart, foundSpike);

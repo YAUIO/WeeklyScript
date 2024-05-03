@@ -209,10 +209,10 @@ double getLastPart(int foundSpike, long long length, int mods, double multiplier
         }
     }
 
-    if (length * lastPart < 40) {
+    if (length * lastPart < 40 && length != 120) {
         lastPart = 40.00 / length;
-    } else if (length * lastPart > 90) {
-        lastPart = 90.00 / length;
+    } else if (length * lastPart > 70) {
+        lastPart = 70.00 / length;
     }
 
     if (lastPart > 1) { lastPart = 1; }
