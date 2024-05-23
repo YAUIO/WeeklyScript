@@ -123,6 +123,8 @@ bool renderReplays(std::vector<Score> &weeklyScores, int qScores, std::vector<In
 
     while (i < qScores) {
 
+        fmt::println("i is {}",i);
+
         rendered = false;
 
         for (const auto &entry: fs::directory_iterator(pathV)) {
@@ -157,7 +159,8 @@ bool renderReplays(std::vector<Score> &weeklyScores, int qScores, std::vector<In
             rendered = false;
             length = ReplayParser::parseReplay(pathD, weeklyScores[i].pp).m_iLenCompressedReplay;
             mods = ReplayParser::parseReplay(pathD, weeklyScores[i].pp).m_iMods;
-            length = getLength(length);
+            length = getLength(pathD.generic_string().append("/").append(std::to_string(weeklyScores[i].pp)).append(".osr"));
+            fmt::println("{} is length of the replay",length);
             std::this_thread::sleep_for(40ms);
 
             if (length <= 40) {
@@ -359,11 +362,11 @@ bool renderReplaysOpt(std::vector<InputTable> const &InputTableV,
         fmt::println("Current replay's pp {}", pp);
         //Starting to configure recording
         SetClickDanser(745, 423); //select replay
-        std::this_thread::sleep_for(40ms);
+        std::this_thread::sleep_for(100ms);
         SetCursorPosExplorer(740, 420);
         LeftClick();
         LeftClick();
-        std::this_thread::sleep_for(40ms);
+        std::this_thread::sleep_for(100ms);
         ExplorerFocusTextField();
         typeInStringPP(osrName, InputTableV);
         SetClickExplorer(136, 36);
@@ -382,7 +385,7 @@ bool renderReplaysOpt(std::vector<InputTable> const &InputTableV,
         length = ReplayParser::parseReplayOpt(pathD, osrName).m_iLenCompressedReplay;
         mods = ReplayParser::parseReplayOpt(pathD, osrName).m_iMods;
 
-        length = getLengthOpt(length);
+        length = getLength(pathD.generic_string().append("/").append(osrName));
 
         std::this_thread::sleep_for(40ms);
         if (length <= 40) {

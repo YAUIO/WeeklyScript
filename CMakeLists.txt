@@ -2,9 +2,11 @@ cmake_minimum_required(VERSION 3.27)
 project(WeeklyScript)
 set(CMAKE_CXX_STANDARD 20)
 include(FetchContent)
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc")
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++ -static")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++ -static")
 set(BUILD_SHARED_LIBS FALSE)
+
+include_directories(include)
 
 FetchContent_Declare(
         fmt
@@ -30,7 +32,9 @@ add_executable(WeeklyScript main.cpp
         action.cpp
         action.h
         step.cpp
-        step.h)
+        step.h
+        OsrParser.cpp OsuParser.cpp OsUtils.cpp include/LzFindOpt.c include/Threads.c include/CpuArch.c include/LzHash.h include/LzFind.c include/LzFindMt.c include/LzmaLib.c include/Alloc.c include/LzmaDec.c include/LzmaEnc.c)
+
 TARGET_LINK_LIBRARIES(WeeklyScript fmt)
 target_link_libraries(WeeklyScript sfml-graphics)
 

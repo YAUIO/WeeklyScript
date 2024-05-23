@@ -46,16 +46,20 @@ void MouseScroll(double RY) {
 }
 
 void openLink(std::string const &link) {
-    int t = 0;
-    char *linkChar = new char[link.length() + 1];
-    //std::copy(link.begin(), link.end(), linkChar);
-    while (t < link.length()) {
-        linkChar[t] = link[t];
-        //fmt::println("{} == {}",linkChar[t],link[t]);
-        t++;
+    try {
+        int t = 0;
+        char *linkChar = new char[link.length() + 1];
+        //std::copy(link.begin(), link.end(), linkChar);
+        while (t < link.length()) {
+            linkChar[t] = link[t];
+            //fmt::println("{} == {}",linkChar[t],link[t]);
+            t++;
+        }
+        fmt::println("{} == {}", linkChar, link);
+        ShellExecute(NULL, NULL, linkChar, NULL, NULL, SW_SHOWNORMAL);
+    } catch (std::exception &e) {
+
     }
-    fmt::println("{} == {}", linkChar, link);
-    ShellExecute(NULL, NULL, linkChar, NULL, NULL, SW_SHOWNORMAL);
 }
 
 void openProgram(std::string app) {
@@ -68,29 +72,37 @@ void openProgram(std::string app) {
     } else {
         app = "G:\\osu!\\osu!.exe";
     }
-    char *pathChar = new char[app.length() + 1];
-    std::copy(app.begin(), app.end(), pathChar);
-    ShellExecute(NULL, "open", pathChar, NULL, NULL, SW_SHOWDEFAULT);
+    try {
+        char *pathChar = new char[app.length() + 1];
+        std::copy(app.begin(), app.end(), pathChar);
+        ShellExecute(NULL, "open", pathChar, NULL, NULL, SW_SHOWDEFAULT);
+    } catch (std::exception &e) {
+
+    }
 }
 
 void openExplorer(std::string const &pathToFoler) {
     using namespace std::chrono_literals;
     int h = 0;
-    char *pathFChar = new char[pathToFoler.length() + 1];
-    while (h < pathToFoler.length()) {
-        pathFChar[h] = pathToFoler[h];
-        h++;
-    }
-    //fmt::println("{}",pathFChar);
-    ShellExecute(NULL, "explore", pathFChar, 0, 0, SW_MAXIMIZE);
+    try {
+        char *pathFChar = new char[pathToFoler.length() + 1];
+        while (h < pathToFoler.length()) {
+            pathFChar[h] = pathToFoler[h];
+            h++;
+        }
+        //fmt::println("{}",pathFChar);
+        ShellExecute(NULL, "explore", pathFChar, 0, 0, SW_MAXIMIZE);
 
-    fmt::println("Setting focus to explorer");
-    std::this_thread::sleep_for(10ms);
-    HWND window = FindWindow(NULL, "videos");
-    if (window) {
-        SetForegroundWindow(window);
-        SetActiveWindow(window);
-        SetFocus(window);
+        fmt::println("Setting focus to explorer");
+        std::this_thread::sleep_for(10ms);
+        HWND window = FindWindow(NULL, "videos");
+        if (window) {
+            SetForegroundWindow(window);
+            SetActiveWindow(window);
+            SetFocus(window);
+        }
+    } catch (std::exception &e) {
+
     }
 }
 

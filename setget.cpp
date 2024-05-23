@@ -156,17 +156,25 @@ void setProperDancerState(int mode) {
     SetClickDanser(753, 95); //record
 }
 
-long long getLength(long long length) {
+/*long long getLength(long long length) {
     length = length / 440; //get approximate length in seconds
     if (length < 0) {
         length = 120;
     }
     fmt::println("Length is {}s", length);
     return length;
+}*/
+
+long long getLength(std::string pathtosor){
+    std::ifstream file(pathtosor, std::ios::binary);
+    osuParser::OsrParser p (&file);
+    p.Parse();
+    long long length = p.actions[p.actions.size()-1].sinceStart;
+    return length/1000;
 }
 
 long long getLengthOpt(long long length) {
-    length = getLength(length);
+    //length = getLength(length);
 
     if (length > 4000) {
         length = length / 33409;
@@ -234,7 +242,7 @@ bool isMods(std::string arg) {
             return false;
         } else if (arg[i] >= '0' && arg[i] <= '9') {
             return false;
-        } else if (arg[i] == '!' || arg[i] == 'V' || arg[i] == 'A' || arg[i] == 'I' || arg[i] == '"') {
+        } else if (arg[i] == '!' || arg[i] == 'V' || arg[i] == 'A' || arg[i] == 'I' || arg[i] == '"' || arg[i] == 'E') {
             return false;
         } else {
             i++;

@@ -6,6 +6,7 @@
 #include <fmt/core.h>
 #include "action.h"
 #include "ReplayParser.h"
+#include "OsrParser.h"
 
 void SetCursorPosDanser(int x, int y);
 
@@ -23,7 +24,9 @@ std::vector<std::string> getOBCConfNames(std::filesystem::path const &path);
 
 void setProperDancerState(int mode);
 
-long long getLength(long long length);
+//long long getLength(long long length);
+
+long long getLength(std::string pathtosor);
 
 long long getLengthOpt(long long length);
 
