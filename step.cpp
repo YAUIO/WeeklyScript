@@ -677,8 +677,12 @@ bool renameFiles(std::vector<Score> &vector, int qScores, std::filesystem::path 
     }
     i = 0;
     while (i < qScores) {
-        fs::rename(matchesConv[i],
-                   path.generic_string().append("/").append(std::to_string(vector[found[i]].pp)).append(".osr"));
+        try {
+            fs::rename(matchesConv[i],
+                       path.generic_string().append("/").append(std::to_string(vector[found[i]].pp)).append(".osr"));
+        }catch(std::exception& e){
+            fmt::println("{}",e.what());
+        }
         i++;
     }
     return true;

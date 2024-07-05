@@ -48,17 +48,17 @@ void MouseScroll(double RY) {
 void openLink(std::string const &link) {
     try {
         int t = 0;
-        char *linkChar = new char[link.length() + 1];
+        const char* linkChar = link.c_str();
+        /*char *linkChar = new char[link.length()+1];
         //std::copy(link.begin(), link.end(), linkChar);
         while (t < link.length()) {
             linkChar[t] = link[t];
-            //fmt::println("{} == {}",linkChar[t],link[t]);
             t++;
-        }
+        }*/
         fmt::println("{} == {}", linkChar, link);
         ShellExecute(NULL, NULL, linkChar, NULL, NULL, SW_SHOWNORMAL);
     } catch (std::exception &e) {
-
+        fmt::println("{}",e.what());
     }
 }
 
@@ -73,8 +73,7 @@ void openProgram(std::string app) {
         app = "G:\\osu!\\osu!.exe";
     }
     try {
-        char *pathChar = new char[app.length() + 1];
-        std::copy(app.begin(), app.end(), pathChar);
+        const char *pathChar = app.c_str();
         ShellExecute(NULL, "open", pathChar, NULL, NULL, SW_SHOWDEFAULT);
     } catch (std::exception &e) {
 
@@ -85,12 +84,8 @@ void openExplorer(std::string const &pathToFoler) {
     using namespace std::chrono_literals;
     int h = 0;
     try {
-        char *pathFChar = new char[pathToFoler.length() + 1];
-        while (h < pathToFoler.length()) {
-            pathFChar[h] = pathToFoler[h];
-            h++;
-        }
-        //fmt::println("{}",pathFChar);
+        const char *pathFChar = pathToFoler.c_str();
+
         ShellExecute(NULL, "explore", pathFChar, 0, 0, SW_MAXIMIZE);
 
         fmt::println("Setting focus to explorer");
